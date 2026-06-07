@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astro Recipe — Competitor Research</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0e0e0e; color: #e8e8e8; line-height: 1.6; }
+
+  header { padding: 48px 40px 32px; border-bottom: 1px solid #222; }
+  header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+  header p { color: #666; margin-top: 6px; font-size: 14px; }
+  .badge { display: inline-block; background: #1a1a1a; border: 1px solid #333; border-radius: 20px; padding: 4px 12px; font-size: 12px; color: #888; margin-top: 12px; }
+
+  nav { display: flex; gap: 8px; padding: 20px 40px; border-bottom: 1px solid #1a1a1a; overflow-x: auto; }
+  nav a { white-space: nowrap; padding: 6px 14px; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 20px; color: #aaa; text-decoration: none; font-size: 13px; transition: all 0.15s; }
+  nav a:hover { background: #222; color: #fff; border-color: #444; }
+
+  section { padding: 48px 40px; border-bottom: 1px solid #1a1a1a; }
+  section h2 { font-size: 20px; font-weight: 600; margin-bottom: 24px; color: #fff; }
+  section h3 { font-size: 15px; font-weight: 600; margin: 32px 0 12px; color: #ccc; }
+
+  /* Groups */
+  .group-label { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; margin-bottom: 20px; }
+  .hard { background: #2a1010; color: #f87171; border: 1px solid #3d1515; }
+  .soft { background: #0f1f2a; color: #60a5fa; border: 1px solid #163048; }
+  .aspirational { background: #1a1028; color: #c084fc; border: 1px solid #2d1a45; }
+
+  /* Competitor cards */
+  .competitor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .card { background: #141414; border: 1px solid #222; border-radius: 12px; overflow: hidden; }
+  .card-header { padding: 16px 16px 12px; border-bottom: 1px solid #1e1e1e; }
+  .card-name { font-size: 15px; font-weight: 600; }
+  .card-type { font-size: 12px; color: #555; margin-top: 3px; }
+  .card-screens { display: flex; gap: 8px; padding: 12px 16px; overflow-x: auto; background: #0e0e0e; }
+  .card-screens img { height: 160px; width: auto; border-radius: 6px; border: 1px solid #222; flex-shrink: 0; cursor: pointer; transition: transform 0.15s; }
+  .card-screens img:hover { transform: scale(1.03); }
+  .card-body { padding: 14px 16px; }
+  .card-body p { font-size: 13px; color: #888; margin-bottom: 8px; }
+  .card-body strong { color: #ccc; }
+  .tag { display: inline-block; background: #1e1e1e; border-radius: 4px; padding: 2px 8px; font-size: 11px; color: #666; margin: 2px; }
+  .unknown { color: #f59e0b; }
+
+  /* Comparison table */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 900px; }
+  th { text-align: left; padding: 10px 14px; background: #141414; color: #666; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #222; }
+  td { padding: 12px 14px; border-bottom: 1px solid #1a1a1a; vertical-align: top; color: #bbb; }
+  tr:hover td { background: #111; }
+  td:first-child { font-weight: 600; color: #e8e8e8; white-space: nowrap; }
+  .price { color: #4ade80; font-weight: 500; }
+  .unknown-cell { color: #f59e0b; }
+
+  /* Patterns */
+  .insights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .insight-card { background: #141414; border: 1px solid #222; border-radius: 12px; padding: 20px; }
+  .insight-card .num { font-size: 32px; font-weight: 700; color: #222; margin-bottom: 8px; }
+  .insight-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #fff; }
+  .insight-card p { font-size: 13px; color: #666; }
+  .pattern .num { color: #1e3a2e; }
+  .diff .num { color: #1e2a3a; }
+  .question .num { color: #2a1e10; }
+
+  /* Lightbox */
+  #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 999; align-items: center; justify-content: center; }
+  #lightbox.open { display: flex; }
+  #lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 8px; }
+  #lightbox-close { position: fixed; top: 20px; right: 24px; font-size: 28px; color: #666; cursor: pointer; }
+
+  @media (max-width: 768px) {
+    header, section, nav { padding-left: 20px; padding-right: 20px; }
+    .insights-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Astro Recipe — Competitor Research</h1>
+  <p>Аналіз конкурентів. Mobile viewport 390×844.</p>
+  <span class="badge">2026-06-07 · 27 screenshots · 13 продуктів</span>
+</header>
+
+<nav>
+  <a href="#hard">🔴 Hard</a>
+  <a href="#soft">🔵 Soft</a>
+  <a href="#aspirational">🟣 Aspirational</a>
+  <a href="#table">Таблиця</a>
+  <a href="#patterns">Патерни</a>
+  <a href="#gaps">Відмінності</a>
+  <a href="#questions">Питання</a>
+  <a href="#influencers">⭐ Інфлюенсери</a>
+</nav>
+
+<!-- HARD -->
+<section id="hard">
+  <span class="group-label hard">Hard — СНД ринок</span>
+  <h2>Той самий продукт, та сама аудиторія</h2>
+
+  <div class="competitor-grid">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Telegram-астрологи</div>
+        <div class="card-type">Особистий бренд · Telegram + Instagram</div>
+      </div>
+      <div class="card-body">
+        <p><strong>Чому тут:</strong> Прямий замінник. Людина йде до астролога в Telegram — не в додаток.</p>
+        <p><strong>Запозичити:</strong> Тон "тепло і близько", теми що продаються (стосунки, гроші, призначення), цінова модель.</p>
+        <p>Знайти вручну: #астролог #натальнакарта в Telegram/Instagram</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Telegram-боти натальних карт</div>
+        <div class="card-type">Telegram-бот · автоматичне читання</div>
+      </div>
+      <div class="card-body">
+        <p><strong>Чому тут:</strong> Найближчий технологічний аналог на ринку. Дата → текст. Те саме що ми, але примітивніше.</p>
+        <p><strong>Запозичити:</strong> Флоу введення даних, де алгоритм проседає (відгуки), що резонує.</p>
+        <p>Знайти: пошук "натальна карта бот" в Telegram</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Astrologer.ru / CIS-портали</div>
+        <div class="card-type">Веб-портал · гороскопи + натальні карти</div>
+      </div>
+      <div class="card-screens">
+        <img src="screens/cis-astrologer-ru.png" alt="astrologer.ru" onclick="openLightbox(this)">
+        <img src="screens/cis-search-astro.png" alt="пошук астрологія" onclick="openLightbox(this)">
+      </div>
+      <div class="card-body">
+        <p><strong>Чому тут:</strong> Великий CIS-портал. Автоматичні розшифровки карт — прямий аналог за функцією.</p>
+        <p><strong>Запозичити:</strong> Де відчувається "генерик", SEO-запити аудиторії.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Матриця долі (matrix-destiny.com)</div>
+        <div class="card-type">Digital-продукт · PDF-звіт + воронка</div>
+      </div>
+      <div class="card-screens">
+        <img src="screens/matrix-destiny-home.png" alt="Matrix Destiny" onclick="openLightbox(this)">
+        <img src="screens/cis-search-matrix.png" alt="пошук матриця долі" onclick="openLightbox(this)">
+      </div>
+      <div class="card-body">
+        <p><strong>Чому тут:</strong> Масовий феномен у СНД. Люди платять за PDF-розшифровку за датою. Той самий JTBD.</p>
+        <p><strong>Запозичити:</strong> Структура воронки, мова обіцянок, що вважається повноцінним продуктом.</p>
+        <div>
+          <span class="tag price">Trial $15</span>
+          <span class="tag price">Report $7</span>
+          <span class="tag price">Unlimited $79</span>
+          <span class="tag price">PRO $149</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Human Design (CIS-ринок)</div>
+        <div class="card-type">Система · jovianarchive.com + HD-практики</div>
+      </div>
+      <div class="card-screens">
+        <img src="screens/jovian-home.png" alt="Jovian Archive" onclick="openLightbox(this)">
+        <img src="screens/mybodygraph-home.png" alt="myBodyGraph" onclick="openLightbox(this)">
+      </div>
+      <div class="card-body">
+        <p><strong>Чому тут:</strong> Та сама аудиторія, той самий момент — "хочу зрозуміти себе через систему." HD витісняє астрологію.</p>
+        <p><strong>Запозичити:</strong> Концепт "стратегія і авторитет" — коротка, застосовна інструкція. Нам потрібен астрологічний аналог.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SOFT -->
+<section id="soft">
+  <span class="group-label soft">Soft — той самий JTBD</span>
+  <h2>Інший продукт, але той самий запит: зрозуміти себе</h2>
+
+  <div class="competitor-grid">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">16Personalities (MBTI)</div>
+        <div class="card-type">Веб-тест · 16personalities.com</div>
+      </div>
+      <div class="card-screens">
+        <img src="screens/16p-home.png" alt="16P home" onclick="openLightbox(this)">
+        <img src="screens/16p-result.png" alt="16P result" onclick="openLightbox(this)">
+        <img src="screens/16p-pricing.png" alt="16P pricing" onclick="openLightbox(this)">
+      </div>
+      <div class="card-body">
+        <p><strong>Чому тут:</strong> Еталон "це точно про мене". 100M+ проходжень. Та сама аудиторія.</p>
+        <p><strong>Запозичити:</strong> Структура профілю, shareable label як вірусний механізм, мова без жаргону.</p>
+        <span class="tag">Freemium</span>
+        <span class="tag">Premium Career</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Gallup CliftonStrengths</div>
+        <div class="card-type">Веб-тест · gallup.com/cliftonstrengths</div>
+      </div>
+      <div class="card-screens">
+        <img src="screens/gallup-home.png" alt="Gallup home" onclick="openLightbox(this)">
+        <img src="screens/gallup-pricing.png" alt="Gallup pricing" onclick="openLightbox(this)">
+      </div>
+      <div class="card-body">
+        <p><strong>Чому тут:</strong> "Знайди свої 5 сильних сторін" — прямий JTBD. Еталон one-time report монетизації.</p>
+        <p><strong>Запозичити:</strong> Модель оплати, мова "твої таланти в сфері X означають що тобі варто..."</p>
+        <span class="tag price">Top 5 — $24.99</span>
+        <span class="tag price">All 34 — $59.99</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Enneagram Institute</div>
+        <div class="card-type">Веб-тест · enneagraminstitute.com</div>
+      </div>
+      <div class="card-screens">
+        <img src="screens/enneagram-home.png" alt="Enneagram home" onclick="openLightbox(this)">
+        <img src="screens/enneagram-result.png" alt="Enneagram types" onclick="openLightbox(this)">
+        <img src="screens/enneagram-pricing.png" alt="Enneagram pricing" onclick="openLightbox(this)">
+      </div>
+      <div class="card-body">
+        <p><strong>Чому тут:</strong> 9 типів + рівні розвитку. Популярний серед нашої аудиторії.</p>
+        <p><strong>Запозичити:</strong> Мова про страхи і бажання — особиста, без езотерики. Глибина без перевантаження.</p>
+        <span class="tag price">RHETI тест ~$12</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Gene Keys</div>
+        <div class="card-type">Веб-система · genekeys.com</div>
+      </div>
+      <div class="card-screens">
+        <img src="screens/genekeys-home.png" alt="Gene Keys home" onclick="openLightbox(this)">
+        <img src="screens/genekeys-result.png" alt="Gene Keys profile" onclick="openLightbox(this)">
+      </div>
+      <div class="card-body">
+        <p><strong>Чому тут:</strong> Астрологія + I Ching + HD. Культовий серед нашої аудиторії. Люди роками "працюють" з профілем.</p>
+        <p><strong>Запозичити:</strong> Концепт "Golden Path" — персональний маршрут. Профіль як живий документ.</p>
+        <span class="tag">Freemium</span>
+        <span class="tag price">Курси $100–300+</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">myBodyGraph (Human Design)</div>
+        <div class="card-type">Веб-додаток · mybodygraph.com</div>
+      </div>
+      <div class="card-screens">
+        <img src="screens/mybodygraph-home.png" alt="myBodyGraph home" onclick="openLightbox(this)">
+        <img src="screens/mybodygraph-pricing.png" alt="myBodyGraph pricing" onclick="openLightbox(this)">
+      </div>
+      <div class="card-body">
+        <p><strong>Чому тут:</strong> Офіційний HD-інструмент. AI Ra assistant. Агресивна цінова модель.</p>
+        <p><strong>Запозичити:</strong> Як будують платну лінійку поверх безкоштовного профілю.</p>
+        <span class="tag price">Unlock $49–129</span>
+        <span class="tag price">Annual $349–1199</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ASPIRATIONAL -->
+<section id="aspirational">
+  <span class="group-label aspirational">Aspirational — міжнародні еталони</span>
+  <h2>Найкращі у категорії — вчимося у них</h2>
+
+  <div class="competitor-grid">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Co-Star</div>
+        <div class="card-type">Мобільний додаток · costarastrology.com</div>
+      </div>
+      <div class="card-screens">
+        <img src="screens/costar-home.png" alt="Co-Star home" onclick="openLightbox(this)">
+        <img src="screens/costar-result.png" alt="Co-Star chart" onclick="openLightbox(this)">
+      </div>
+      <div class="card-body">
+        <p><strong>Чому тут:</strong> Еталон UX. 20M+ юзерів. Але саме те від чого відштовхуємось — абстрактно і порожньо.</p>
+        <p><strong>Запозичити:</strong> Онбординг, візуальна мова (ч/б, типографіка), соціальний шар (синастрія).</p>
+        <p><strong>НЕ брати:</strong> щоденні повідомлення ні про що.</p>
+        <span class="tag">Freemium</span>
+        <span class="tag unknown">Монетизація неочевидна</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">The Pattern</div>
+        <div class="card-type">Мобільний додаток · thepattern.com</div>
+      </div>
+      <div class="card-screens">
+        <img src="screens/pattern-home.png" alt="The Pattern home" onclick="openLightbox(this)">
+      </div>
+      <div class="card-body">
+        <p><strong>Чому тут:</strong> Ховає астрологію за психологічною мовою. Найближчий до "читання як психолог".</p>
+        <p><strong>Запозичити:</strong> Мова без астро-жаргону, структура "паттерн → коли активується → що робити".</p>
+        <span class="tag">Freemium</span>
+        <span class="tag unknown">Ціна [?] за логіном</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Chani</div>
+        <div class="card-type">Мобільний додаток · chani.com</div>
+      </div>
+      <div class="card-screens">
+        <img src="screens/chani-home.png" alt="Chani home" onclick="openLightbox(this)">
+        <img src="screens/chani-result.png" alt="Chani chart" onclick="openLightbox(this)">
+      </div>
+      <div class="card-body">
+        <p><strong>Чому тут:</strong> Зроблений практикуючим астрологом. Сильний авторський голос. Feminist.</p>
+        <p><strong>Запозичити:</strong> Баланс натал + транзити, підписна модель, tone of voice з позицією.</p>
+        <span class="tag price">~$14.99/міс</span>
+        <span class="tag unknown">Ціна [?] на сайті</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Astro.com (Astrodienst)</div>
+        <div class="card-type">Веб-портал · astro.com</div>
+      </div>
+      <div class="card-screens">
+        <img src="screens/astro-home.png" alt="Astro.com home" onclick="openLightbox(this)">
+        <img src="screens/astro-result.png" alt="Astro.com chart" onclick="openLightbox(this)">
+        <img src="screens/astro-pricing.png" alt="Astro.com shop" onclick="openLightbox(this)">
+      </div>
+      <div class="card-body">
+        <p><strong>Чому тут:</strong> Золотий стандарт. Liz Greene, Robert Hand. Але UX 2005 року — і тут наш шанс.</p>
+        <p><strong>Запозичити:</strong> Глибина і структура платних звітів, теми Psychological Horoscope.</p>
+        <span class="tag price">~$20–50 за звіт</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Astro7 / CIS-портали</div>
+        <div class="card-type">Веб-портал · CIS ринок</div>
+      </div>
+      <div class="card-screens">
+        <img src="screens/astro7-home.png" alt="Astro7" onclick="openLightbox(this)">
+      </div>
+      <div class="card-body">
+        <p><strong>Чому тут:</strong> Великий CIS-портал з автоматичними розшифровками.</p>
+        <span class="tag unknown">Потребує авторизацію [?]</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section id="table">
+  <h2>Порівняльна таблиця</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Продукт</th>
+          <th>Аудиторія</th>
+          <th>Основа продукту</th>
+          <th>Ключовий механізм</th>
+          <th>Довіра</th>
+          <th>Монетизація</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Astro.com</td>
+          <td>Серйозні астрологи, 30+</td>
+          <td>Класичний веб-портал</td>
+          <td>Swiss Ephemeris + звіти Greene/Hand</td>
+          <td>Авторитет авторів</td>
+          <td class="price">~$20–50 за звіт</td>
+        </tr>
+        <tr>
+          <td>16Personalities</td>
+          <td>18–40, глобально</td>
+          <td>MBTI-квіз → архетип</td>
+          <td>144 питань → профіль + shareable label</td>
+          <td>"100M проходжень"</td>
+          <td>Freemium + Premium Career</td>
+        </tr>
+        <tr>
+          <td>The Pattern</td>
+          <td>Жінки 20–35</td>
+          <td>Мобільний додаток</td>
+          <td>Натал → "паттерни" без астро-жаргону</td>
+          <td>Психологічна мова</td>
+          <td class="unknown-cell">Freemium [?]</td>
+        </tr>
+        <tr>
+          <td>Co-Star</td>
+          <td>18–35, США</td>
+          <td>Мобільний додаток</td>
+          <td>Натал + щоденний push + синастрія</td>
+          <td>"20M+ юзерів"</td>
+          <td class="unknown-cell">Freemium, монетизація [?]</td>
+        </tr>
+        <tr>
+          <td>Chani</td>
+          <td>Феміністська 25–40</td>
+          <td>Додаток + медіа</td>
+          <td>Натал + транзити + авторський голос</td>
+          <td>Чані як практик</td>
+          <td class="price">~$14.99/міс</td>
+        </tr>
+        <tr>
+          <td>Gene Keys</td>
+          <td>Духовні 28–45</td>
+          <td>Golden Path профіль</td>
+          <td>Дата → персональний маршрут</td>
+          <td>Автор-бренд Рудда</td>
+          <td class="price">Freemium → курси $100–300+</td>
+        </tr>
+        <tr>
+          <td>Gallup CliftonStrengths</td>
+          <td>25–55, корп+особисте</td>
+          <td>Тест 34 сильних сторін</td>
+          <td>Тест → ранжування + звіт</td>
+          <td>Gallup Research</td>
+          <td class="price">One-time: $24.99 / $59.99</td>
+        </tr>
+        <tr>
+          <td>myBodyGraph (HD)</td>
+          <td>HD-аудиторія 25–45</td>
+          <td>Офіційний HD-інструмент</td>
+          <td>Безкоштовна карта + AI Ra assistant</td>
+          <td>Офіційний бренд HD</td>
+          <td class="price">Unlock $49–129 / Annual $349–1199</td>
+        </tr>
+        <tr>
+          <td>Matrix Destiny (CIS)</td>
+          <td>СНД жінки 25–50</td>
+          <td>Нумерологічна матриця</td>
+          <td>Дата → матриця → PDF</td>
+          <td>Testimonials + таймер знижки</td>
+          <td class="price">$7 trial → $79–149</td>
+        </tr>
+        <tr>
+          <td>Enneagram Institute</td>
+          <td>Психологічні 25–45</td>
+          <td>9 типів + рівні</td>
+          <td>RHETI тест → тип + крила</td>
+          <td>Науковий дизайн тесту</td>
+          <td class="price">RHETI ~$12</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PATTERNS -->
+<section id="patterns">
+  <h2>3 спільні патерни — що роблять усі</h2>
+  <div class="insights-grid">
+    <div class="insight-card pattern">
+      <div class="num">01</div>
+      <h4>Freemium як точка входу</h4>
+      <p>Абсолютно всі дають щось безкоштовно — карту, профіль, тест. Жоден не бере гроші на старті без демо. Навіть Gallup дає sample report перед покупкою.</p>
+    </div>
+    <div class="insight-card pattern">
+      <div class="num">02</div>
+      <h4>Особистість через ярлик</h4>
+      <p>Всі редукують складність до label — INFJ, Generator, тип 4, Gene Key 12. Людина отримує ярлик і ділиться ним. Це вірусний механізм. Ніхто не залишає результат "голим аналізом".</p>
+    </div>
+    <div class="insight-card pattern">
+      <div class="num">03</div>
+      <h4>Розрив між описом і дією</h4>
+      <p>Всі описують "хто ти є", але жоден послідовно не відповідає на "що конкретно з цим робити сьогодні". Це і є наш ринковий зазор.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENCES -->
+<section id="gaps">
+  <h2>3 ключові відмінності</h2>
+  <div class="insights-grid">
+    <div class="insight-card diff">
+      <div class="num">01</div>
+      <h4>Мова довіри — у кожного своя</h4>
+      <p>Gallup і 16P → наука і статистика. Co-Star → алгоритм і AI. Chani і Gene Keys → авторський голос. Astro.com → авторитет авторів. CIS → масовий феномен і таймер знижки.</p>
+    </div>
+    <div class="insight-card diff">
+      <div class="num">02</div>
+      <h4>Монетизаційна модель кардинально різна</h4>
+      <p>One-time: Gallup, Matrix Destiny, Astro.com. Підписка: Chani, myBodyGraph. Education funnel: Gene Keys, Jovian. Scale play: Co-Star, 16P.</p>
+    </div>
+    <div class="insight-card diff">
+      <div class="num">03</div>
+      <h4>Глибина vs UX — всі вибрали один полюс</h4>
+      <p>Astro.com — глибокий, UX 2005 року, немає мобілки. Co-Star — сучасний, але порожній. <strong>Ніхто не зробив глибоке читання з нормальним мобільним UX. Це наш шанс.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN QUESTIONS -->
+<section id="questions">
+  <h2>3 відкриті питання</h2>
+  <div class="insights-grid">
+    <div class="insight-card question">
+      <div class="num">01</div>
+      <h4>Яка реальна конверсія CIS-воронки?</h4>
+      <p>Matrix Destiny показує агресивні ціни ($7 trial, знижки -70%). Нам потрібно знати: який % аудиторії платить за автоматизований продукт без живого астролога?</p>
+    </div>
+    <div class="insight-card question">
+      <div class="num">02</div>
+      <h4>Як монетизує Co-Star при $60M інвестицій?</h4>
+      <p>20M+ юзерів і жодного очевидного платного продукту на сайті. Дані? In-app? Досі в growth mode? Треба перевірити App Store і фінансові звіти.</p>
+    </div>
+    <div class="insight-card question">
+      <div class="num">03</div>
+      <h4>Чи повертаються юзери в The Pattern і Gene Keys?</h4>
+      <p>Обидва будують "живий документ". Але чи реально повертаються щодня — чи це one-and-done? Це ключове питання: будувати recurring product чи one-time deep report?</p>
+    </div>
+  </div>
+</section>
+
+<!-- INFLUENCERS -->
+<section id="influencers">
+  <span class="group-label aspirational">⭐ Інфлюенсери</span>
+  <h2>Астрологи-інфлюенсери та їхні продуктові лінійки</h2>
+
+  <h3>Ключовий інсайт</h3>
+  <div class="insight-card pattern" style="max-width:800px;margin-bottom:32px;">
+    <p style="color:#ccc;font-size:14px;">Астрологи монетизують через <strong style="color:#fff">освітні воронки</strong> (курси, членства, когорти) — не через застосунки чи інструменти. Модель: безкоштовний контент Instagram/YouTube → платний курс або членство ($100–$1,000+). Жоден не продає самостійний, глибоко персоналізований продукт натальної карти з конкретними інструкціями — це і є зазор Astro Recipe.</p>
+  </div>
+
+  <h3>Україна / СНД-ринок</h3>
+  <div class="competitor-grid">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Ірина Мінєєва</div>
+        <div class="card-type">@irenezodiac · Instagram 829K · Facebook 91.7K · YouTube · TikTok · Telegram · Substack</div>
+      </div>
+      <div class="card-body">
+        <p><strong>Позиціонування:</strong> "Astrological Wealth Strategist — Helping ambitious people turn Astrology into their unfair advantage"</p>
+        <p><strong>Продукти:</strong> Курс натальної карти (5 днів), програми wealth / manifestation</p>
+        <p><strong>Ціна:</strong> <span class="unknown">[?] — не знайдено напряму</span></p>
+        <p><strong>Чому важливо:</strong> Найпомітніший СНД-астролог з білінгвальною аудиторією. Сильний фрейм "гроші + астрологія".</p>
+        <span class="tag">Instagram</span><span class="tag">Substack</span><span class="tag">Manifestation</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Катерина Дятлова — Школа 11 Дом</div>
+        <div class="card-type">@katrin.dia · Instagram · YouTube 513K переглядів · VK · Telegram · Dzen</div>
+      </div>
+      <div class="card-body">
+        <p><strong>Позиціонування:</strong> Школа астрології — структурований навчальний бренд</p>
+        <p><strong>Продукти:</strong> Курси натальної астрології, хорарна, прогнозування</p>
+        <p><strong>Ціна:</strong> <span class="price">~7 100₽/міс</span> <span class="unknown">(зі сніпету Bing, сайт недоступний)</span></p>
+        <p><strong>Сайт:</strong> 11dom.school — відмовив у з'єднанні (гео-блок)</p>
+        <span class="tag">Навчання</span><span class="tag">Школа</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Катерина Дімова</div>
+        <div class="card-type">Instagram</div>
+      </div>
+      <div class="card-body">
+        <p><strong>Знайдено:</strong> 287 підписників Instagram, архітектор з Болгарії. Жодних астрологічних продуктів не виявлено.</p>
+        <p><strong>Висновок:</strong> <span class="unknown">[?] — Не значущий інфлюенсер за цим іменем. Можливо, потрібне пряме посилання від замовника.</span></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Лілія Любімова</div>
+        <div class="card-type">astrolog566.com · Instagram</div>
+      </div>
+      <div class="card-body">
+        <p><strong>Позиціонування:</strong> "17 years transforming main life spheres: personal growth…"</p>
+        <p><strong>Продукти:</strong> Консультації, програми</p>
+        <p><strong>Ціна:</strong> <span class="unknown">[?]</span></p>
+        <p>Сайт відмовив у з'єднанні (гео-блок або недоступний).</p>
+        <span class="tag">Консультації</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Поліна Чувільова</div>
+        <div class="card-type">@polina.chuvileva · Instagram</div>
+      </div>
+      <div class="card-body">
+        <p><strong>Позиціонування:</strong> "інфлюенсер • астролог • навчання"</p>
+        <p><strong>Аудиторія:</strong> <span class="unknown">[?] мала</span></p>
+        <p><strong>Продукти / ціни:</strong> <span class="unknown">[?] — сторінка продуктів недоступна</span></p>
+        <span class="tag">Навчання</span>
+      </div>
+    </div>
+
+  </div>
+
+  <h3>Міжнародні інфлюенсери</h3>
+  <div class="competitor-grid">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Astrology Hub</div>
+        <div class="card-type">Медіа-платформа · astrologyhub.com · YouTube · Podcast</div>
+      </div>
+      <div class="card-screens">
+        <img src="screens/influencer-astrologyhub-membership.png" alt="Astrology Hub membership" onclick="openLightbox(this)">
+        <img src="screens/influencer-astrologyhub-reports.png" alt="Astrology Hub reports" onclick="openLightbox(this)">
+        <img src="screens/influencer-astrologyhub-courses.png" alt="Astrology Hub courses" onclick="openLightbox(this)">
+      </div>
+      <div class="card-body">
+        <p><strong>Позиціонування:</strong> "ALIGN WITH THE COSMOS & TRANSFORM YOUR LIFE" — тотальна обізнаність про себе і своє призначення</p>
+        <p><strong>Продукти:</strong> Членство Inner Circle, персоналізовані звіти, курси, бандли</p>
+        <p><strong>Ціни:</strong></p>
+        <span class="tag price">Членство $74/міс</span>
+        <span class="tag price">$740/рік</span>
+        <span class="tag price">$7 400 lifetime</span>
+        <span class="tag price">Звіти $27–$37</span>
+        <span class="tag price">Курси $67–$297+</span>
+        <span class="tag price">Бандли ~$895</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">CHANI (Chani Nicholas)</div>
+        <div class="card-type">Мобільний застосунок · chani.com</div>
+      </div>
+      <div class="card-screens">
+        <img src="screens/influencer-chani-app.png" alt="CHANI app" onclick="openLightbox(this)">
+      </div>
+      <div class="card-body">
+        <p><strong>Позиціонування:</strong> "Discover who you are" — manifestation, self-discovery, mindfulness, healing. "Written by astrologers, not AI."</p>
+        <p><strong>Продукти:</strong> Підписний застосунок (натал + транзити + ритуали)</p>
+        <p><strong>Аудиторія:</strong> <span class="unknown">[?] публічна кількість не знайдена</span></p>
+        <p><strong>Ціна:</strong> <span class="price">~$14.99/міс</span> <span class="unknown">(історична; поточне ціноутворення за логіном)</span></p>
+        <span class="tag">Підписка</span><span class="tag">Feminist</span><span class="tag">Self-discovery</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-name">Elizabeth April</div>
+        <div class="card-type">@elizabeth.april · Instagram 510K · YouTube @ElizabethApril</div>
+      </div>
+      <div class="card-body">
+        <p><strong>Позиціонування:</strong> "School of Awakening" — spiritual awakening and self-discovery, "Student of the Universe"</p>
+        <p><strong>Продукти:</strong> Курси School of Awakening, тарифи членства</p>
+        <p><strong>Ціна:</strong> <span class="unknown">[?] — elizabethapril.com відмовив у з'єднанні</span></p>
+        <span class="tag">Курси</span><span class="tag">Spiritual</span><span class="tag">Awakening</span>
+      </div>
+    </div>
+
+  </div>
+
+  <h3>Продуктові архетипи</h3>
+  <div class="insights-grid" style="margin-top:16px;">
+    <div class="insight-card">
+      <div class="num" style="color:#1e3a2e">01</div>
+      <h4>Членство / Inner Circle</h4>
+      <p>Повторний доступ до спільноти + контенту ($74/міс). Потребує великої аудиторії та постійного виробництва контенту.</p>
+    </div>
+    <div class="insight-card">
+      <div class="num" style="color:#1e3a2e">02</div>
+      <h4>Самостійний курс</h4>
+      <p>Один раз або когортний курс з астрології ($67–$297). Найпоширеніша монетизація астрологів-інфлюенсерів. Висока маржа.</p>
+    </div>
+    <div class="insight-card">
+      <div class="num" style="color:#1e3a2e">03</div>
+      <h4>Персоналізований звіт (PDF)</h4>
+      <p>Дата → автоматичний або напів-кастомний PDF. СНД модель ($7–$149); міжнародна ($27–$37). Низький чек, великий об'єм.</p>
+    </div>
+    <div class="insight-card">
+      <div class="num" style="color:#1e3a2e">04</div>
+      <h4>Підписний застосунок</h4>
+      <p>Щомісячний доступ до натал + транзити (CHANI ~$14.99/міс). Висока вартість розробки, сильне утримання.</p>
+    </div>
+    <div class="insight-card">
+      <div class="num" style="color:#1e3a2e">05</div>
+      <h4>Школа / бренд навчання</h4>
+      <p>Повноцінна школа з кількома курсами та сертифікаціями (Школа 11 Дом, School of Awakening). Позиціонування як освіта, а не контент.</p>
+    </div>
+    <div class="insight-card">
+      <div class="num" style="color:#1e3a2e">06</div>
+      <h4>Гроші / Manifestation кут</h4>
+      <p>Астрологія як інструмент для рішень щодо грошей/кар'єри (Mineeva "Astrological Wealth Strategist"). Дуже сильно в СНД, зростає в EN.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox" onclick="closeLightbox()">
+  <span id="lightbox-close">✕</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  function openLightbox(img) {
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+
+</body>
+</html>
