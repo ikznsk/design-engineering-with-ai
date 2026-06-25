@@ -62,6 +62,11 @@
   .diff .num { color: #1e2a3a; }
   .question .num { color: #2a1e10; }
 
+  /* Hypotheses grid */
+  .hypo-grid { display: grid; grid-template-columns: 60px 1fr; gap: 8px; font-size: 13px; color: #888; margin-top: 12px; }
+  .hypo-label { color: #555; font-weight: 600; padding-top: 1px; }
+  .benchmark-target td { background: #0a150a; }
+
   /* Lightbox */
   #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 999; align-items: center; justify-content: center; }
   #lightbox.open { display: flex; }
@@ -91,6 +96,10 @@
   <a href="#gaps">Відмінності</a>
   <a href="#questions">Питання</a>
   <a href="#influencers">⭐ Інфлюенсери</a>
+  <a href="#benchmark">📊 Бенчмарк</a>
+  <a href="#ux-patterns">🧩 UX-патерни</a>
+  <a href="#video-analysis">🎥 Відео</a>
+  <a href="#hypotheses">💡 Гіпотези</a>
 </nav>
 
 <!-- HARD -->
@@ -704,6 +713,453 @@
       <h4>Гроші / Manifestation кут</h4>
       <p>Астрологія як інструмент для рішень щодо грошей/кар'єри (Mineeva "Astrological Wealth Strategist"). Дуже сильно в СНД, зростає в EN.</p>
     </div>
+  </div>
+</section>
+
+<!-- BENCHMARK -->
+<section id="benchmark">
+  <span class="group-label aspirational">📊 Бенчмарк</span>
+  <h2>Один вимір: наскільки вихідний результат справді actionable?</h2>
+  <p style="color:#666;font-size:14px;margin-bottom:32px;">Беремо ключовий вимір Astro Recipe — <strong style="color:#aaa">перехід від опису до дії</strong>. Оцінюємо 5 кращих продуктів в категорії. Шкала 1–5.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Продукт</th>
+          <th>Глибина даних</th>
+          <th>Комбінаційне читання</th>
+          <th>Конкретні дії</th>
+          <th>Прив'язка до часу</th>
+          <th>Точність мови</th>
+          <th>Ніша vs всеохопність</th>
+          <th>СУМА /30</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CHANI</td>
+          <td>5 — вся карта, аспекти, транзити</td>
+          <td>4 — читає в контексті дому і знаку</td>
+          <td>1 — описує, не каже що робити</td>
+          <td>5 — транзити прив'язані до дат</td>
+          <td>5 — авторська мова, висока точність</td>
+          <td>2 — широке: стосунки, кар'єра, тіло</td>
+          <td><strong style="color:#4ade80">22</strong></td>
+        </tr>
+        <tr>
+          <td>AstroBella</td>
+          <td>3 — Sun/Moon/Rising free, решта за Plus</td>
+          <td>3 — у compatibility читає в комбінації</td>
+          <td>3 — "How to show up" тільки в compatibility</td>
+          <td>3 — daily synastry transits</td>
+          <td>3 — нормальна, але шаблонна</td>
+          <td>1 — все: карта + таро + астролог + сумісність</td>
+          <td><strong style="color:#4ade80">16</strong></td>
+        </tr>
+        <tr>
+          <td>Nebula</td>
+          <td>1 — сонячний знак (не натальна карта)</td>
+          <td>1 — generic по знаку, не по карті</td>
+          <td>4 — tasks-список, structured plan</td>
+          <td>4 — Love/Health/Career % щодня</td>
+          <td>2 — clickbait ("become a woman he never forgets")</td>
+          <td>2 — "відносини" нішева, але не астрологічно глибока</td>
+          <td><strong style="color:#f59e0b">14</strong></td>
+        </tr>
+        <tr>
+          <td>The Pattern</td>
+          <td>4 — вся карта, психологічні патерни</td>
+          <td>4 — читає конфігурації, не окремі планети</td>
+          <td>2 — описує патерни, але не дії</td>
+          <td>3 — "коли патерн активується"</td>
+          <td>5 — найточніша психологічна мова</td>
+          <td>3 — психологічне самопізнання</td>
+          <td><strong style="color:#4ade80">21</strong></td>
+        </tr>
+        <tr>
+          <td>16Personalities</td>
+          <td>2 — тест, не натальна карта</td>
+          <td>5 — 16 типів = архетипна комбінація</td>
+          <td>4 — "ось як застосовувати у кар'єрі/стосунках"</td>
+          <td>1 — статичний профіль</td>
+          <td>4 — конкретна, але не персональна</td>
+          <td>4 — є кар'єрна і особиста версія</td>
+          <td><strong style="color:#4ade80">20</strong></td>
+        </tr>
+        <tr style="background:#0a1a0a">
+          <td><strong style="color:#4ade80">Astro Recipe (ціль)</strong></td>
+          <td><strong style="color:#4ade80">5</strong></td>
+          <td><strong style="color:#4ade80">5</strong></td>
+          <td><strong style="color:#4ade80">5</strong></td>
+          <td><strong style="color:#4ade80">5</strong></td>
+          <td><strong style="color:#4ade80">5</strong></td>
+          <td><strong style="color:#4ade80">5</strong></td>
+          <td><strong style="color:#4ade80">30</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Топ-3 механізми для MVP</h3>
+  <div class="insights-grid" style="margin-top:16px;">
+    <div class="insight-card pattern">
+      <div class="num">01</div>
+      <h4>«How to show up» — AstroBella</h4>
+      <p>Формат: транзит → як ти це відчуваєш → що зробити сьогодні. Єдиний реально actionable контент в усіх трьох відео. Потрібно цей самий патерн застосувати до всієї карти, а не тільки до compatibility.</p>
+    </div>
+    <div class="insight-card pattern">
+      <div class="num">02</div>
+      <h4>Structured Plan + Tasks — Nebula</h4>
+      <p>Сесія → текст → checklist завдань. Відчувається як конкретний прогрес, а не читання. Але у Nebula це по сонячному знаку — у нас має бути по реальній карті.</p>
+    </div>
+    <div class="insight-card pattern">
+      <div class="num">03</div>
+      <h4>Психологічна мова без жаргону — The Pattern</h4>
+      <p>Ховає астрологічну механіку за психологічним фреймінгом. "Ти схильний уникати конфлікту через X" — не "Венера в 12 домі означає..." Знижує бар'єр входу і підвищує сприйману точність.</p>
+    </div>
+  </div>
+
+  <div class="insight-card" style="max-width:800px;margin-top:16px;border-color:#3d1515;">
+    <div class="num" style="color:#3d1515">✕</div>
+    <h4>Що НЕ спрацює: щоденний push-контент без прив'язки до карти</h4>
+    <p style="color:#888">Co-Star і Nebula надсилають щоденні повідомлення ("Dreams and dreamers break the rules") які не прив'язані до натальної карти. Аудиторія швидко розуміє що це generic і перестає звертати увагу. Recurring без справжньої персоналізації = churn.</p>
+  </div>
+</section>
+
+<!-- UX PATTERNS -->
+<section id="ux-patterns">
+  <span class="group-label soft">🧩 UX-патерни</span>
+  <h2>5 принципово різних UX-патернів взаємодії</h2>
+  <p style="color:#666;font-size:14px;margin-bottom:32px;">Ключова задача: людина хоче зрозуміти себе і отримати відповідь на реальне питання. Які UX-патерни існують — і який підходить нам?</p>
+
+  <div style="display:grid;gap:16px;margin-bottom:32px;">
+
+    <div class="insight-card" style="border-left:3px solid #555;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <h4 style="font-size:16px;">1. Progressive Revelation — «відкривай глибше»</h4>
+        <span style="font-size:11px;color:#555;white-space:nowrap;margin-left:16px;">Co-Star · 16P · AstroBella</span>
+      </div>
+      <p style="margin-top:8px;"><strong style="color:#ccc">Як працює:</strong> Базовий результат безкоштовно → кожен наступний шар глибини відкривається платно або за дію.</p>
+      <p><strong style="color:#ccc">Де застосовується:</strong> Freemium-продукти де безкоштовний контент є маркетингом платного.</p>
+      <p><strong style="color:#ccc">Коли підходить:</strong> Коли у тебе великий обсяг контенту і треба мотивувати до платного.</p>
+      <p><strong style="color:#ccc">Коли ламається:</strong> Якщо безкоштовний рівень не дає достатньо цінності — ніхто не платить за "більше нічого". У Co-Star безкоштовний рівень настільки порожній, що немає мотивації платити.</p>
+    </div>
+
+    <div class="insight-card" style="border-left:3px solid #555;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <h4 style="font-size:16px;">2. Daily Ritual Loop — «повертайся щодня»</h4>
+        <span style="font-size:11px;color:#555;white-space:nowrap;margin-left:16px;">Nebula · Co-Star · CHANI</span>
+      </div>
+      <p style="margin-top:8px;"><strong style="color:#ccc">Як працює:</strong> Щодня новий контент прив'язаний до поточного астрологічного стану. Push-нотифікація або %, щоб людина відкривала додаток щоранку.</p>
+      <p><strong style="color:#ccc">Де застосовується:</strong> Retention-орієнтовані subscription-продукти.</p>
+      <p><strong style="color:#ccc">Коли підходить:</strong> Якщо є реальний щоденний сигнал (транзити) і якість контенту висока.</p>
+      <p><strong style="color:#ccc">Коли ламається:</strong> Якщо щоденний контент generic — як "Dreams and dreamers break the rules" в Nebula — людина перестає відкривати через 3 дні.</p>
+    </div>
+
+    <div class="insight-card" style="border-left:3px solid #555;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <h4 style="font-size:16px;">3. Guided Journey — «ти на шляху»</h4>
+        <span style="font-size:11px;color:#555;white-space:nowrap;margin-left:16px;">Nebula Personal Plan · Gene Keys Golden Path</span>
+      </div>
+      <p style="margin-top:8px;"><strong style="color:#ccc">Як працює:</strong> Персональний план з кроками/сесіями. Прогрес видимий. Людина "проходить" курс на основі своїх даних.</p>
+      <p><strong style="color:#ccc">Де застосовується:</strong> EdTech, self-improvement, духовні практики.</p>
+      <p><strong style="color:#ccc">Коли підходить:</strong> Коли є реальна трансформаційна мета і люди хочуть відчуття прогресу.</p>
+      <p><strong style="color:#ccc">Коли ламається:</strong> Якщо план generic (не прив'язаний до реальної карти) — виглядає як будь-який інший self-help курс. У Nebula Plan по сонячному знаку — не по карті.</p>
+    </div>
+
+    <div class="insight-card" style="border-left:3px solid #555;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <h4 style="font-size:16px;">4. Reference Document — «твоя карта як жива довідка»</h4>
+        <span style="font-size:11px;color:#555;white-space:nowrap;margin-left:16px;">Astro.com · CHANI ME tab · The Pattern</span>
+      </div>
+      <p style="margin-top:8px;"><strong style="color:#ccc">Як працює:</strong> Натальна карта як постійний документ який можна досліджувати. Немає "закінчення" — завжди є що додати або перечитати.</p>
+      <p><strong style="color:#ccc">Де застосовується:</strong> Серйозні астрологічні інструменти, The Pattern.</p>
+      <p><strong style="color:#ccc">Коли підходить:</strong> Коли є великий обсяг контенту і аудиторія готова "жити в продукті".</p>
+      <p><strong style="color:#ccc">Коли ламається:</strong> Нема hook для повернення якщо нічого не змінилось. Потребує великого бажання аудиторії досліджувати.</p>
+    </div>
+
+    <div class="insight-card" style="border-left:3px solid #4ade80;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <h4 style="font-size:16px;color:#4ade80">5. Question → Answer — «питай — отримуй відповідь» ← наш</h4>
+        <span style="font-size:11px;color:#555;white-space:nowrap;margin-left:16px;">AstroBella Compatibility · Astro.com reports</span>
+      </div>
+      <p style="margin-top:8px;"><strong style="color:#ccc">Як працює:</strong> Людина приходить з конкретним питанням (стосунки, кар'єра, гроші) → отримує відповідь прив'язану до своєї карти. Питання задає контекст, карта дає персональну відповідь.</p>
+      <p><strong style="color:#ccc">Де застосовується:</strong> AstroBella compatibility, Astro.com psychological horoscope, Gallup CliftonStrengths (у сфері роботи).</p>
+      <p><strong style="color:#ccc">Коли підходить:</strong> Коли аудиторія приходить з реальною проблемою, а не з абстрактним бажанням "дізнатись більше". JTBD — отримати відповідь, а не провести час в додатку.</p>
+      <p><strong style="color:#ccc">Коли ламається:</strong> Якщо відповідь не прив'язана до реальних даних карти — перетворюється на fortune cookie. Потрібна реальна персоналізація щоб довіра не зламалась після першої ж відповіді.</p>
+    </div>
+
+  </div>
+
+  <div class="insight-card" style="max-width:800px;border-color:#1e3a2e;">
+    <h4 style="color:#4ade80">Чому патерн 5 — для Astro Recipe</h4>
+    <p style="margin-top:8px;color:#888;">1. <strong style="color:#ccc">Наша аудиторія приходить з питаннями.</strong> "Чому я постійно вибираю не тих партнерів?" "Коли мені змінювати роботу?" — це реальні запити. Не "розкажи мені про себе."</p>
+    <p style="margin-top:8px;color:#888;">2. <strong style="color:#ccc">Відразу зрозуміла цінність.</strong> Людина знає навіщо відкриває — отримати відповідь. Retention через актуальність, а не через звичку.</p>
+    <p style="margin-top:8px;color:#888;">3. <strong style="color:#ccc">Диференціація від усіх конкурентів.</strong> Ніхто не будує навколо питань і конкретних відповідей. Всі будують навколо "ось твоя карта — досліджуй".</p>
+  </div>
+</section>
+
+<!-- VIDEO ANALYSIS -->
+<section id="video-analysis">
+  <span class="group-label hard">🎥 Аналіз відео</span>
+  <h2>Детальний аналіз value proposition — CHANI, AstroBella, Nebula</h2>
+  <p style="color:#666;font-size:14px;margin-bottom:32px;">Скріншоти з відеозаписів реального використання. 103 кадри з 3 відео. Дата: 2026-06-25.</p>
+
+  <!-- CHANI -->
+  <h3 style="color:#e8e8e8;font-size:18px;margin-bottom:4px;">CHANI</h3>
+  <p style="color:#555;font-size:13px;margin-bottom:20px;">Відео 1 · 7 хв · $11.99/міс або $107.99/рік</p>
+
+  <div class="competitor-grid" style="margin-bottom:32px;">
+    <div class="card">
+      <div class="card-header"><div class="card-name">Онбординг</div></div>
+      <div class="card-body">
+        <p><strong>Welcome to your universe</strong> → email + верифікація → дата/час/місце народження</p>
+        <p>Кожен крок пояснює навіщо дані: "Your birth time determines key pieces of your natal chart, including your rising sign"</p>
+        <p>Тон: тепло, трохи іронічно. Екран верифікації: "Verification station" з колажем тварин у капелюхах.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-name">ME — Ключі твоєї карти</div></div>
+      <div class="card-body">
+        <p><strong>"The keys to your chart"</strong></p>
+        <p>Список планет з поясненням одним рядком: "Sun in Cancer in the 9th House — Your identity and where you shine"</p>
+        <p>Кожна планета → глибока сторінка з реально авторським текстом. Читається як живий астролог.</p>
+        <p>Приклад (Scorpio Rising): "Whether your childhood was bumpy, your relationships are livewires, or you've changed more career titles than you can fit on a resume, you need to both honor your diverse experience…"</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-name">TRANSITS — Поточні теми</div></div>
+      <div class="card-body">
+        <p><strong>"Your short-term themes"</strong> і <strong>"Your long-term themes"</strong></p>
+        <p>Кожна тема: назва ("ARE YOU A MIND READER?") + дати (Jun 24–27, 2026) + базовий текст free</p>
+        <p>Кнопка: <strong>"GO DEEPER WITH PREMIUM"</strong> — преміум-гейт на глибину</p>
+        <p>Секції по life areas: Family &amp; Home, Money &amp; Success — транзитний текст прив'язаний до питання</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-name">GROW — Курси</div></div>
+      <div class="card-body">
+        <p>Аудіокурси всередині додатку: Audio / Transcript / Resources</p>
+        <p>Приклад: "BREAKTHROUGH — Day 1: Build your base" (7:16 хв)</p>
+        <p>Повний транскрипт доступний прямо в додатку</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="insights-grid" style="margin-bottom:48px;">
+    <div class="insight-card pattern">
+      <div class="num">✓</div>
+      <h4>Сила CHANI</h4>
+      <p>Найвища якість тексту. Читається як справжній астролог. Чітка структура: хто ти (ME) + що відбувається зараз (TRANSITS). Курсова освіта всередині.</p>
+    </div>
+    <div class="insight-card" style="border-color:#3d1515;">
+      <div class="num" style="color:#3d1515">✕</div>
+      <h4>Слабкість CHANI</h4>
+      <p><strong>Немає actionability.</strong> Описує ХТО ти, але не ЩО РОБИТИ. Навіть Money &amp; Success секція — це розповідь, не інструкція. Текстоцентрично, стомлює.</p>
+    </div>
+    <div class="insight-card diff">
+      <div class="num">→</div>
+      <h4>Що взяти</h4>
+      <p>Стандарт якості тексту. Структуру транзитів по life areas. Спосіб пояснення навіщо дані під час онбордингу.</p>
+    </div>
+  </div>
+
+  <!-- ASTROBELLA -->
+  <h3 style="color:#e8e8e8;font-size:18px;margin-bottom:4px;">AstroBella</h3>
+  <p style="color:#555;font-size:13px;margin-bottom:20px;">Відео 2 · 7.4 хв · Freemium + Plus</p>
+
+  <div class="competitor-grid" style="margin-bottom:32px;">
+    <div class="card">
+      <div class="card-header"><div class="card-name">YOU — Core Personality</div></div>
+      <div class="card-body">
+        <p><strong>3 картки:</strong> Sun (Cancer) — Core Identity, Moon (Sagittarius) — Emotional Self, Rising (Scorpio) — Your Image</p>
+        <p>Решта планет (Jupiter, Saturn, Uranus) — замкнені за Plus</p>
+        <p>Кожна планета: 3D-зображення + STRENGTHS / CHALLENGES / ELEMENT</p>
+        <p>Приклад (Sun Cancer): "You make people feel safe and seen" / "Your feelings can overwhelm you"</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-name">COMPATIBILITY ← найсильніша частина</div></div>
+      <div class="card-body">
+        <p>Synastry chart: дві карти накладені</p>
+        <p>TODAY tab: активні аспекти між партнерами</p>
+        <p><strong>Формат "How to show up":</strong></p>
+        <p>"Mercury Trine ilya's Sun · Jun 24 → Jul 5 · peak today"</p>
+        <p>"How ilya feels it: Words come easily."</p>
+        <p><strong>"How to show up: Ask the question you've been holding. They'll give you a real answer."</strong></p>
+        <p>← Це єдиний справді actionable контент в усіх трьох додатках</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-name">TAROT — Yes or No (BellaAI)</div></div>
+      <div class="card-body">
+        <p>Питання текстом → вибір карти → BellaAI відповідає</p>
+        <p>Питання ділиться з BellaAI і видаляється після</p>
+        <p>Приклад питань: "Will my ex and I get back together?"</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-name">ADVISOR — Birth Chart Report</div></div>
+      <div class="card-body">
+        <p>25-30 сторінковий PDF через конкретного астролога</p>
+        <p>Фото астролога + досвід + спеціалізація + рейтинг</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="insights-grid" style="margin-bottom:48px;">
+    <div class="insight-card pattern">
+      <div class="num">✓</div>
+      <h4>Сила AstroBella</h4>
+      <p>"How to show up" у сумісності — єдина actionable функція серед усіх. Synastry з активними транзитами між двома людьми. Гарна візуальна подача планет.</p>
+    </div>
+    <div class="insight-card" style="border-color:#3d1515;">
+      <div class="num" style="color:#3d1515">✕</div>
+      <h4>Слабкість AstroBella</h4>
+      <p>Занадто багато функцій: карта + таро + астролог + сумісність. Жодна не глибока. Текст шаблонний. BellaAI tarot — гімік.</p>
+    </div>
+    <div class="insight-card diff">
+      <div class="num">→</div>
+      <h4>Що взяти</h4>
+      <p><strong>Формат "How to show up"</strong> — транзит → як ти відчуваєш → що зробити сьогодні. Застосувати до всієї карти, не тільки до compatibility.</p>
+    </div>
+  </div>
+
+  <!-- NEBULA -->
+  <h3 style="color:#e8e8e8;font-size:18px;margin-bottom:4px;">Nebula</h3>
+  <p style="color:#555;font-size:13px;margin-bottom:20px;">Відео 3 · 2.7 хв · Freemium + підписка + per-advisor</p>
+
+  <div class="competitor-grid" style="margin-bottom:32px;">
+    <div class="card">
+      <div class="card-header"><div class="card-name">HOROSCOPE — Daily Feed</div></div>
+      <div class="card-body">
+        <p>Today / Weekly / Yearly</p>
+        <p>Щоденний заголовок: "Dreams and dreamers break the rules."</p>
+        <p><strong>Кільця-індикатори: Love 60% · Health 80% · Career 95%</strong></p>
+        <p>"Get answers to your worries" — карусель питань → "Ask a question"</p>
+        <p>Yearly — заблоковано: "Subscribe to view full Yearly Horoscope"</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-name">YOUR PERSONAL PLAN ← ключова функція</div></div>
+      <div class="card-body">
+        <p>"46.9k people have enrolled"</p>
+        <p>Структура сесій:</p>
+        <p>Session 1: <strong>Self Love</strong> — "Become a woman he never forgets"</p>
+        <p>Session 2: Communication — "Behavioural patterns according to Natal Chart"</p>
+        <p>Session 3: Sex life and communication</p>
+        <p>Session 4: Five love languages — "Key to marriage"</p>
+        <p>Session 1 відкрита: текст + Tasks (checklist конкретних дій)</p>
+        <p><strong>⚠️ Plan — по сонячному знаку (Aries), не по натальній карті!</strong></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-name">ADVISORS + CHATS</div></div>
+      <div class="card-body">
+        <p>Реальні люди-астрологи для чату</p>
+        <p>Meera Chadha — 19 years experience — Relationship — ★★★★★ 4,328 reviews</p>
+        <p>Birth Chart Report замовляється через конкретного астролога</p>
+        <p>Сповіщення: "Answer is ready"</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="insights-grid" style="margin-bottom:32px;">
+    <div class="insight-card pattern">
+      <div class="num">✓</div>
+      <h4>Сила Nebula</h4>
+      <p>Personal Plan — структура курсу з чітким прогресом. Tasks у сесіях. Люди-астрологи як якір довіри. Кільця Love/Health/Career — гачок для щоденного повернення.</p>
+    </div>
+    <div class="insight-card" style="border-color:#3d1515;">
+      <div class="num" style="color:#3d1515">✕</div>
+      <h4>Слабкість Nebula</h4>
+      <p>Plan НЕ прив'язаний до карти — це контент по сонячному знаку. "Become a woman he never forgets" — регресивний, відштовхує нашу аудиторію. Tasks generichni.</p>
+    </div>
+    <div class="insight-card diff">
+      <div class="num">→</div>
+      <h4>Що взяти</h4>
+      <p>Структуру Personal Plan з сесіями і чекбоксами. Зробити те саме але справді по натальній карті.</p>
+    </div>
+  </div>
+
+  <!-- Summary table -->
+  <h3>Зведена матриця — що кожен робить унікально</h3>
+  <div class="table-wrap" style="margin-top:16px;">
+    <table>
+      <thead>
+        <tr>
+          <th>Вимір</th>
+          <th>CHANI</th>
+          <th>AstroBella</th>
+          <th>Nebula</th>
+          <th style="color:#4ade80">Astro Recipe</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Персоналізація</td><td>✅ Вся карта</td><td>⚠️ Sun/Moon/Rising free</td><td>❌ Сонячний знак</td><td style="color:#4ade80">✅ Вся карта</td></tr>
+        <tr><td>Actionability</td><td>❌ Тільки опис</td><td>⚠️ Тільки в compatibility</td><td>⚠️ Generic tasks</td><td style="color:#4ade80">✅ Конкретні дії</td></tr>
+        <tr><td>Life areas</td><td>✅ Є секції</td><td>⚠️ Частково</td><td>⚠️ Стосунки</td><td style="color:#4ade80">✅ Одна ніша, глибоко</td></tr>
+        <tr><td>Якість тексту</td><td>✅ Авторська</td><td>⚠️ Шаблонна</td><td>❌ Clickbait</td><td style="color:#4ade80">✅ Авторська</td></tr>
+        <tr><td>Прив'язка до часу</td><td>✅ Транзити</td><td>✅ Daily synastry</td><td>⚠️ Daily %, не карта</td><td style="color:#4ade80">✅ Транзити × карта</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- HYPOTHESES -->
+<section id="hypotheses">
+  <span class="group-label aspirational">💡 Гіпотези</span>
+  <h2>5 гіпотез — якщо / то / бо</h2>
+  <p style="color:#666;font-size:14px;margin-bottom:32px;">Висновки з ресерчу у форматі перевіряємих припущень. Кожне — основа для рішення в продукті.</p>
+
+  <div style="display:grid;gap:16px;">
+
+    <div class="insight-card" style="border-left:3px solid #4ade80;">
+      <h4 style="font-size:15px;margin-bottom:12px;">Гіпотеза 1 — Відповідь на питання > опис особистості</h4>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:8px;font-size:13px;color:#888;">
+        <span style="color:#666;font-weight:600;">ЯКЩО</span><span>Ми будуємо продукт навколо реальних питань аудиторії (стосунки, кар'єра, гроші) а не навколо "дізнайся свою карту"</span>
+        <span style="color:#666;font-weight:600;">ТО</span><span>Вища конверсія в оплату і довша retention, ніж у конкурентів</span>
+        <span style="color:#666;font-weight:600;">БО</span><span>AstroBella compatibility (єдина actionable секція в усіх трьох відео) — найпроводиміший екран. Люди платять за вирішення проблеми, а не за саморозвиток абстрактно. Gallup монетизує через "знайди свої сильні сторони для роботи" — конкретний JTBD.</span>
+      </div>
+    </div>
+
+    <div class="insight-card" style="border-left:3px solid #4ade80;">
+      <h4 style="font-size:15px;margin-bottom:12px;">Гіпотеза 2 — "Інструкція" сприймається точнішою ніж "опис"</h4>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:8px;font-size:13px;color:#888;">
+        <span style="color:#666;font-weight:600;">ЯКЩО</span><span>Ми фреймуємо результат як "твоя інструкція до себе" а не "ось хто ти є"</span>
+        <span style="color:#666;font-weight:600;">ТО</span><span>Вища сприймана точність і більше "боже, це точно про мене" відгуків</span>
+        <span style="color:#666;font-weight:600;">БО</span><span>The Pattern і 16Personalities отримують найвищу оцінку точності — обидва говорять "ось що ти робиш / схильний робити" замість "ти такий-то". Дієслово замість іменника підвищує резонанс.</span>
+      </div>
+    </div>
+
+    <div class="insight-card" style="border-left:3px solid #4ade80;">
+      <h4 style="font-size:15px;margin-bottom:12px;">Гіпотеза 3 — Комбінаційне читання = справжня персоналізація</h4>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:8px;font-size:13px;color:#888;">
+        <span style="color:#666;font-weight:600;">ЯКЩО</span><span>Ми читаємо планети в комбінації (Sun + Moon + Rising + дім + аспекти) а не по одній</span>
+        <span style="color:#666;font-weight:600;">ТО</span><span>Наш результат буде унікальним для кожного юзера і не буде сприйматись як generic</span>
+        <span style="color:#666;font-weight:600;">БО</span><span>Небула з планом по сонячному знаку швидко виглядає шаблоном — аудиторія одразу бачить "це для всіх Овнів". CHANI читає Sun-in-Cancer-in-9th-House — вже специфічніше. Тільки комбінація дає унікальний результат.</span>
+      </div>
+    </div>
+
+    <div class="insight-card" style="border-left:3px solid #4ade80;">
+      <h4 style="font-size:15px;margin-bottom:12px;">Гіпотеза 4 — Одна ніша з глибиною > все і всім</h4>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:8px;font-size:13px;color:#888;">
+        <span style="color:#666;font-weight:600;">ЯКЩО</span><span>Ми обираємо ONE нішу (наприклад, стосунки і комунікація або кар'єра і призначення) і йдемо дуже глибоко</span>
+        <span style="color:#666;font-weight:600;">ТО</span><span>Вищий word-of-mouth і нижча вартість залучення ніж у широких конкурентів</span>
+        <span style="color:#666;font-weight:600;">БО</span><span>AstroBella намагається охопити все (карта + таро + астролог + сумісність) і жодна функція не є глибокою. Gallup вибрав "сильні сторони для роботи" — і зробив це краще за всіх. Нішевий спеціаліст завжди виграє у дженераліста в довірі.</span>
+      </div>
+    </div>
+
+    <div class="insight-card" style="border-left:3px solid #4ade80;">
+      <h4 style="font-size:15px;margin-bottom:12px;">Гіпотеза 5 — Транзити × карта = daily retention без generic push</h4>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:8px;font-size:13px;color:#888;">
+        <span style="color:#666;font-weight:600;">ЯКЩО</span><span>Ми показуємо "що зробити в наступні 3 дні" на основі перетину поточних транзитів і персональної карти</span>
+        <span style="color:#666;font-weight:600;">ТО</span><span>Вища частота повернень і retention ніж у продуктів з generic daily content</span>
+        <span style="color:#666;font-weight:600;">БО</span><span>CHANI's transits прив'язані до конкретних дат (Jun 24–27) і показують "YOUR themes" — це повертає. Nebula's "Dreams and dreamers break the rules" — не повертає, бо не має зв'язку з мною конкретно. AstroBella's daily synastry transits ("Mercury trine your Sun — peak today") — конкретний і персональний.</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
