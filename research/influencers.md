@@ -25,6 +25,7 @@ Astrology influencers monetize primarily through **education funnels** (courses,
 | Astrology Hub (astrologyhub.com) | Web, YouTube, Podcast | Large (media platform) | Membership (Inner Circle), personalized reports, individual courses, bundles | "ALIGN WITH THE COSMOS & TRANSFORM YOUR LIFE", "total awareness of yourself, your purpose" | Membership $74/mo · $740/yr · $7,400 lifetime; Reports $27–$37; Courses $67–$297+; Bundles ~$895 | influencer-astrologyhub-membership.png, influencer-astrologyhub-reports.png, influencer-astrologyhub-courses.png |
 | CHANI / Chani Nicholas (chani.com) | Mobile app, Web | [?] (no public count found) | Subscription astrology app | "Discover who you are", "manifestation, self-discovery, mindfulness, and healing", "written by astrologers, not AI" | ~$14.99/month (historical, no current pricing on public pages) | influencer-chani-app.png |
 | Elizabeth April (@elizabeth.april) | Instagram, YouTube | 510K Instagram | "School of Awakening" courses, membership tiers | "Spiritual awakening and self-discovery", "unlock mysteries", "Student of the Universe" | [?] Site elizabethapril.com refused to connect. Pricing not found. | — |
+| Amelie (ameliesadvice.com) | Web | [?] | 4-week online course AstroGlow 101 + 1:1 readings | "Вивчи метод читання карти, який я використовую для консультацій — щоб розвиватись без астролога." Психологія + wellness + астрологія. | Course $197 · 1:1 reading add-on +$200 | — |
 
 ---
 
