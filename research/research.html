@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astro Recipe — Research Report</title>
+<style>
+  :root {
+    --bg: #0e0e0f;
+    --surface: #17171a;
+    --surface2: #1f1f24;
+    --border: #2a2a30;
+    --text: #e8e8ec;
+    --muted: #7a7a8a;
+    --accent: #c9a96e;
+    --accent2: #8b6fd4;
+    --accent3: #5fa87a;
+    --red: #c96e6e;
+    --tag-bg: #1f1f24;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Georgia', serif;
+    font-size: 16px;
+    line-height: 1.7;
+    padding: 0 24px 80px;
+  }
+  .container { max-width: 860px; margin: 0 auto; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+    z-index: 100;
+    margin: 0 -24px;
+    padding-left: 24px;
+  }
+  nav .nav-inner { max-width: 860px; margin: 0 auto; display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+  nav a { color: var(--muted); text-decoration: none; font-family: monospace; font-size: 13px; }
+  nav a:hover { color: var(--accent); }
+  nav .logo { color: var(--accent); font-size: 14px; font-weight: bold; margin-right: 12px; }
+
+  /* HEADERS */
+  .hero { padding: 60px 0 48px; border-bottom: 1px solid var(--border); }
+  .hero .label { font-family: monospace; font-size: 12px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+  .hero h1 { font-size: 42px; font-weight: normal; line-height: 1.2; margin-bottom: 16px; }
+  .hero .meta { font-family: monospace; font-size: 13px; color: var(--muted); }
+
+  h2 { font-size: 26px; font-weight: normal; margin: 56px 0 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); color: var(--text); }
+  h3 { font-size: 18px; font-weight: normal; margin: 36px 0 14px; color: var(--accent); }
+  h4 { font-size: 15px; font-weight: bold; margin: 24px 0 10px; color: var(--text); font-family: monospace; }
+
+  p { margin-bottom: 14px; color: var(--text); }
+  strong { color: var(--accent); font-weight: bold; }
+  em { color: var(--muted); font-style: italic; }
+
+  /* SECTIONS */
+  section { padding: 0; }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .card h4 { margin-top: 0; color: var(--accent); }
+  .card .tag {
+    display: inline-block;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-family: monospace;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin: 20px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { background: var(--surface2); color: var(--accent); text-align: left; padding: 10px 14px; border: 1px solid var(--border); font-family: monospace; font-size: 13px; font-weight: normal; }
+  td { padding: 10px 14px; border: 1px solid var(--border); vertical-align: top; color: var(--text); }
+  tr:nth-child(even) td { background: var(--surface); }
+
+  /* LISTS */
+  ul, ol { margin: 10px 0 14px 20px; }
+  li { margin-bottom: 6px; }
+
+  /* HIGHLIGHT BOX */
+  .highlight {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent);
+    padding: 18px 20px;
+    margin: 20px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .highlight.green { border-color: var(--accent3); }
+  .highlight.purple { border-color: var(--accent2); }
+  .highlight.red { border-color: var(--red); }
+
+  /* QUOTE */
+  blockquote {
+    border-left: 2px solid var(--accent2);
+    padding: 14px 20px;
+    margin: 20px 0;
+    background: var(--surface);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  /* BADGE */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-family: monospace; font-size: 12px; font-weight: bold; }
+  .badge-gap { background: #2a1a0e; color: var(--accent); border: 1px solid #4a3010; }
+  .badge-ok { background: #0e2a18; color: var(--accent3); border: 1px solid #1a4a28; }
+  .badge-weak { background: #1a0e2a; color: var(--accent2); border: 1px solid #2a1a4a; }
+
+  /* PERSONA CARD */
+  .persona-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+  .persona-card.primary { border-color: var(--accent); }
+  .persona-meta { font-family: monospace; font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+  .persona-meta span { margin-right: 16px; }
+
+  /* JTBD */
+  .jtbd-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+  }
+  .jtbd-item .job-label { font-family: monospace; font-size: 12px; color: var(--accent2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+  .jtbd-item p { margin: 0; }
+
+  /* DIVIDER */
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  /* SOURCE */
+  .source { font-family: monospace; font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .source a { color: var(--muted); text-decoration: underline; }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-family: monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* STAR */
+  .star-3 { color: var(--accent); }
+  .star-2 { color: #7a6a4a; }
+  .star-1 { color: #4a4a4a; }
+
+  /* FOOTNOTE */
+  .footnote { font-size: 13px; color: var(--muted); font-style: italic; margin-top: 6px; }
+
+  /* GAP BOX */
+  .gap-box {
+    background: #1a1200;
+    border: 1px solid #4a3800;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .gap-box .gap-title { color: var(--accent); font-family: monospace; font-size: 13px; font-weight: bold; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="logo">Astro Recipe</span>
+    <a href="#market">Ринок</a>
+    <a href="#products">Продукти</a>
+    <a href="#influencers">Інфлюенсери</a>
+    <a href="#niches">Ніші</a>
+    <a href="#psychology">Психологія</a>
+    <a href="#personas">Персони</a>
+    <a href="#jtbd">JTBD</a>
+    <a href="#conclusions">Висновки</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<div class="hero">
+  <div class="label">Research Report · v1.0</div>
+  <h1>Astro Recipe<br>Дослідження ринку</h1>
+  <div class="meta">Дата: 2026-07-06 &nbsp;·&nbsp; Статус: В процесі &nbsp;·&nbsp; Ніша: уточнюється</div>
+</div>
+
+<!-- ============================================================ -->
+<section id="brief">
+  <h2>Продукт</h2>
+
+  <div class="highlight">
+    <strong>Концепт:</strong> Астрологічний додаток що перетворює натальну карту людини на персональну інструкцію до життя. Людина вводить дату + час + місце народження → отримує глибокий аналіз побудований на алгоритмах → отримує конкретні дії у вибраній сфері.
+  </div>
+
+  <h3>Проблема</h3>
+  <p>Додатки типу Co-Star і The Pattern занадто абстрактні й генеричні:</p>
+  <ul>
+    <li>Читання розмите — підходить будь-кому</li>
+    <li>Описують ХТО ти, але не кажуть ЩО РОБИТИ</li>
+    <li>Немає практичного застосування — прочитав і пішов далі</li>
+  </ul>
+
+  <h3>Рішення</h3>
+  <p>Натальна карта як персональна операційна система. Алгоритм читає планетарні позиції, аспекти, будинки і знаки <em>в комбінації</em> — так як це робить практикуючий астролог — і перетворює це на конкретне керівництво по обраній ніші.</p>
+
+  <h3>Аудиторія</h3>
+  <ul>
+    <li><strong>Primary:</strong> молоді люди 24–35, digital nomad / travelller контекст (Балі, ЮСА), англомовні</li>
+    <li>Жінки — основна частина; але є чоловіки (творчі, емоційно доступні)</li>
+    <li>Вже знайомі з MBTI / Human Design / Enneagram</li>
+    <li>Frustrated with vague astrology — хочуть конкретики</li>
+    <li>CIS-ринок: референс, не primary target MVP</li>
+  </ul>
+
+  <div class="highlight red" style="margin-top:20px">
+    <strong>Критичний інсайт:</strong> Карта показує ПОТЕНЦІАЛ, не рівень розвитку. Класний Нептун може реалізуватись у творчість або в алкоголь. Два "сумісних" за картою людини можуть бути на абсолютно різних рівнях свідомості. Чесний продукт говорить про це — це диференціатор від наївної астрології.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="market">
+  <h2>Конкурентна карта</h2>
+
+  <h3>Hard конкуренти — той самий продукт, та сама аудиторія</h3>
+
+  <div class="card">
+    <div class="tag">HARD · CIS</div>
+    <h4>Telegram-астрологи з платним контентом</h4>
+    <p>Особистий бренд: Telegram-канал + Instagram + платні продукти. <strong>Це наш головний конкурент за увагу і гроші — не Co-Star.</strong> Мільйонні аудиторії в Україні. Коли людина хоче зрозуміти карту — вона йде до астролога в Telegram.</p>
+    <p><strong>Що запозичити:</strong> як формулюють цінність ("ти дізнаєшся чому..."), які теми продаються (карта + стосунки / гроші / призначення), тон — тепло і близько.</p>
+  </div>
+
+  <div class="card">
+    <div class="tag">HARD · CIS</div>
+    <h4>AstroBot та аналоги (Telegram-боти)</h4>
+    <p>Найближчий технологічний аналог на ринку СНД. Людина вводить дату — отримує текст. Те саме що ми робимо, але примітивніше.</p>
+    <p><strong>Що запозичити:</strong> флоу введення даних, де алгоритм проседає у відгуках.</p>
+  </div>
+
+  <div class="card">
+    <div class="tag">HARD · CIS</div>
+    <h4>Матриця долі / Нумерологія</h4>
+    <p>Масовий феномен у СНД. Той самий JTBD, інший інструмент. Конвертує через агресивну воронку.</p>
+    <p><strong>Монетизація:</strong> Trial $15 → one report $7 → unlimited $79 → PRO $149</p>
+    <p><strong>Що запозичити:</strong> структура PDF-звіту, воронка freemium → paid, мова обіцянок.</p>
+  </div>
+
+  <div class="card">
+    <div class="tag">HARD · Global</div>
+    <h4>Human Design практики</h4>
+    <p>Та сама аудиторія, той самий момент — "хочу зрозуміти себе через систему." HD активно витісняє астрологію у частини аудиторії. Люди живуть за "Генератор, стратегія — відгукатись."</p>
+    <p><strong>Що запозичити:</strong> формат "твоя стратегія і авторитет" як рецепт дій — наш астрологічний аналог. Як пояснюють складне простою мовою без жаргону.</p>
+  </div>
+
+  <h3>Soft конкуренти — інший продукт, той самий JTBD</h3>
+
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th>Продукт</th>
+        <th>Аудиторія</th>
+        <th>Механізм</th>
+        <th>Монетизація</th>
+        <th>Що взяти</th>
+      </tr>
+      <tr>
+        <td><strong>16Personalities (MBTI)</strong></td>
+        <td>18–40, глобально</td>
+        <td>144 питання → архетип + профіль</td>
+        <td>Free + Premium Career Suite</td>
+        <td>Структура сторінки результату. Момент "боже, це точно про мене". Shareable ярлик.</td>
+      </tr>
+      <tr>
+        <td><strong>Gallup CliftonStrengths</strong></td>
+        <td>25–55, корпоративна</td>
+        <td>Тест → звіт з 34 темами</td>
+        <td>Top-5: $24.99 / All-34: $59.99</td>
+        <td>Модель one-time report. Мова: "твої таланти означають що варто..."</td>
+      </tr>
+      <tr>
+        <td><strong>Gene Keys</strong></td>
+        <td>28–45, духовна</td>
+        <td>Golden Path профіль за датою народження</td>
+        <td>Free profile → курси $100–300+</td>
+        <td>Профіль як живий документ. Tone: поетичний але з конкретними інсайтами.</td>
+      </tr>
+      <tr>
+        <td><strong>Enneagram Institute</strong></td>
+        <td>25–45, психологічна</td>
+        <td>9 типів + крила + рівні розвитку</td>
+        <td>RHETI $12, книги через Amazon</td>
+        <td>Мова про страхи і бажання — особиста, без езотерики. Глибина без перевантаження.</td>
+      </tr>
+      <tr>
+        <td><strong>Human Design (myBodyGraph)</strong></td>
+        <td>25–45</td>
+        <td>Free карта + AI Ra assistant</td>
+        <td>Unlocks $49–129 / Yearly $349–1199</td>
+        <td>Онбординг: мінімум даних → максимум враження. Freemium → paid лінійка.</td>
+      </tr>
+    </table>
+  </div>
+
+  <h3>Aspirational — міжнародні еталони</h3>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="tag">ASPIRATIONAL</div>
+      <h4>Co-Star</h4>
+      <p>20M+ юзерів. Мінімалізм, AI-копі. <strong>Те від чого відштовхуємось</strong> — занадто абстрактно.</p>
+      <p><strong>Взяти:</strong> онбординг (мін. кроків → перший wow), візуальна мова.</p>
+      <p><strong>Не брати:</strong> абстрактні повідомлення ні про що.</p>
+    </div>
+    <div class="card">
+      <div class="tag">ASPIRATIONAL</div>
+      <h4>The Pattern</h4>
+      <p>Ховає астрологічну механіку за психологічною мовою. Найближчий до "читання як живий психолог."</p>
+      <p><strong>Взяти:</strong> структура "паттерн + коли активується + як з цим". Дзеркальний, точний тон.</p>
+    </div>
+    <div class="card">
+      <div class="tag">ASPIRATIONAL</div>
+      <h4>CHANI</h4>
+      <p>Найвища якість тексту з усіх. Читається як справжній астролог. ~$12/міс.</p>
+      <p><strong>Взяти:</strong> якість тексту як еталон. Авторський голос, позиція.</p>
+      <p><strong>Не брати:</strong> описує але не каже що робити.</p>
+    </div>
+    <div class="card">
+      <div class="tag">ASPIRATIONAL</div>
+      <h4>Astro.com</h4>
+      <p>Золотий стандарт глибини (Liz Greene, Robert Hand). UX 2005 року, мобільної версії нема.</p>
+      <p><strong>Взяти:</strong> структура і глибина Psychological Horoscope. <strong>Наш шанс:</strong> та сама глибина + сучасний UX.</p>
+    </div>
+  </div>
+
+  <div class="table-wrap" style="margin-top:32px">
+    <table>
+      <tr>
+        <th>Конкурент</th>
+        <th>Персоналізація</th>
+        <th>Actionability</th>
+        <th>Ніша</th>
+      </tr>
+      <tr>
+        <td>CHANI</td>
+        <td><span class="badge badge-ok">✅ справжня</span></td>
+        <td><span class="badge badge-gap">❌ опис без дій</span></td>
+        <td><span class="badge badge-gap">❌ широко</span></td>
+      </tr>
+      <tr>
+        <td>AstroBella</td>
+        <td><span class="badge badge-weak">⚠️ часткова</span></td>
+        <td><span class="badge badge-weak">⚠️ тільки в compatibility</span></td>
+        <td><span class="badge badge-gap">❌ широко</span></td>
+      </tr>
+      <tr>
+        <td>Nebula</td>
+        <td><span class="badge badge-gap">❌ сонячний знак</span></td>
+        <td><span class="badge badge-weak">⚠️ generic tasks</span></td>
+        <td><span class="badge badge-gap">❌ широко</span></td>
+      </tr>
+      <tr>
+        <td><strong>Astro Recipe (ціль)</strong></td>
+        <td><span class="badge badge-ok">✅ ціль</span></td>
+        <td><span class="badge badge-ok">✅ ціль</span></td>
+        <td><span class="badge badge-ok">✅ ціль</span></td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="products">
+  <h2>Аналіз продуктів (відеорозбір)</h2>
+  <p class="footnote">Метод: скріншоти з відеозаписів — 103 кадри з 3 додатків, 1 кадр кожні 10 сек. Дата: 2026-06-25.</p>
+
+  <h3>CHANI</h3>
+  <div class="highlight purple">
+    <strong>Тон онбордингу:</strong> "Welcome to your universe" — теплий, трохи іронічний. Одразу пояснює НАВІЩО потрібні дані (час народження → rising sign). Верифікація email називається "Verification station" з колажем тварин у капелюхах.
+  </div>
+  <p>Навігація: HOME / GROW / ME / TRANSITS / LISTEN. Секція ME — список планет з однорядковим поясненням: "Sun in Cancer in the 9th House — Your identity and where you shine." Кожна планета → окрема сторінка з довгим авторським текстом.</p>
+  <blockquote>"It's not that you don't need consistency, it's just that it might not be something you know how to facilitate for yourself... you need to both honor your diverse experience and find ways to give yourself the containment you crave." — CHANI, Scorpio Rising</blockquote>
+  <div class="grid-2">
+    <div>
+      <h4>Сильні сторони</h4>
+      <ul>
+        <li>Найвища якість тексту — читається як справжній астролог</li>
+        <li>Чітка структура: що означає планета + що відбувається ЗАРАЗ</li>
+        <li>Курсова освіта всередині додатку</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Слабкі сторони</h4>
+      <ul>
+        <li><strong>Немає actionability</strong> — описує ХТО ти, а не ЩО РОБИТИ</li>
+        <li>Дуже текстоцентрично — стомлює</li>
+        <li>Немає відповідей на реальні питання ("що з кар'єрою?")</li>
+        <li>Транзити і карта існують окремо — немає синтезу</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>AstroBella</h3>
+  <p>Мейнстримний додаток. AI (BellaAI) + людські астрологи. "Birth Charts · Daily Insights · Compatibility".</p>
+  <div class="highlight green">
+    <strong>Найцінніший патерн — "How to show up" у сумісності:</strong><br>
+    Транзит → як партнер це відчуває → <strong>що зробити сьогодні</strong><br>
+    "Mercury Trine ilya's Sun — peak today. How to show up: Ask the question you've been holding. They'll give you a real answer."<br><br>
+    Це найближче до actionability з усіх трьох. Треба застосувати цей формат до всієї карти, не тільки до compatibility.
+  </div>
+
+  <h3>Nebula</h3>
+  <p>Гібрид: AI-астрологія + маркетплейс людських астрологів. Ключова фіча — "Personal Plan" начебто на основі натальної карти.</p>
+  <div class="card">
+    <h4>Personal Plan — структура</h4>
+    <ul>
+      <li>Session 1: Self Love — "Become a woman he never forgets"</li>
+      <li>Session 2: Communication — "Behavioural patterns according to Natal Chart"</li>
+      <li>Session 3: Sex life and communication</li>
+      <li>Session 4: Five love languages — "Key to marriage"</li>
+    </ul>
+    <p style="margin-top:12px">Tasks: "Spend time each day appreciating yourself for the unique individual you are."</p>
+    <p class="footnote">❌ Критична проблема: план побудований за СОНЯЧНИМ ЗНАКОМ (Овен), не за натальною картою. Tasks генеричні, не пов'язані з реальними планетарними позиціями. "Become a woman he never forgets" — регресивний фреймінг.</p>
+  </div>
+
+  <div class="gap-box">
+    <div class="gap-title">ГОЛОВНА ПРОГАЛИНА ринку</div>
+    <p>Жоден з трьох додатків не робить одночасно: (1) реально персоналізований аналіз по всій карті, (2) конкретні дії — не "ти такий" а "зроби ось це", (3) глибину в одній ніші. <strong>Astro Recipe — перший хто може зробити все три.</strong></p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="influencers">
+  <h2>Інфлюенсери та курси</h2>
+
+  <h3>CIS-ринок</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Хто</th><th>Платформа</th><th>Аудиторія</th><th>Продукт / Framing</th><th>Ціна</th></tr>
+      <tr>
+        <td><strong>Ірина Мінєєва</strong> (@irenezodiac)</td>
+        <td>Instagram, YouTube, TikTok, Telegram</td>
+        <td>829K Instagram</td>
+        <td>Курси, wealth & manifestation. "Astrological Wealth Strategist — turn Astrology into your unfair advantage"</td>
+        <td>[?]</td>
+      </tr>
+      <tr>
+        <td><strong>Школа 11 Дом</strong> (Дятлова)</td>
+        <td>Instagram, YouTube, VK</td>
+        <td>513K YouTube views</td>
+        <td>Натальна астрологія, horary, прогностика. Структурований curriculum.</td>
+        <td>~7,100₽/міс</td>
+      </tr>
+    </table>
+  </div>
+  <p><strong>Висновок по CIS:</strong> сильний мотив — гроші, кар'єра, призначення. "Astrological Wealth Strategist" — найсильніший positioning сигнал. Career/money/life purpose теми конвертують добре.</p>
+
+  <h3>Міжнародний ринок</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Хто</th><th>Продукт</th><th>Framing</th><th>Ціна</th></tr>
+      <tr>
+        <td><strong>Astrology Hub</strong></td>
+        <td>Membership, reports, courses</td>
+        <td>"ALIGN WITH THE COSMOS & TRANSFORM YOUR LIFE"</td>
+        <td>Membership $74/міс · Reports $27–37 · Courses $67–297+</td>
+      </tr>
+      <tr>
+        <td><strong>Amelie</strong> (ameliesadvice.com)</td>
+        <td>AstroGlow 101 — 4-тижневий курс</td>
+        <td>"Вивчи метод читання карти щоб розвиватись без астролога." Психологія + wellness + астрологія.</td>
+        <td>$197 · 1:1 reading +$200</td>
+      </tr>
+      <tr>
+        <td><strong>CHANI Nicholas</strong></td>
+        <td>App subscription</td>
+        <td>"Discover who you are. Written by astrologers, not AI."</td>
+        <td>~$12/міс</td>
+      </tr>
+    </table>
+  </div>
+
+  <h3>Архетипи продуктів на ринку</h3>
+  <ol>
+    <li><strong>Membership / Inner Circle</strong> — recurring доступ до спільноти + контенту ($74/міс). Потребує великої аудиторії.</li>
+    <li><strong>Self-paced Course</strong> — one-time або cohort ($67–297). Найпопулярніша монетизація інфлюенсерів.</li>
+    <li><strong>Personalized Report (PDF)</strong> — дата → автоматичний PDF. CIS: $7–149. EN: $27–37. Низький тікет, великий об'єм.</li>
+    <li><strong>App Subscription</strong> — місячний доступ (~$12–15/міс). Висока вартість розробки, сильний retention.</li>
+    <li><strong>Wealth / Manifestation Angle</strong> — астрологія як практичний інструмент для грошей/кар'єри. Дуже сильно на CIS, зростає в EN.</li>
+  </ol>
+
+  <div class="highlight">
+    <strong>Ключовий висновок:</strong> Немає нікого хто продає масштабований self-serve продукт на перетині астрологія + конкретні дії + одна ніша. Amelie — виняток. Astro Recipe йде в ту ж зону.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="niches">
+  <h2>Дослідження ніш</h2>
+  <p>Питання: в якій конкретній сфері Astro Recipe дає інструкцію? Досліджено дві ніші.</p>
+
+  <h3>Ніша 1 — Style / Fashion / Personal Aesthetic</h3>
+
+  <p>Ключові планети для стилю (консенсус всіх авторів): <strong>Venus</strong> (естетика, краса), <strong>Rising sign</strong> (як тебе сприймають), <strong>Moon</strong> (що дає комфорт в одязі), <strong>Neptune + 1-й дім</strong> (внутрішній образ).</p>
+
+  <p><strong>Що знайдено:</strong> тонна безкоштовного контенту — статті Nylon, The Numinous (з 2016), Alice Bell (Substack), Farah Salem. SEO-попит підтверджено. Але <strong>жодного платного масштабованого курсу або продукту в цій ніші.</strong></p>
+
+  <ul>
+    <li>"Astro Glow Cheat Sheet" (Scribd, 30 стор., 283 перегляди) — лід-магніт, не продукт</li>
+    <li>Etsy-лістинги "Influencer Astrology Chart PDF" — $10–30, мікро-продукти</li>
+    <li>Alice Bell (Substack) — безкоштовна стаття, монетизує підпискою</li>
+  </ul>
+
+  <div class="gap-box">
+    <div class="gap-title">GAP: великий попит на контент, нуль якісних платних продуктів</div>
+    <p>Люди шукають "how to dress for your birth chart" і знаходять статті 2016 року. Платного гіда, курсу або звіту — не існує.</p>
+  </div>
+
+  <h3>Ніша 2 — Content Creation / Personal Brand Strategy</h3>
+
+  <p>Ключові планети для контент-мейкера: <strong>Mercury</strong> (комунікація, тип контенту), <strong>Venus</strong> (естетика і бренд), <strong>Midheaven</strong> (як тебе мають бачити публічно), <strong>Rising</strong> (перше враження).</p>
+
+  <p><strong>Що знайдено:</strong></p>
+  <ul>
+    <li><strong>Meghan Rose</strong> (Substack "PRAGMA") — контент-стратегія за Sun/Moon/Rising, Substack paywall. Не курс — підписка на контент.</li>
+    <li><strong>Blu Cameron</strong> — "Private Astrologer" program (application-only, нішево і дорого).</li>
+    <li><strong>TikTok тренд</strong> "Go Viral Using Astrology" — вірусний контент, попит підтверджено.</li>
+    <li><strong>Astro Assured</strong> — безкоштовні статті, уселл до readings.</li>
+  </ul>
+
+  <p>Концепт що повторюється скрізь: <em>"Most people aren't going viral because they're creating out of alignment with their chart."</em></p>
+
+  <div class="gap-box">
+    <div class="gap-title">GAP: є попит і концепт, але масштабованого продукту нема</div>
+    <p>TikTok-тренд підтверджує попит. Але між безкоштовними статтями і дорогим 1:1 coaching — порожній простір. Amelie-like продукту в цій ніші не існує.</p>
+  </div>
+
+  <h3>Порівняння ніш і перетин</h3>
+
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th></th>
+        <th>Style / Fashion</th>
+        <th>Content Creation</th>
+      </tr>
+      <tr><td>Попит</td><td>Великий, широка аудиторія</td><td>Нішевий, але motivated</td></tr>
+      <tr><td>Платні продукти</td><td>Практично нема</td><td>1–2 (дорогі, не масові)</td></tr>
+      <tr><td>Контент-конкуренція</td><td>Висока (але стара)</td><td>Середня</td></tr>
+      <tr><td>Хто купує</td><td>Будь-хто хто хоче стиль</td><td>Контент-мейкери</td></tr>
+      <tr><td>Price point</td><td>$30–150</td><td>$100–300</td></tr>
+      <tr><td>Overlap з Amelie</td><td>✅ Прямо (AstroGlow)</td><td>⚠️ Частково</td></tr>
+    </table>
+  </div>
+
+  <div class="highlight green" style="margin-top:24px">
+    <strong>Найцікавіший кут — перетин обох ніш:</strong><br><br>
+    <strong>Особистий бренд і естетика через карту.</strong><br>
+    Venus + Rising + Midheaven → як виглядати, яку естетику будувати, що транслювати в контенті.<br><br>
+    Це закриває Style і Content Creation одночасно. Конкурентів у цьому конкретному перетині — нуль. Amelie робить щось схоже (AstroGlow = routine + aesthetics), але не в digital/content кутку.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="psychology">
+  <h2>Психологія користувача — чому люди йдуть до астрології</h2>
+
+  <h3>Тригер: кризова ситуація, а не цікавість</h3>
+
+  <div class="highlight red">
+    <strong>Підтверджено дослідженнями.</strong> Психолог Graham Tyson (1982): "People who consult astrologers tend to do so in response to life stress" — не з абстрактної цікавості.<br><br>
+    Фінське дослідження: люди що записуються на курси астрології нещодавно пережили значно більше life crises ніж контрольна група — розлучення, зради, відхід дітей.
+  </div>
+
+  <p><strong>Конкретні тригерні ситуації</strong> (з quarter-life crisis research): відчуття застрягання, бажання змін, кар'єрна невизначеність, питання стосунків, сімейні рішення — топ-теми людей у кризі 25–35 років.</p>
+
+  <p><strong>Масштаб:</strong> 72% Gen Z консультуються зі своєю картою перед великими рішеннями (кар'єра, стосунки, фінанси). Не розваги — реальне використання для прийняття рішень.</p>
+
+  <h3>Механізм: Compensatory Control</h3>
+
+  <p>Лабораторне дослідження: учасники яких примушували відчути безсилля оцінювали гороскопи як значно точніші ніж ті хто відчував контроль. <strong>Астрологія — не пошук правди, а відновлення відчуття порядку.</strong></p>
+
+  <div class="highlight">
+    <strong>Продуктовий висновок:</strong><br>
+    1. Онбординг має питати "що зараз відбувається у твоєму житті?" — не просто збирати дату народження.<br>
+    2. Ключова обіцянка: не "дізнайся себе" (занадто загально), а "відновити відчуття ясності і контролю через свою карту."<br>
+    3. Продукт має давати AGENCY — конкретні дії відновлюють відчуття контролю краще ніж будь-який опис.
+  </div>
+
+  <p class="source">Джерела: <a href="https://skepticalinquirer.org/exclusive/why-are-millennials-turning-to-astrology/">Skeptical Inquirer</a> · <a href="https://www.panmacmillan.com/blogs/lifestyle-wellbeing/the-popularity-of-astrology">Pan Macmillan</a> · <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7068850/">PMC — Quarter-Life Crisis</a></p>
+</section>
+
+<!-- ============================================================ -->
+<section id="personas">
+  <h2>Персони</h2>
+  <p class="footnote">Синтез з research.md, influencers.md, video-analysis.md, доресерч 2026-07-06. Кожне твердження — з джерелом або позначено [?].</p>
+
+  <div class="persona-card primary">
+    <div class="section-label">Primary Persona</div>
+    <h3 style="margin-top:8px; color: var(--accent);">Маша — "Шукачка інструкції"</h3>
+    <div class="persona-meta">
+      <span>Вік: 27–34</span>
+      <span>Локація: Балі / ЮСА / digital nomad</span>
+      <span>Мова: англійська</span>
+    </div>
+
+    <h4>Контекст</h4>
+    <p>Прийшла до астрології після або паралельно з психотерапією. Вже пройшла MBTI, Human Design, Enneagram — не перший раз через систему. Знає Сонце і, можливо, Місяць. Але не знає що з цим робити.</p>
+
+    <h4>Тригер (підтверджено доресерчем)</h4>
+    <p>Приходить у момент конкретної кризи або рішення — зміна роботи, розставання, відчуття "застрягла". Механізм: compensatory control — шукає відновлення відчуття порядку. <em>(Graham Tyson 1982, Finnish study)</em></p>
+
+    <h4>Jobs</h4>
+    <ul>
+      <li>Зрозуміти чому вона реагує саме так в конкретних ситуаціях</li>
+      <li>Отримати конкретну відповідь на конкретне питання — не опис, а інструкцію</li>
+      <li>Відчути "боже, це точно про мене" — момент впізнавання <em>(16P pattern)</em></li>
+    </ul>
+
+    <h4>Болі</h4>
+    <ul>
+      <li>Читає CHANI — красиво, але не розуміє що конкретно робити</li>
+      <li>Generic tasks ("проводь час з собою") — відчуває що її дурять <em>(Nebula)</em></li>
+      <li>Боїться що "персоналізація" насправді по сонячному знаку</li>
+    </ul>
+
+    <h4>Тригери довіри</h4>
+    <ul>
+      <li>Текст читається як справжній астролог, не шаблон <em>(CHANI якість)</em></li>
+      <li>Посилання на конкретні планетарні позиції її карти (не "ти Скорпіон")</li>
+      <li>"Написано астрологами, не AI" або переконливий framing алгоритму</li>
+    </ul>
+
+    <blockquote>"Я знаю що я Рак з Місяцем у Стрільці. Але що мені з цим робити? Чому всі пишуть одне й те саме?"</blockquote>
+  </div>
+
+  <div class="grid-2">
+    <div class="persona-card">
+      <div class="section-label">Secondary 1</div>
+      <h3 style="margin-top:8px;">Оля — "Готова платити за глибину"</h3>
+      <div class="persona-meta"><span>32–42</span><span>СНД / Польща</span><span>UA/RU</span></div>
+      <p>Вже платила астрологам. Розчарована коли онлайн дає менше ніж живий консультант. Хоче якість астролога без його ціни і розкладу.</p>
+      <p><strong>Job:</strong> кар'єра і призначення, артефакт що можна перечитати.</p>
+      <p><strong>Price point:</strong> $7–25 one-time report. <em>(Matrix Destiny, Astrology Hub)</em></p>
+      <blockquote style="font-size:13px">"Хочу щось що я можу почитати коли захочу, а не тільки на консультації."</blockquote>
+    </div>
+    <div class="persona-card">
+      <div class="section-label">Secondary 2</div>
+      <h3 style="margin-top:8px;">Аня — "Скептик у пошуку"</h3>
+      <div class="persona-meta"><span>24–30</span><span>EN-ринок</span><span>англійська</span></div>
+      <p>Не вважає себе вірячою в астрологію. Але пройшла 16P. Натрапила через соцмережі. Зацікавлена якщо мова психологічна.</p>
+      <p><strong>Job:</strong> самопізнання без зобов'язання вірити. Ділиться результатами.</p>
+      <p><strong>Важлива для:</strong> growth і вірусності, але [?] готовність платити.</p>
+      <blockquote style="font-size:13px">"Я не вірю в гороскопи. Але це було дуже точно про мене."</blockquote>
+    </div>
+    <div class="persona-card">
+      <div class="section-label">Secondary 3 · Несподіваний</div>
+      <h3 style="margin-top:8px;">Творчий хлопець</h3>
+      <div class="persona-meta"><span>25–35</span><span>Балі / ЮСА</span><span>англійська</span></div>
+      <p>Емоційно доступний, чутливий, є дівчина. Творча сфера. Перевіряє сумісність з партнером на 2–3 побаченні. Робить синастрію самостійно в ChatGPT.</p>
+      <p class="footnote">Спостереження product owner — реальна поведінка в тревел-середовищі.</p>
+      <p><strong>Продуктовий інсайт:</strong> карта не показує рівень розвитку. Чесний продукт говорить про це.</p>
+    </div>
+    <div class="persona-card">
+      <div class="section-label">Secondary 4 · B2B сигнал</div>
+      <h3 style="margin-top:8px;">Ангеліна — підприємець</h3>
+      <div class="persona-meta"><span>30–42</span><span>свій бізнес</span></div>
+      <p>Топ-рекрутер. Використовує астрологію як бізнес-інструмент: вибір дня для офферу, перевірка кандидата на посаду через нумерологію.</p>
+      <p class="footnote">Не для MVP. Сигнал що є платоспроможна B2B аудиторія.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="jtbd">
+  <h2>JTBD — Jobs To Be Done</h2>
+  <p class="footnote">Формат: «Коли [ситуація], я хочу [мотивація], щоб [результат]». Без назв функцій.</p>
+
+  <h3>Main Job</h3>
+  <div class="jtbd-item" style="border-color: var(--accent);">
+    <div class="job-label">MAIN JOB</div>
+    <p><strong>Коли</strong> я застрягла в якомусь аспекті свого життя і не розумію чому знову роблю одне й те саме,<br>
+    <strong>я хочу</strong> отримати пояснення через мою конкретну карту,<br>
+    <strong>щоб</strong> нарешті мати ясність і знати що конкретно змінити.</p>
+  </div>
+
+  <h3>Related Jobs</h3>
+  <div class="jtbd-item">
+    <div class="job-label">R1 — Впізнати себе</div>
+    <p><strong>Коли</strong> я бачу опис мого типу або знаку, <strong>я хочу</strong> відчути точне впізнавання ("це точно про мене"), <strong>щоб</strong> повірити що система справжня і варта довіри.</p>
+  </div>
+  <div class="jtbd-item">
+    <div class="job-label">R2 — Відповідь на конкретне питання ← ДИФЕРЕНЦІАЦІЯ</div>
+    <p><strong>Коли</strong> я стою перед конкретним рішенням (зміна роботи, стосунки, переїзд), <strong>я хочу</strong> знати що моя карта каже саме про це, <strong>щоб</strong> прийняти рішення з більшою впевненістю.</p>
+  </div>
+  <div class="jtbd-item">
+    <div class="job-label">R3 — Зрозуміти патерн поведінки</div>
+    <p><strong>Коли</strong> я помічаю патерн у своїй поведінці що мене дратує, <strong>я хочу</strong> зрозуміти звідки це, <strong>щоб</strong> перестати себе звинувачувати і знати як з цим працювати.</p>
+  </div>
+  <div class="jtbd-item">
+    <div class="job-label">R4 — Поділитись (Growth)</div>
+    <p><strong>Коли</strong> отримую результат що мене вразив, <strong>я хочу</strong> показати це іншим, <strong>щоб</strong> і вони себе впізнали і ми могли говорити про це разом.</p>
+  </div>
+  <div class="jtbd-item">
+    <div class="job-label">R5 — Перевірити якість перед платежем</div>
+    <p><strong>Коли</strong> я вперше бачу новий продукт, <strong>я хочу</strong> отримати щось безкоштовно що одразу вразить точністю, <strong>щоб</strong> вирішити чи варто платити далі.</p>
+  </div>
+
+  <h3>Матриця: Jobs × Персони</h3>
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th>Job</th>
+        <th>Маша</th>
+        <th>Оля</th>
+        <th>Аня</th>
+        <th>Конкуренти закривають?</th>
+      </tr>
+      <tr>
+        <td><strong>Main: ясність + дія</strong></td>
+        <td class="star-3">★★★</td><td class="star-3">★★★</td><td class="star-2">★★</td>
+        <td><span class="badge badge-gap">❌ Ніхто повністю</span></td>
+      </tr>
+      <tr>
+        <td>R1: Впізнати себе</td>
+        <td class="star-3">★★★</td><td class="star-2">★★</td><td class="star-3">★★★</td>
+        <td><span class="badge badge-weak">⚠️ CHANI, 16P частково</span></td>
+      </tr>
+      <tr>
+        <td>R2: Відповідь на питання</td>
+        <td class="star-3">★★★</td><td class="star-3">★★★</td><td class="star-1">★</td>
+        <td><span class="badge badge-gap">❌ Жоден не робить добре</span></td>
+      </tr>
+      <tr>
+        <td>R3: Зрозуміти патерн</td>
+        <td class="star-3">★★★</td><td class="star-2">★★</td><td class="star-3">★★★</td>
+        <td><span class="badge badge-weak">⚠️ The Pattern (без дій)</span></td>
+      </tr>
+      <tr>
+        <td>R4: Поділитись</td>
+        <td class="star-2">★★</td><td class="star-1">★</td><td class="star-3">★★★</td>
+        <td><span class="badge badge-weak">⚠️ Co-Star (соціальний шар)</span></td>
+      </tr>
+      <tr>
+        <td>R5: Перевірити якість</td>
+        <td class="star-3">★★★</td><td class="star-3">★★★</td><td class="star-2">★★</td>
+        <td><span class="badge badge-ok">✅ Всі (freemium)</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="highlight green" style="margin-top:24px">
+    <strong>3 Jobs у ядро MVP:</strong><br>
+    1. Main Job — ясність через карту + конкретні дії. Це весь продукт.<br>
+    2. R1 — Впізнати себе. Без цього людина не повірить і не заплатить.<br>
+    3. R2 — Відповідь на конкретне питання. Найбільший розрив ринку. Наша диференціація.<br><br>
+    <strong>Відкладено:</strong> R4 (Поділитись) — важливо для growth, не для core. Синастрія — є у всіх конкурентів, не наша диференціація на старті.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="conclusions">
+  <h2>Висновки</h2>
+
+  <h3>3 спільних патерни ринку</h3>
+  <ol>
+    <li><strong>Freemium як точка входу.</strong> Всі дають щось безкоштовно — карту, профіль, тест. Немає гравця який бере гроші на старті без демо.</li>
+    <li><strong>Особистість через архетип.</strong> Всі редукують до ярлика — INFJ, Generator, 4-й тип. Ярлик яким можна ділитись = вірусний механізм.</li>
+    <li><strong>Розрив між описом і дією.</strong> Всі описують "хто ти є", жоден не каже "що конкретно робити". <strong>Це наш ринковий зазор.</strong></li>
+  </ol>
+
+  <h3>Головна диференціація Astro Recipe</h3>
+  <div class="highlight">
+    Замість: "Sun in Cancer = ти турботливий"<br><br>
+    <strong>Astro Recipe:</strong> "Sun in Cancer в 9 домі + Moon в 2 домі: коли ти береш на себе відповідальність за матеріальну безпеку близьких — ти втрачаєш себе. Ось три ознаки що це відбувається, і що з цим робити."
+  </div>
+
+  <h3>Ніша: особистий бренд і естетика через карту</h3>
+  <div class="highlight green">
+    <strong>Validated gap:</strong> Venus + Rising + Midheaven → як виглядати, яку естетику будувати, що транслювати в контенті. Закриває Style і Content Creation одночасно. Конкурентів у цьому перетині — нуль. Попит підтверджено SEO і TikTok-трендом.
+  </div>
+
+  <h3>Відкриті питання [?]</h3>
+  <ul>
+    <li>[?] Яка retention — recurring product чи one-time deep report?</li>
+    <li>[?] Що реально монетизує Co-Star (залучили $60M без явної моделі)?</li>
+    <li>[?] Чи Аня конвертується у платника або залишається freemium?</li>
+    <li>[?] Синастрія — в MVP чи ні?</li>
+    <li>[?] Відгуки App Store Co-Star/CHANI (1-зіркові) — де болить найбільше?</li>
+  </ul>
+
+  <h3>Value Proposition (draft)</h3>
+  <blockquote style="font-size:18px; color: var(--text); border-color: var(--accent);">
+    Твоя натальна карта — це не опис. Це інструкція.<br>
+    <span style="font-size:15px; color: var(--muted);">Astro Recipe читає твої планети в комбінації і дає конкретні відповіді: як виглядати, що транслювати, яку естетику будувати — саме для тебе.</span>
+  </blockquote>
+
+  <hr>
+  <p class="footnote">Документ зібраний: 2026-07-06. Джерела: research.md, influencers.md, video-analysis.md, personas.md, jtbd.md, психологічний доресерч, ніша-доресерч. Скріншоти: /research/screens/.</p>
+</section>
+
+</div>
+</body>
+</html>

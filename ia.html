@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astro Recipe — IA</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg: #0e0e0f;
+    --surface: #17171a;
+    --surface2: #1f1f24;
+    --border: #2a2a30;
+    --text: #e8e8ec;
+    --muted: #7a7a8a;
+    --accent: #c9a96e;
+    --accent2: #8b6fd4;
+    --accent3: #5fa87a;
+    --red: #c96e6e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    padding: 0 24px 80px;
+  }
+  .container { max-width: 980px; margin: 0 auto; }
+
+  nav {
+    position: sticky; top: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+    z-index: 100;
+    margin: 0 -24px;
+    padding-left: 24px;
+  }
+  nav .nav-inner { max-width: 980px; margin: 0 auto; display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+  nav a { color: var(--muted); text-decoration: none; font-family: monospace; font-size: 13px; }
+  nav a:hover { color: var(--accent); }
+  nav .logo { color: var(--accent); font-size: 14px; font-weight: bold; margin-right: 12px; }
+
+  .hero { padding: 56px 0 40px; border-bottom: 1px solid var(--border); }
+  .hero .label { font-family: monospace; font-size: 12px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .hero h1 { font-size: 36px; font-weight: 300; line-height: 1.2; margin-bottom: 12px; }
+  .hero .sub { color: var(--muted); font-size: 16px; }
+
+  h2 { font-size: 22px; font-weight: 400; margin: 52px 0 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; font-weight: 600; margin: 32px 0 12px; color: var(--accent); font-family: monospace; }
+
+  p { margin-bottom: 12px; color: var(--text); }
+  strong { color: var(--accent); }
+
+  .mermaid {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 20px;
+    margin: 16px 0 32px;
+    overflow-x: auto;
+  }
+
+  /* TREE */
+  .tree {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    font-family: monospace;
+    font-size: 13px;
+    line-height: 1.9;
+    white-space: pre;
+    overflow-x: auto;
+    margin: 16px 0 32px;
+  }
+  .tree .screen { color: var(--text); }
+  .tree .job { color: var(--accent); }
+  .tree .sirota { color: var(--red); }
+  .tree .backlog { color: var(--muted); }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin: 16px 0 32px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--surface2); color: var(--accent); text-align: left; padding: 10px 12px; border: 1px solid var(--border); font-family: monospace; font-size: 12px; font-weight: normal; }
+  td { padding: 10px 12px; border: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--surface); }
+  .yes { color: var(--accent3); font-weight: bold; }
+  .no { color: var(--muted); }
+  .partial { color: var(--accent2); }
+
+  .highlight {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+  }
+  .highlight.red { border-color: var(--red); }
+  .highlight.green { border-color: var(--accent3); }
+
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-family: monospace; font-size: 11px; }
+  .badge-sirota { background: #2a0e0e; color: var(--red); border: 1px solid #4a1a1a; }
+  .badge-ok { background: #0e2a18; color: var(--accent3); border: 1px solid #1a4a28; }
+  .badge-backlog { background: #1a1a2a; color: var(--muted); border: 1px solid #2a2a4a; }
+
+  .nav-count {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    font-family: monospace;
+    font-size: 13px;
+    margin: 16px 0 32px;
+    line-height: 2;
+  }
+  .nav-count .step { color: var(--text); }
+  .nav-count .tap { color: var(--accent); font-weight: bold; }
+
+  .defect-list { margin: 16px 0 32px; }
+  .defect { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; margin-bottom: 10px; }
+  .defect .defect-type { font-family: monospace; font-size: 11px; color: var(--accent2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .defect .defect-status { float: right; }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+  .footnote { font-size: 12px; color: var(--muted); font-style: italic; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="logo">Astro Recipe</span>
+    <a href="#sitemap">Sitemap</a>
+    <a href="#nav">Навігація</a>
+    <a href="#flow-main">Flow Main</a>
+    <a href="#flow-r1">Flow R1</a>
+    <a href="#flow-r2">Flow R2</a>
+    <a href="#matrix">Матриця</a>
+    <a href="#audit">Аудит</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<div class="hero">
+  <div class="label">IA · Урок 03</div>
+  <h1>Astro Recipe — Information Architecture</h1>
+  <div class="sub">Ніша: Glow — жити в своїй природі, а не проти неї &nbsp;·&nbsp; 2026-07-08</div>
+</div>
+
+<!-- ============================================================ -->
+<section id="entities">
+  <h2>Сутності продукту</h2>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Сутність</th><th>Що це</th><th>Job</th></tr>
+      <tr><td><strong>Натальна карта</strong></td><td>Розрахована по даті/часу/місцю</td><td>Main Job — основа</td></tr>
+      <tr><td><strong>Glow Profile</strong></td><td>Персональний результат: стиль + рутина + енергія + присутність</td><td>Main Job</td></tr>
+      <tr><td><strong>Естетика / стиль</strong></td><td>Яка твоя природна візуальна мова</td><td>R1</td></tr>
+      <tr><td><strong>Рутина</strong></td><td>Твої звички і природній ритм</td><td>R2</td></tr>
+      <tr><td><strong>Енергія</strong></td><td>Що відновлює і що виснажує</td><td>R3</td></tr>
+      <tr><td><strong>Присутність</strong></td><td>Як виглядаєш для інших</td><td>R4</td></tr>
+      <tr><td><strong>Деталізація</strong></td><td>Детальне пояснення кожного виміру</td><td>Main Job — глибина</td></tr>
+      <tr><td><strong>Wow-момент</strong></td><td>Перший екран результату — щось точне і несподіване</td><td>Emotional job + R1</td></tr>
+      <tr><td><strong>Онбординг-питання</strong></td><td>"Що зараз відбувається у твоєму житті?"</td><td>Main Job (тригер кризи)</td></tr>
+      <tr><td><strong>Shareable картка</strong></td><td>"Мій Glow тип" — для поширення</td><td>Social job</td></tr>
+      <tr><td style="color:var(--muted)">Синастрія</td><td style="color:var(--muted)">Сумісність з іншою людиною</td><td style="color:var(--muted)">Backlog — не в MVP</td></tr>
+      <tr><td style="color:var(--muted)">Транзити</td><td style="color:var(--muted)">Поточні впливи</td><td style="color:var(--muted)">Backlog — recurring job не підтверджений</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="sitemap">
+  <h2>Sitemap — ієрархія екранів</h2>
+  <div class="tree">
+<span class="screen">Astro Recipe</span>
+│
+├── <span class="screen">ONBOARDING</span>  <span class="job">[Main Job — entry]</span>
+│   ├── 1.1 Welcome / Hook          <span class="job">[Main Job — обіцянка]</span>
+│   ├── 1.2 Введення дати           <span class="job">[Main Job — дані]</span>
+│   ├── 1.3 Введення часу           <span class="job">[Main Job — час]</span>
+│   ├── 1.4 Введення місця          <span class="job">[Main Job — точність]</span>
+│   └── 1.5 Питання "що зараз?"    <span class="job">[Main Job + Emotional job]</span>
+│
+├── <span class="screen">GLOW PROFILE</span>  <span class="job">[Main Job — результат]</span>
+│   ├── 2.1 Wow-момент              <span class="job">[Emotional job + R1]</span>
+│   ├── 2.2 Твоя естетика           <span class="job">[R1 — стиль]</span>
+│   ├── 2.3 Твоя рутина             <span class="job">[R2 — звички]</span>
+│   ├── 2.4 Твоя енергія            <span class="job">[R3 — що дає / що забирає]</span>
+│   └── 2.5 Як ти виглядаєш        <span class="job">[R4 — присутність]</span>
+│
+├── <span class="screen">ДЕТАЛІЗАЦІЯ</span>  <span class="job">[Main Job — глибина]</span>
+│   ├── 3.1 Стиль — деталі          <span class="job">[R1]</span>
+│   ├── 3.2 Сприйняття — деталі     <span class="job">[R1 + R4]</span>
+│   ├── 3.3 Ритм — деталі           <span class="job">[R2 + R3]</span>
+│   ├── 3.4 Структура — деталі      <span class="job">[R2]</span>
+│   └── 3.5 Присутність — деталі    <span class="job">[R4]</span>
+│
+├── <span class="screen">SHAREABLE</span>  <span class="job">[Social job]</span>
+│   └── 4.1 Мій Glow тип — картка  <span class="job">[Social job]</span>
+│
+└── <span class="sirota">ПРОФІЛЬ  [SIROTA — технічна, без job]</span>
+    ├── 5.1 Мої дані народження
+    └── 5.2 Редагування / перерахунок</div>
+
+  <div class="highlight red">
+    <strong>Екрани-сироти:</strong> 5.1 / 5.2 Профіль — технічна необхідність без власного Job. Рішення: прихована іконка в хедері, не в головній навігації.<br><br>
+    <strong>Jobs-сироти:</strong> R5 (Самодогляд) — немає окремого екрана. Рішення: включити в 2.4 Енергія. Emotional job "дозвіл бути собою" — реалізується через тон тексту на 2.1, не потребує окремого екрана.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="nav">
+  <h2>Навігаційна модель</h2>
+
+  <h3>Глобальна навігація — 3 пункти</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Пункт</th><th>Що тут</th><th>Job</th><th>Обґрунтування</th></tr>
+      <tr><td><strong>Glow</strong></td><td>Повний Glow Profile</td><td>Main Job</td><td>Core value — перше що бачить юзер після онбордингу</td></tr>
+      <tr><td><strong>Деталізація</strong></td><td>Деталізація кожного виміру</td><td>Main Job (глибина)</td><td>Для тих хто хоче знати ЧОМУ — не тільки ЩО РОБИТИ</td></tr>
+      <tr><td><strong>Поділитись</strong></td><td>Shareable Glow картка</td><td>Social job</td><td>Growth механізм — вірусне поширення через ярлик</td></tr>
+    </table>
+  </div>
+
+  <h3>Підрахунок тапів — Main Job для Маші</h3>
+  <div class="nav-count">
+<span class="step">Старт (Welcome)</span>
+  → <span class="tap">тап 1:</span> Введення дати
+  → <span class="tap">тап 2:</span> Введення часу
+  → <span class="tap">тап 3:</span> Введення місця
+  → <span class="tap">тап 4:</span> Питання "що зараз?"
+  → <span class="tap">тап 5:</span> Glow Profile ✅
+
+<span style="color:var(--muted)">Онбординг: 5 кроків — більше 3, але виправдано: без дати/часу/місця карта неможлива.
+Після першого разу: Main Job у 1 тап (Glow в навігації → одразу результат).</span>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="flow-main">
+  <h2>Flow 1 — Main Job</h2>
+  <p>"Перестати воювати з собою — отримати Glow Profile по своїй карті"</p>
+
+  <div class="mermaid">
+flowchart TD
+    A([Старт — Welcome / Hook]) --> B[1.2 Введення дати народження]
+    B --> C{Дата валідна?}
+    C -- Ні --> B_err[error: невалідна дата]
+    B_err --> B
+    C -- Так --> D[1.3 Введення часу народження]
+    D --> D_skip{Час відомий?}
+    D_skip -- Не знаю --> D_approx[⚠️ Попередження: без часу результат буде частковим]
+    D_approx --> E
+    D_skip -- Так --> E[1.4 Введення місця народження]
+    E --> E_load[loading: пошук міста...]
+    E_load --> F{Місто знайдено?}
+    F -- Ні --> E_err[error: місто не знайдено]
+    E_err --> E
+    F -- Так --> G[1.5 Питання: що зараз відбувається?]
+    G --> G_skip{Відповів?}
+    G_skip -- Пропустив --> H_load
+    G_skip -- Відповів --> H_load[loading: розраховуємо Glow Profile...]
+    H_load --> H{Карта розрахована?}
+    H -- Помилка --> H_err[error: не вдалось розрахувати]
+    H_err --> B
+    H -- Успіх --> I[2.1 Wow-момент]
+    I --> J[2.2 Твоя естетика]
+    J --> K[2.3 Твоя рутина]
+    K --> L[2.4 Твоя енергія]
+    L --> M[2.5 Як ти виглядаєш]
+    M --> N{Що далі?}
+    N -- Глибше --> O[3.x Деталізація]
+    N -- Поділитись --> P[4.1 Shareable Glow картка]
+    N -- Готово --> Q([Glow Profile збережено ✅])
+    O --> Q
+    P --> Q
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="flow-r1">
+  <h2>Flow 2 — R1: Стиль і естетика</h2>
+  <p>"Знайти свою справжню візуальну мову"</p>
+
+  <div class="mermaid">
+flowchart TD
+    A([Glow Profile]) --> B[2.2 Твоя естетика]
+    B --> B_check{Карта є?}
+    B_check -- empty: карти нема --> onboard[Онбординг — ввести дані]
+    onboard --> B
+    B_check -- Так --> C[Твій природний візуальний підпис]
+    C --> D[Блок: твоя природна палітра і форми]
+    D --> E[Блок: що тебе притягує естетично і чому]
+    E --> F[Блок: конкретні інструкції — що носити, що уникати]
+    F --> G{Хоче більше?}
+    G -- Стиль детально --> H[3.1 Стиль — деталі]
+    G -- Сприйняття детально --> I[3.2 Сприйняття — деталі]
+    G -- Поділитись --> J[4.1 Shareable картка]
+    G -- Назад --> A
+    H --> A
+    I --> A
+    J --> A
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="flow-r2">
+  <h2>Flow 3 — R2: Рутина</h2>
+  <p>"Побудувати рутину що приживається"</p>
+
+  <div class="mermaid">
+flowchart TD
+    A([Glow Profile]) --> B[2.3 Твоя рутина]
+    B --> B_check{Карта є?}
+    B_check -- empty: карти нема --> onboard[Онбординг]
+    onboard --> B
+    B_check -- Так --> C[Твій природній ритм]
+    C --> D[Блок: коли твоя енергія на піку і коли падає]
+    D --> E[Блок: яка структура природня для тебе]
+    E --> F[Блок: конкретні рутини — що спробувати, що прибрати]
+    F --> G{Хоче більше?}
+    G -- Ритм детально --> H[3.3 Ритм — деталі]
+    G -- Структура детально --> I[3.4 Структура — деталі]
+    G -- Назад --> A
+    H --> A
+    I --> A
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section id="matrix">
+  <h2>Матриця трасування Jobs × Екрани</h2>
+
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th>Екран</th>
+        <th>Main Job</th>
+        <th>R1 Стиль</th>
+        <th>R2 Рутина</th>
+        <th>R3 Енергія</th>
+        <th>R4 Присутність</th>
+        <th>Emotional</th>
+        <th>Social</th>
+      </tr>
+      <tr>
+        <td>1.1 Welcome</td>
+        <td class="yes">✅</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="partial">⚠️</td><td class="no">—</td>
+      </tr>
+      <tr>
+        <td>1.2–1.4 Дані</td>
+        <td class="yes">✅</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
+      </tr>
+      <tr>
+        <td>1.5 Питання "що зараз?"</td>
+        <td class="yes">✅</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✅</td><td class="no">—</td>
+      </tr>
+      <tr>
+        <td>2.1 Wow-момент</td>
+        <td class="yes">✅</td><td class="partial">⚠️</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✅</td><td class="no">—</td>
+      </tr>
+      <tr>
+        <td>2.2 Твоя естетика</td>
+        <td class="yes">✅</td><td class="yes">✅</td><td class="no">—</td><td class="no">—</td><td class="partial">⚠️</td><td class="no">—</td><td class="no">—</td>
+      </tr>
+      <tr>
+        <td>2.3 Твоя рутина</td>
+        <td class="yes">✅</td><td class="no">—</td><td class="yes">✅</td><td class="partial">⚠️</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
+      </tr>
+      <tr>
+        <td>2.4 Твоя енергія</td>
+        <td class="yes">✅</td><td class="no">—</td><td class="no">—</td><td class="yes">✅</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
+      </tr>
+      <tr>
+        <td>2.5 Як ти виглядаєш</td>
+        <td class="yes">✅</td><td class="partial">⚠️</td><td class="no">—</td><td class="no">—</td><td class="yes">✅</td><td class="no">—</td><td class="no">—</td>
+      </tr>
+      <tr>
+        <td>3.1–3.5 Деталізація</td>
+        <td class="yes">✅</td><td class="partial">⚠️</td><td class="partial">⚠️</td><td class="partial">⚠️</td><td class="partial">⚠️</td><td class="no">—</td><td class="no">—</td>
+      </tr>
+      <tr>
+        <td>4.1 Shareable картка</td>
+        <td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✅</td>
+      </tr>
+      <tr>
+        <td style="color:var(--red)">5.1–5.2 Профіль [SIROTA]</td>
+        <td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
+      </tr>
+    </table>
+  </div>
+
+  <h3>Екрани-сироти</h3>
+  <p><span class="badge badge-sirota">[SIROTA]</span> <strong>5.1–5.2 Профіль</strong> — не обслуговує жодного Job. Рішення: прихована іконка в хедері, не в основній навігації.</p>
+
+  <h3>Jobs-сироти</h3>
+  <p><span class="badge badge-sirota">[SIROTA]</span> <strong>R5 — Самодогляд</strong> — немає свого екрана. Рішення: включити в 2.4 Енергія як підрозділ.</p>
+  <p><span class="badge badge-ok">[OK]</span> <strong>Emotional job</strong> — реалізується через тон і якість тексту на 2.1, не потребує окремого екрана.</p>
+  <p><span class="badge badge-backlog">[BACKLOG]</span> <strong>Синастрія, Транзити</strong> — Jobs існують, але не в Glow-MVP. Відкладено.</p>
+</section>
+
+<!-- ============================================================ -->
+<section id="audit">
+  <h2>Аудит — 4 класи дефектів</h2>
+
+  <div class="defect-list">
+    <div class="defect">
+      <div class="defect-type">Тупики</div>
+      <span class="badge badge-ok" style="float:right">Виправлено</span>
+      <p><strong>Знайдено:</strong> якщо час народження невідомий — потенційний тупик (блокуємо прогрес або даємо порожній результат).</p>
+      <p><strong>Виправлено в Flow 1:</strong> якщо час невідомий → попередження "результат буде частковим" → продовжуємо. Не блокуємо.</p>
+      <p><strong>Знайдено:</strong> якщо місто не знайдено — можна було скинути весь онбординг.</p>
+      <p><strong>Виправлено:</strong> error повертає на той самий крок (1.4), не скидає попередні дані.</p>
+    </div>
+
+    <div class="defect">
+      <div class="defect-type">Відсутні стани</div>
+      <span class="badge badge-ok" style="float:right">Додано</span>
+      <p><strong>Loading:</strong> пошук міста (1.4), розрахунок карти після онбордингу — додано в Flow 1.</p>
+      <p><strong>Error:</strong> невалідна дата, місто не знайдено, помилка розрахунку — всі три в Flow 1.</p>
+      <p><strong>Empty:</strong> якщо юзер відкриває R1 або R2 без карти → redirect на онбординг (є в Flow 2 і 3).</p>
+    </div>
+
+    <div class="defect">
+      <div class="defect-type">Зайва глибина</div>
+      <span class="badge badge-ok" style="float:right">Контрольовано</span>
+      <p><strong>Перевірено:</strong> навігація 3 пункти — не більше. Деталізація (3.x) — 2 рівні від головного екрана максимум. Прийнятно.</p>
+      <p><strong>Ризик:</strong> якщо кожен розділ матиме підрозділи — може стати 4+ рівнів. Рішення: розділи деталізації (3.x) — це кінцеві листи, без підрозділів.</p>
+    </div>
+
+    <div class="defect">
+      <div class="defect-type">Сироти</div>
+      <span class="badge badge-ok" style="float:right">Адресовано</span>
+      <p><strong>Екран-сирота:</strong> 5.1–5.2 Профіль → прихований в хедері, не в навігації.</p>
+      <p><strong>Job-сирота:</strong> R5 Самодогляд → включено в 2.4 Енергія.</p>
+      <p><strong>Job-сирота:</strong> Emotional job → реалізується через тон тексту, не окремий екран.</p>
+    </div>
+  </div>
+
+  <div class="highlight green">
+    <strong>Результат аудиту:</strong> 2 тупики знайдено і виправлено. 3 відсутні стани додано. Зайва глибина під контролем (обмежено правилом "3.x — листи без підрозділів"). 3 сироти адресовано — 2 переміщені, 1 реалізується через тон.
+  </div>
+
+  <hr>
+  <p class="footnote">IA v1.0 · Astro Recipe · 2026-07-08 · Джерела: personas.md, jtbd.md, sitemap.md, flows.md</p>
+</section>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+      primaryColor: '#1f1f24',
+      primaryTextColor: '#e8e8ec',
+      primaryBorderColor: '#2a2a30',
+      lineColor: '#7a7a8a',
+      secondaryColor: '#17171a',
+      tertiaryColor: '#0e0e0f',
+      background: '#0e0e0f',
+      nodeBorder: '#2a2a30',
+      clusterBkg: '#17171a',
+      edgeLabelBackground: '#1f1f24',
+      fontSize: '13px'
+    },
+    flowchart: { curve: 'basis', padding: 20 }
+  });
+</script>
+</body>
+</html>
