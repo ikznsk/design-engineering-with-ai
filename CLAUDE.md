@@ -98,6 +98,9 @@ Price signals: one-time report $7–50 range (Matrix Destiny, Astrology Hub, Gal
 ## Wireframes
 `wireframes/` — low-fi HTML, grayscale, semantic markup, real domain text (Урок 4). Main flow fully built and linked: welcome → onboarding (date/time/place/questions) → results (free teaser: chart + brief) → checkout (email + payment) → report (paid, 4 sections: style/career/energy/social content) → share. All states (empty/error/loading) covered per `_screens.md`. Profile screens (5.1/5.2, [SIROTA]) intentionally not built — need unconfirmed without persistent navigation. See `_critique.md` for the audit.
 
+## Voice
+Product copy is English (audience is English-speaking). `voice.md` — 4 principles (concrete action not character description, specific chart placement not abstract trait, honest about limits, advice tied to this person's chart), dictionary, forbidden list (no AI clichés, no "successfully", no exclamation marks/emoji in system messages), microcopy rules by element type. `microcopy.md` is the source of truth — every interface line, by screen. All 18 `wireframes/*.html` rewritten to this voice (Урок 5, 2026-07-19).
+
 ## Name
 **Astro Recipe** (working title)
 
@@ -105,4 +108,5 @@ Price signals: one-time report $7–50 range (Matrix Destiny, Astrology Hub, Gal
 TBD
 
 ## Status
+Brief v0.9 — Voice established and applied to all wireframes, product copy is English (Урок 5, 2026-07-19).
 Brief v0.8 — Glow niche confirmed, audience narrowed to solopreneurs/content creators, platform confirmed as website (not app). Product is a funnel, not an app: onboarding → free teaser page (chart + brief) → scroll → paywall (report previews + testimonials) → checkout → paid Glow Report. The four Glow dimensions (style, career/talents, energy, social content) live inside the Report, not as separate site screens. sitemap.md, flows.md, ia.html, jtbd.md all synced to this (2026-07-17). Wireframes (Урок 4) done for the whole main flow — 18 HTML files, grayscale, all states, linked, audited (2026-07-19).
