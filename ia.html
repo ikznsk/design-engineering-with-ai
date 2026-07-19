@@ -106,6 +106,15 @@
   .badge-sirota { background: #2a0e0e; color: var(--red); border: 1px solid #4a1a1a; }
   .badge-ok { background: #0e2a18; color: var(--accent3); border: 1px solid #1a4a28; }
   .badge-backlog { background: #1a1a2a; color: var(--muted); border: 1px solid #2a2a4a; }
+  .badge-fact { background: #0e2a18; color: var(--accent3); border: 1px solid #1a4a28; }
+  .badge-hypothesis { background: #241a2e; color: var(--accent2); border: 1px solid #3a2a4a; }
+  .badge-decision { background: #0e2233; color: #6ea8d8; border: 1px solid #1a3a52; }
+
+  .research-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; margin-bottom: 14px; }
+  .research-card h4 { font-size: 13px; color: var(--accent); font-family: monospace; margin-bottom: 8px; text-transform: uppercase; letter-spacing: .5px; }
+  .research-card p { font-size: 13px; color: var(--text); margin-bottom: 0; }
+  .research-card .source { font-size: 11px; color: var(--muted); font-family: monospace; margin-top: 8px; }
+  .status-legend { font-size: 12px; color: var(--muted); margin: 10px 0 0; }
 
   .nav-count {
     background: var(--surface);
@@ -134,6 +143,7 @@
 <nav>
   <div class="nav-inner">
     <span class="logo">Astro Recipe</span>
+    <a href="#research">Дані ресерчу</a>
     <a href="#sitemap">Sitemap</a>
     <a href="#nav">Навігація</a>
     <a href="#flow-main">Flow Main</a>
@@ -153,23 +163,65 @@
 </div>
 
 <!-- ============================================================ -->
+<section id="research">
+  <h2>Дані ресерчу, що обґрунтовують цю архітектуру</h2>
+  <p class="footnote">Джерела: research.md, research.html (Висновки), jtbd.md (Статус + Звідки у кожного Job). IA — не з чистого аркуша: кожен екран нижче або спирається на факт з ресерчу, або відкрито позначений як гіпотеза.</p>
+
+  <div class="research-card">
+    <h4>Головна прогалина ринку</h4>
+    <p>Жоден конкурент не поєднує одночасно: (1) реально персоналізований аналіз по всій карті, (2) конкретні дії — не "ти такий", а "зроби ось це", (3) глибину в одній ніші.</p>
+    <div class="source">research.html → Продукти, "ГОЛОВНА ПРОГАЛИНА ринку"</div>
+  </div>
+
+  <div class="research-card">
+    <h4>Ніша Glow — validated gap</h4>
+    <p>Venus + Rising + Midheaven → як виглядати, яку естетику будувати, що транслювати. Конкурентів у цьому перетині — нуль. Попит підтверджено SEO-запитом "how to dress for your birth chart" (з 2016) і TikTok-трендом "2025 glow up astrology".</p>
+    <div class="source">research.html → Висновки, "Ніша: особистий бренд і естетика"</div>
+  </div>
+
+  <div class="research-card">
+    <h4>Сигнали попиту</h4>
+    <p>Nebula Personal Plan — 46.9k enrolled при поганому продукті (generic tasks, план по сонячному знаку, не по карті). Amelie AstroGlow 101 — $197 курс, найближчий конкурент, продає саме "навчись читати карту без астролога". Тригер приходу — момент кризи, не цікавість (compensatory control, Graham Tyson 1982, Finnish study).</p>
+    <div class="source">jtbd.md → Main Job, "Звідки"; research.md → Доресерч після персон</div>
+  </div>
+
+  <div class="highlight">
+    <strong>Легенда статусів, що йде далі по документу:</strong>
+    <span class="status-legend">
+      <span class="badge badge-fact">✅ ФАКТ</span> — job підтверджений даними ресерчу (звідки видно в jtbd.md) &nbsp;·&nbsp;
+      <span class="badge badge-decision">🔵 РІШЕННЯ 17.07</span> — продуктове рішення, підкріплене сигналами, окремий попит не вимірювався &nbsp;·&nbsp;
+      <span class="badge badge-hypothesis">⚠️ ГІПОТЕЗА</span> — концепт логічний, але окремий попит не виміряний
+    </span>
+  </div>
+
+  <div class="highlight green">
+    <strong>Вирішено 2026-07-17 (ранок):</strong> аудиторія звужена до солопренерів/контент-крейторів, платформа — вебсайт (не app). R3/R4-гіпотеза з попередньої версії цього документа закрита рішенням: 2.4 Енергія лишається (тепер R3, все ще гіпотеза), а 2.5 Присутність замінена на <strong>Соушал медіа контент</strong> (нова R4). Заразом 2.3 Рутина замінена на <strong>Кар'єру і таланти</strong> (нова R2) — деталі в jtbd.md і personas.md.
+  </div>
+
+  <div class="highlight green">
+    <strong>Вирішено 2026-07-17 (день) — продукт це funnel, не app:</strong> сайт = безкоштовна тизер-сторінка (чарт + коротко) → скрол до CTA з прев'ю чужих репортів і відгуками → checkout (email + оплата) → платний Glow Report. R1–R4 (стиль, кар'єра, енергія, соушал контент) — це розділи <em>всередині</em> Glow Report, не окремі екрани сайту (GLOW PROFILE 2.2–2.5 і ДЕТАЛІЗАЦІЯ 3.x з ранкової версії об'єднані в Report). Підтверджено product owner. Деталі — CLAUDE.md → Core User Flow, Monetization.
+  </div>
+</section>
+
+<!-- ============================================================ -->
 <section id="entities">
   <h2>Сутності продукту</h2>
   <div class="table-wrap">
     <table>
-      <tr><th>Сутність</th><th>Що це</th><th>Job</th></tr>
-      <tr><td><strong>Натальна карта</strong></td><td>Розрахована по даті/часу/місцю</td><td>Main Job — основа</td></tr>
-      <tr><td><strong>Glow Profile</strong></td><td>Персональний результат: стиль + рутина + енергія + присутність</td><td>Main Job</td></tr>
-      <tr><td><strong>Естетика / стиль</strong></td><td>Яка твоя природна візуальна мова</td><td>R1</td></tr>
-      <tr><td><strong>Рутина</strong></td><td>Твої звички і природній ритм</td><td>R2</td></tr>
-      <tr><td><strong>Енергія</strong></td><td>Що відновлює і що виснажує</td><td>R3</td></tr>
-      <tr><td><strong>Присутність</strong></td><td>Як виглядаєш для інших</td><td>R4</td></tr>
-      <tr><td><strong>Деталізація</strong></td><td>Детальне пояснення кожного виміру</td><td>Main Job — глибина</td></tr>
-      <tr><td><strong>Wow-момент</strong></td><td>Перший екран результату — щось точне і несподіване</td><td>Emotional job + R1</td></tr>
-      <tr><td><strong>Онбординг-питання</strong></td><td>"Що зараз відбувається у твоєму житті?"</td><td>Main Job (тригер кризи)</td></tr>
-      <tr><td><strong>Shareable картка</strong></td><td>"Мій Glow тип" — для поширення</td><td>Social job</td></tr>
-      <tr><td style="color:var(--muted)">Синастрія</td><td style="color:var(--muted)">Сумісність з іншою людиною</td><td style="color:var(--muted)">Backlog — не в MVP</td></tr>
-      <tr><td style="color:var(--muted)">Транзити</td><td style="color:var(--muted)">Поточні впливи</td><td style="color:var(--muted)">Backlog — recurring job не підтверджений</td></tr>
+      <tr><th>Сутність</th><th>Що це</th><th>Job</th><th>Статус</th></tr>
+      <tr><td><strong>Натальна карта</strong></td><td>Розрахована по даті/часу/місцю</td><td>Main Job — основа</td><td><span class="badge badge-fact">✅ ФАКТ</span></td></tr>
+      <tr><td><strong>Результати (тизер)</strong></td><td>Безкоштовна сторінка: чарт + коротко — wow-момент</td><td>Main Job, Emotional job + R1</td><td><span class="badge badge-fact">✅ ФАКТ</span></td></tr>
+      <tr><td><strong>Glow Report</strong></td><td>Платний повний репорт: стиль + кар'єра/таланти + енергія + соушал контент, можливо тарифні плани</td><td>Main Job, R1–R4</td><td><span class="badge badge-decision">🔵 РІШЕННЯ 17.07</span></td></tr>
+      <tr><td><strong>Прев'ю чужих репортів + відгуки</strong></td><td>Соціальний доказ на тизер-сторінці перед покупкою</td><td>Конверсія</td><td><span class="badge badge-decision">🔵 РІШЕННЯ 17.07</span></td></tr>
+      <tr><td><strong>Естетика / стиль</strong></td><td>Яка твоя природна візуальна мова — розділ репорту</td><td>R1</td><td><span class="badge badge-fact">✅ ФАКТ</span></td></tr>
+      <tr><td><strong>Кар'єра і таланти</strong></td><td>Позиціонування, природні таланти, де можуть бути затики у виконанні задач — розділ репорту</td><td>R2</td><td><span class="badge badge-decision">🔵 РІШЕННЯ 17.07</span></td></tr>
+      <tr><td><strong>Енергія</strong></td><td>Що відновлює і що виснажує — розділ репорту</td><td>R3</td><td><span class="badge badge-hypothesis">⚠️ ГІПОТЕЗА</span></td></tr>
+      <tr><td><strong>Соушал медіа контент</strong></td><td>Який візуал і тип контенту органічний для тебе — розділ репорту</td><td>R4</td><td><span class="badge badge-decision">🔵 РІШЕННЯ 17.07</span></td></tr>
+      <tr><td><strong>Wow-момент</strong></td><td>Перша частина тизер-сторінки — щось точне і несподіване</td><td>Emotional job + R1</td><td><span class="badge badge-fact">✅ ФАКТ</span></td></tr>
+      <tr><td><strong>Онбординг-питання</strong></td><td>"Що зараз відбувається у твоєму житті?"</td><td>Main Job (тригер кризи)</td><td><span class="badge badge-fact">✅ ФАКТ</span></td></tr>
+      <tr><td><strong>Shareable картка</strong></td><td>"Мій Glow тип" — для поширення</td><td>Social job</td><td><span class="badge badge-fact">✅ ФАКТ</span></td></tr>
+      <tr><td style="color:var(--muted)">Синастрія</td><td style="color:var(--muted)">Сумісність з іншою людиною</td><td style="color:var(--muted)">Backlog — не в MVP</td><td><span class="badge badge-backlog">BACKLOG</span></td></tr>
+      <tr><td style="color:var(--muted)">Транзити</td><td style="color:var(--muted)">Поточні впливи</td><td style="color:var(--muted)">Backlog — recurring job не підтверджений</td><td><span class="badge badge-backlog">BACKLOG</span></td></tr>
     </table>
   </div>
 </section>
@@ -185,32 +237,38 @@
 │   ├── 1.2 Введення дати           <span class="job">[Main Job — дані]</span>
 │   ├── 1.3 Введення часу           <span class="job">[Main Job — час]</span>
 │   ├── 1.4 Введення місця          <span class="job">[Main Job — точність]</span>
-│   └── 1.5 Питання "що зараз?"    <span class="job">[Main Job + Emotional job]</span>
+│   ├── 1.5 Питання "що зараз?"    <span class="job">[Main Job + Emotional job]</span>
+│   └── 1.6 Додаткове питання       <span class="job">[опціональне, зміст TBD]</span>
 │
-├── <span class="screen">GLOW PROFILE</span>  <span class="job">[Main Job — результат]</span>
-│   ├── 2.1 Wow-момент              <span class="job">[Emotional job + R1]</span>
-│   ├── 2.2 Твоя естетика           <span class="job">[R1 — стиль]</span>
-│   ├── 2.3 Твоя рутина             <span class="job">[R2 — звички]</span>
-│   ├── 2.4 Твоя енергія            <span class="job">[R3 — що дає / що забирає]</span>
-│   └── 2.5 Як ти виглядаєш        <span class="job">[R4 — присутність]</span>
+├── <span class="screen">РЕЗУЛЬТАТИ (безкоштовний тизер)</span>  <span class="job">[Main Job — результат]</span>  ✅
+│   ├── 2.1 Чарт + коротко про нього — wow-момент  <span class="job">[Emotional job + R1]</span>
+│   └── 2.2 Розблокувати репорт — прев'ю + відгуки  <span class="job">[Конверсія]</span>
 │
-├── <span class="screen">ДЕТАЛІЗАЦІЯ</span>  <span class="job">[Main Job — глибина]</span>
-│   ├── 3.1 Стиль — деталі          <span class="job">[R1]</span>
-│   ├── 3.2 Сприйняття — деталі     <span class="job">[R1 + R4]</span>
-│   ├── 3.3 Ритм — деталі           <span class="job">[R2 + R3]</span>
-│   ├── 3.4 Структура — деталі      <span class="job">[R2]</span>
-│   └── 3.5 Присутність — деталі    <span class="job">[R4]</span>
+├── <span class="screen">GLOW REPORT (платний, після checkout)</span>  <span class="job">[Main Job — глибина, R1–R4]</span>  🔵
+│   ├── Стиль                       <span class="job">[R1]</span>  ✅
+│   ├── Кар'єра і таланти           <span class="job">[R2]</span>  🔵
+│   ├── Енергія                     <span class="job">[R3]</span>  ⚠️
+│   └── Соушал медіа контент        <span class="job">[R4]</span>  🔵
+│   <span style="color:var(--muted)">(тарифні плани — "тільки стиль" vs повний бандл — TBD)</span>
+│
+├── <span class="screen">CHECKOUT</span>  <span class="job">[Конверсія]</span>
+│   └── Email + оплата
 │
 ├── <span class="screen">SHAREABLE</span>  <span class="job">[Social job]</span>
-│   └── 4.1 Мій Glow тип — картка  <span class="job">[Social job]</span>
+│   └── 4.1 Мій Glow тип — картка  <span class="job">[Social job]</span>  (з 2.1, безкоштовно)
 │
 └── <span class="sirota">ПРОФІЛЬ  [SIROTA — технічна, без job]</span>
     ├── 5.1 Мої дані народження
     └── 5.2 Редагування / перерахунок</div>
 
+  <div class="highlight green">
+    <strong>Що змінилось 2026-07-17 (день):</strong> GLOW PROFILE (2.1–2.5) і ДЕТАЛІЗАЦІЯ (3.x) з ранкової версії об'єднані в РЕЗУЛЬТАТИ (безкоштовний тизер) + GLOW REPORT (платний, вміщує R1–R4). Причина: продукт — funnel, не app з навігацією між секціями. Підтверджено product owner 2026-07-17.
+  </div>
+
   <div class="highlight red">
-    <strong>Екрани-сироти:</strong> 5.1 / 5.2 Профіль — технічна необхідність без власного Job. Рішення: прихована іконка в хедері, не в головній навігації.<br><br>
-    <strong>Jobs-сироти:</strong> R5 (Самодогляд) — немає окремого екрана. Рішення: включити в 2.4 Енергія. Emotional job "дозвіл бути собою" — реалізується через тон тексту на 2.1, не потребує окремого екрана.
+    <strong>Екрани-сироти:</strong> 5.1 / 5.2 Профіль — технічна необхідність без власного Job. Під питанням, чи взагалі потрібен окремий "профіль" без persistent навігації — можливо, лише "переглянути репорт ще раз" за посиланням з email.<br><br>
+    <strong>Jobs-сироти:</strong> R5 (Самодогляд) — немає окремого розділу. Рішення: включити в розділ Енергія репорту. Emotional job "дозвіл бути собою" — реалізується через тон тексту на 2.1, не потребує окремого екрана.<br><br>
+    <strong>✅ / 🔵 / ⚠️ статуси</strong> — із <a href="#research" style="color:inherit;text-decoration:underline;">даних ресерчу</a> вище: РЕЗУЛЬТАТИ факт, GLOW REPORT і R2/R4 продуктове рішення 17.07, R3 (Енергія) лишається гіпотезою.
   </div>
 </section>
 
@@ -218,13 +276,15 @@
 <section id="nav">
   <h2>Навігаційна модель</h2>
 
-  <h3>Глобальна навігація — 3 пункти</h3>
+  <p class="footnote">Оновлено 2026-07-17: глобальної навігації-меню по суті немає — це лінійний funnel, не app. Замість "3 пункти меню" — один шлях зі скролом і одним рішенням (купити чи ні).</p>
+
+  <h3>Кроки funnel-у замість меню</h3>
   <div class="table-wrap">
     <table>
-      <tr><th>Пункт</th><th>Що тут</th><th>Job</th><th>Обґрунтування</th></tr>
-      <tr><td><strong>Glow</strong></td><td>Повний Glow Profile</td><td>Main Job</td><td>Core value — перше що бачить юзер після онбордингу</td></tr>
-      <tr><td><strong>Деталізація</strong></td><td>Деталізація кожного виміру</td><td>Main Job (глибина)</td><td>Для тих хто хоче знати ЧОМУ — не тільки ЩО РОБИТИ</td></tr>
-      <tr><td><strong>Поділитись</strong></td><td>Shareable Glow картка</td><td>Social job</td><td>Growth механізм — вірусне поширення через ярлик</td></tr>
+      <tr><th>Крок</th><th>Що тут</th><th>Job</th></tr>
+      <tr><td><strong>Тизер-сторінка</strong></td><td>Чарт + wow-момент, скрол до CTA</td><td>Main Job, Emotional job</td></tr>
+      <tr><td><strong>Розблокувати репорт</strong></td><td>Прев'ю + відгуки + checkout</td><td>Конверсія</td></tr>
+      <tr><td><strong>Поділитись</strong></td><td>Shareable Glow картка — кнопкою прямо з тизер-сторінки, без пункту меню</td><td>Social job</td></tr>
     </table>
   </div>
 
@@ -235,10 +295,12 @@
   → <span class="tap">тап 2:</span> Введення часу
   → <span class="tap">тап 3:</span> Введення місця
   → <span class="tap">тап 4:</span> Питання "що зараз?"
-  → <span class="tap">тап 5:</span> Glow Profile ✅
+  → <span class="tap">тап 5:</span> Додаткове питання (опціонально)
+  → [чарт розрахований] → скрол → <span class="tap">тап 6:</span> Розблокувати репорт
+  → <span class="tap">тап 7:</span> Checkout (email + оплата) → Glow Report ✅
 
-<span style="color:var(--muted)">Онбординг: 5 кроків — більше 3, але виправдано: без дати/часу/місця карта неможлива.
-Після першого разу: Main Job у 1 тап (Glow в навігації → одразу результат).</span>
+<span style="color:var(--muted)">Онбординг: 5–6 кроків — більше 3, але виправдано: без дати/часу/місця карта неможлива, друге питання опціональне.
+На відміну від ранкової версії — тут немає "після першого разу 1 тап": немає persistent навігації, людина або вже купила репорт (посилання з email), або проходить онбординг заново.</span>
   </div>
 </section>
 
@@ -264,72 +326,59 @@ flowchart TD
     E_err --> E
     F -- Так --> G[1.5 Питання: що зараз відбувається?]
     G --> G_skip{Відповів?}
-    G_skip -- Пропустив --> H_load
-    G_skip -- Відповів --> H_load[loading: розраховуємо Glow Profile...]
+    G_skip -- Пропустив --> G2[1.6 Додаткове питання — опціональне]
+    G_skip -- Відповів --> G2
+    G2 --> G2_skip{Відповів?}
+    G2_skip -- Пропустив --> H_load
+    G2_skip -- Відповів --> H_load[loading: розраховуємо чарт...]
     H_load --> H{Карта розрахована?}
     H -- Помилка --> H_err[error: не вдалось розрахувати]
     H_err --> B
-    H -- Успіх --> I[2.1 Wow-момент]
-    I --> J[2.2 Твоя естетика]
-    J --> K[2.3 Твоя рутина]
-    K --> L[2.4 Твоя енергія]
-    L --> M[2.5 Як ти виглядаєш]
-    M --> N{Що далі?}
-    N -- Глибше --> O[3.x Деталізація]
-    N -- Поділитись --> P[4.1 Shareable Glow картка]
-    N -- Готово --> Q([Glow Profile збережено ✅])
-    O --> Q
-    P --> Q
+    H -- Успіх --> I[2.1 Результати: чарт + коротко — wow-момент]
+    I --> I_share{Поділитись?}
+    I_share -- Так --> P[4.1 Shareable Glow картка]
+    P --> I_scroll
+    I_share -- Ні --> I_scroll[Скрол вниз]
+    I_scroll --> R[2.2 Розблокувати повний репорт]
+    R --> R_preview[Блок: прев'ю репортів інших людей]
+    R_preview --> R_reviews[Блок: відгуки щасливих покупців]
+    R_reviews --> R_cta{Купує?}
+    R_cta -- Так --> R_checkout[Checkout: email + оплата]
+    R_checkout --> R_err{Оплата пройшла?}
+    R_err -- Ні --> R_checkout_err[error: оплата не пройшла]
+    R_checkout_err --> R_checkout
+    R_err -- Так --> Q([Glow Report розблоковано і надіслано на email ✅])
+    R_cta -- Ще подумає --> Q2([Вихід без покупки — тизер лишається доступним])
   </div>
 </section>
 
 <!-- ============================================================ -->
 <section id="flow-r1">
-  <h2>Flow 2 — R1: Стиль і естетика</h2>
-  <p>"Знайти свою справжню візуальну мову"</p>
+  <h2>Flow 2 — R1: Стиль і естетика (розділ Glow Report)</h2>
+  <p>"Знайти свою справжню візуальну мову" — ⚠️ це вміст купленого репорту, не окремий екран сайту (рішення 17.07, день). Flow нижче описує зміст розділу.</p>
 
   <div class="mermaid">
 flowchart TD
-    A([Glow Profile]) --> B[2.2 Твоя естетика]
-    B --> B_check{Карта є?}
-    B_check -- empty: карти нема --> onboard[Онбординг — ввести дані]
-    onboard --> B
-    B_check -- Так --> C[Твій природний візуальний підпис]
+    A([Glow Report — куплено]) --> C[Розділ: твій природний візуальний підпис]
     C --> D[Блок: твоя природна палітра і форми]
     D --> E[Блок: що тебе притягує естетично і чому]
     E --> F[Блок: конкретні інструкції — що носити, що уникати]
-    F --> G{Хоче більше?}
-    G -- Стиль детально --> H[3.1 Стиль — деталі]
-    G -- Сприйняття детально --> I[3.2 Сприйняття — деталі]
-    G -- Поділитись --> J[4.1 Shareable картка]
-    G -- Назад --> A
-    H --> A
-    I --> A
-    J --> A
+    F --> N[Наступний розділ репорту: Кар'єра і таланти]
   </div>
 </section>
 
 <!-- ============================================================ -->
 <section id="flow-r2">
-  <h2>Flow 3 — R2: Рутина</h2>
-  <p>"Побудувати рутину що приживається"</p>
+  <h2>Flow 3 — R2: Кар'єра і таланти (розділ Glow Report)</h2>
+  <p>"Зрозуміти кар'єрне позиціонування, свої таланти і де можуть бути затики у виконанні задач" — ⚠️ це вміст купленого репорту, не окремий екран сайту (рішення 17.07, день). Flow нижче описує зміст розділу.</p>
 
   <div class="mermaid">
 flowchart TD
-    A([Glow Profile]) --> B[2.3 Твоя рутина]
-    B --> B_check{Карта є?}
-    B_check -- empty: карти нема --> onboard[Онбординг]
-    onboard --> B
-    B_check -- Так --> C[Твій природній ритм]
-    C --> D[Блок: коли твоя енергія на піку і коли падає]
-    D --> E[Блок: яка структура природня для тебе]
-    E --> F[Блок: конкретні рутини — що спробувати, що прибрати]
-    F --> G{Хоче більше?}
-    G -- Ритм детально --> H[3.3 Ритм — деталі]
-    G -- Структура детально --> I[3.4 Структура — деталі]
-    G -- Назад --> A
-    H --> A
-    I --> A
+    A([Glow Report — куплено]) --> C[Розділ: твоє природне кар'єрне позиціонування]
+    C --> D[Блок: твої природні таланти і сильні сторони]
+    D --> E[Блок: де можуть бути затики у виконанні задач]
+    E --> F[Блок: конкретні кроки — на що спиратись, що делегувати чи спростити]
+    F --> N[Наступний розділ репорту: Енергія]
   </div>
 </section>
 
@@ -341,13 +390,13 @@ flowchart TD
     <table>
       <tr>
         <th>Екран</th>
-        <th>Main Job</th>
-        <th>R1 Стиль</th>
-        <th>R2 Рутина</th>
-        <th>R3 Енергія</th>
-        <th>R4 Присутність</th>
-        <th>Emotional</th>
-        <th>Social</th>
+        <th>Main Job<br><span class="badge badge-fact" style="margin-top:4px">✅</span></th>
+        <th>R1 Стиль<br><span class="badge badge-fact" style="margin-top:4px">✅</span></th>
+        <th>R2 Кар'єра<br><span class="badge badge-decision" style="margin-top:4px">🔵</span></th>
+        <th>R3 Енергія<br><span class="badge badge-hypothesis" style="margin-top:4px">⚠️</span></th>
+        <th>R4 Соушал контент<br><span class="badge badge-decision" style="margin-top:4px">🔵</span></th>
+        <th>Emotional<br><span class="badge badge-fact" style="margin-top:4px">✅</span></th>
+        <th>Social<br><span class="badge badge-fact" style="margin-top:4px">✅</span></th>
       </tr>
       <tr>
         <td>1.1 Welcome</td>
@@ -358,32 +407,39 @@ flowchart TD
         <td class="yes">✅</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
       </tr>
       <tr>
-        <td>1.5 Питання "що зараз?"</td>
+        <td>1.5–1.6 Питання (осн. + опц.)</td>
         <td class="yes">✅</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✅</td><td class="no">—</td>
       </tr>
       <tr>
-        <td>2.1 Wow-момент</td>
+        <td>2.1 Результати — тизер (безкоштовно)</td>
         <td class="yes">✅</td><td class="partial">⚠️</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✅</td><td class="no">—</td>
       </tr>
       <tr>
-        <td>2.2 Твоя естетика</td>
-        <td class="yes">✅</td><td class="yes">✅</td><td class="no">—</td><td class="no">—</td><td class="partial">⚠️</td><td class="no">—</td><td class="no">—</td>
+        <td>2.2 Розблокувати репорт — CTA/прев'ю/відгуки</td>
+        <td class="yes">✅</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
+      </tr>
+      <tr style="color:var(--accent2)">
+        <td colspan="8" style="font-family:monospace; font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--accent2); background:var(--surface2)">Glow Report (платно, після checkout) — розділи нижче</td>
       </tr>
       <tr>
-        <td>2.3 Твоя рутина</td>
+        <td>— Стиль</td>
+        <td class="yes">✅</td><td class="yes">✅</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
+      </tr>
+      <tr>
+        <td>— Кар'єра і таланти</td>
         <td class="yes">✅</td><td class="no">—</td><td class="yes">✅</td><td class="partial">⚠️</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
       </tr>
       <tr>
-        <td>2.4 Твоя енергія</td>
+        <td>— Енергія</td>
         <td class="yes">✅</td><td class="no">—</td><td class="no">—</td><td class="yes">✅</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
       </tr>
       <tr>
-        <td>2.5 Як ти виглядаєш</td>
+        <td>— Соушал медіа контент</td>
         <td class="yes">✅</td><td class="partial">⚠️</td><td class="no">—</td><td class="no">—</td><td class="yes">✅</td><td class="no">—</td><td class="no">—</td>
       </tr>
       <tr>
-        <td>3.1–3.5 Деталізація</td>
-        <td class="yes">✅</td><td class="partial">⚠️</td><td class="partial">⚠️</td><td class="partial">⚠️</td><td class="partial">⚠️</td><td class="no">—</td><td class="no">—</td>
+        <td>Checkout (email + оплата)</td>
+        <td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
       </tr>
       <tr>
         <td>4.1 Shareable картка</td>
@@ -395,6 +451,7 @@ flowchart TD
       </tr>
     </table>
   </div>
+  <p class="footnote">Оновлено 2026-07-17: рядки 2.2–2.5 з ранкової версії стали розділами Glow Report (сірий заголовок-розділювач), не окремими екранами. "3.1–3.5 Деталізація" видалено — це тепер сам репорт.</p>
 
   <h3>Екрани-сироти</h3>
   <p><span class="badge badge-sirota">[SIROTA]</span> <strong>5.1–5.2 Профіль</strong> — не обслуговує жодного Job. Рішення: прихована іконка в хедері, не в основній навігації.</p>
@@ -447,8 +504,20 @@ flowchart TD
     <strong>Результат аудиту:</strong> 2 тупики знайдено і виправлено. 3 відсутні стани додано. Зайва глибина під контролем (обмежено правилом "3.x — листи без підрозділів"). 3 сироти адресовано — 2 переміщені, 1 реалізується через тон.
   </div>
 
+  <div class="highlight green">
+    <strong>5-й клас — job-статус, поза оригінальним аудитом:</strong>
+    <span class="badge badge-ok" style="float:right">Вирішено 17.07</span>
+    Вихідне занепокоєння: 2.4 Енергія і 2.5 Присутність будувались на гіпотезах, не фактах. Рішення продукту: 2.5 замінена на <strong>Соушал медіа контент</strong> (R4, підкріплено use case контент-мейкера), а 2.3 Рутина — на <strong>Кар'єру і таланти</strong> (R2). 2.4 Енергія лишається розділом і лишається гіпотезою (R3) — попит окремо не вимірювався, це усвідомлений ризик, не помилка IA.
+  </div>
+
+  <div class="highlight green">
+    <strong>6-й клас — модель продукту (app vs funnel), поза оригінальним аудитом:</strong>
+    <span class="badge badge-ok" style="float:right">Вирішено 17.07, день</span>
+    Уся IA до цього моменту описувала персистентну навігацію між екранами (як у app). Product owner описав фактичний core flow як лінійний funnel: тизер → скрол → paywall із соціальним доказом → checkout. Наслідок: GLOW PROFILE (2.2–2.5) і ДЕТАЛІЗАЦІЯ (3.x) з ранкової версії злиті в Glow Report — платний, лінійний, без окремої навігації. Підтверджено окремим уточненням (report = усі 4 job-виміри, не окремі екрани сайту).
+  </div>
+
   <hr>
-  <p class="footnote">IA v1.0 · Astro Recipe · 2026-07-08 · Джерела: personas.md, jtbd.md, sitemap.md, flows.md</p>
+  <p class="footnote">IA v1.3 · Astro Recipe · оновлено 2026-07-17 · Джерела: personas.md, jtbd.md, sitemap.md, flows.md, research.md, research/research.html</p>
 </section>
 
 </div>

@@ -1,8 +1,8 @@
 # Astro Recipe
 
-> Your natal chart as a personal instruction manual for your style, aesthetic and personal brand.
+> Your natal chart as a personal instruction manual for how to live in your own nature — style, career, content, energy.
 
-An astrology app that turns a birth chart into concrete, actionable guidance — built on real Western astrology algorithms, not generic horoscope copy.
+An astrology website that turns a birth chart into concrete, actionable guidance — built on real Western astrology algorithms, not generic horoscope copy.
 
 ---
 
@@ -11,11 +11,11 @@ An astrology app that turns a birth chart into concrete, actionable guidance —
 | | |
 |---|---|
 | **Problem** | Co-Star & The Pattern describe who you are, not what to do. Nobody reads the whole chart in combination. |
-| **Solution** | Natal chart reading that works like a professional astrologer — Venus + Rising + Midheaven → how to look, what to express, which aesthetic to build. |
-| **Audience** | 24–35, digital nomad / traveller context (Bali, SEA), English-speaking, self-discovery oriented. |
-| **Platform** | Mobile-first web → desktop. |
-| **Niche** | Personal brand & aesthetic through the birth chart (style × content creation intersection). |
-| **Status** | Research done — moving to IA |
+| **Solution** | Natal chart reading that works like a professional astrologer — Venus + Rising + Midheaven + Saturn → how to look, how to position your career, what to post, what drains/restores energy. |
+| **Audience** | Solopreneurs & content creators, 24–35, digital nomad / traveller context (Bali, SEA), English-speaking. |
+| **Platform** | Website (not an app) — mobile-first web → desktop. |
+| **Niche** | Glow — style + career/talents + social content + energy through the birth chart. |
+| **Status** | Personas + JTBD + IA done, wireframes in progress (Lesson 4) |
 
 Full brief → [CLAUDE.md](./CLAUDE.md)
 
@@ -23,17 +23,17 @@ Full brief → [CLAUDE.md](./CLAUDE.md)
 
 ## People
 
-**Primary persona — Маша, "Шукачка інструкції"**
-27–34, digital nomad, знає астрологію поверхово, хоче конкретних дій.
+**Primary persona — Маша, "Шукачка своєї природи"**
+27–34, digital nomad, солопренер/контент-крейтор, знає астрологію поверхово, хоче конкретних дій.
 Приходить у момент кризи або великого рішення. → [personas.md](./personas.md)
 
 **Main Job**
-Коли я застрягла і не розумію чому знову роблю одне й те саме — хочу отримати пояснення через свою конкретну карту, щоб мати ясність і знати що змінити. → [jtbd.md](./jtbd.md)
+Коли я постійно намагаюсь себе покращити — змінити стиль, зрозуміти кар'єру, бути більш собою — але нічого не приживається і відчуваю що роблю щось не так, я хочу зрозуміти через свою карту яка моя природна мова, щоб перестати воювати з собою і почати жити так, що це відчувається як я. → [jtbd.md](./jtbd.md)
 
 **MVP Top-3 Jobs**
-1. Ясність через карту + конкретні дії (core)
+1. Glow Profile — зрозуміти свою природу через карту (core)
 2. Wow-момент впізнавання себе (конверсія)
-3. Відповідь на конкретне питання (диференціація)
+3. Стиль, кар'єра/таланти і соушал контент що реально мої (диференціація)
 
 ---
 
@@ -50,7 +50,7 @@ research/
 personas.md              # 4 персони (primary: Маша, 3 secondary)
 jtbd.md                  # Jobs + матриця + висновок про MVP
 
-wireframes/              # Low-fi flows (не починали)
+wireframes/              # Low-fi flows (в процесі — Урок 4)
 concept/                 # Visual direction (не починали)
 tokens/                  # Design tokens (не починали)
 components/              # UI components (не починали)
@@ -72,9 +72,10 @@ handoff/                 # Dev specs (не починали)
 | Research — психологія | ✅ Done | research.html → Психологія |
 | Персони | ✅ Done | personas.md |
 | JTBD | ✅ Done | jtbd.md |
-| IA — Sitemap | ⬜ Not started | sitemap.md |
-| IA — Flows | ⬜ Not started | flows.md |
-| Wireframes | ⬜ Not started | |
+| IA — Sitemap | ✅ Done | sitemap.md |
+| IA — Flows | ✅ Done | flows.md |
+| IA — консолідація | ✅ Done | ia.html |
+| Wireframes | 🟡 В процесі | wireframes/ |
 | Concept | ⬜ Not started | |
 | Design system | ⬜ Not started | |
 | Handoff | ⬜ Not started | |
@@ -84,7 +85,8 @@ handoff/                 # Dev specs (не починали)
 ## Key findings
 
 - **Gap:** ніхто не дає реально персоналізований аналіз (по всій карті) + конкретні дії + в одній ніші
-- **Ніша:** особистий бренд і естетика через карту (Venus + Rising + Midheaven) — конкурентів нуль
+- **Ніша:** Glow — стиль + кар'єра/таланти + соушал контент + енергія через карту (Venus + Rising + Midheaven + Saturn) — конкурентів нуль
+- **Аудиторія:** солопренери й контент-крейтори — звужено 2026-07-17 (раніше: будь-хто в self-improvement)
 - **Тригер:** людина приходить у момент кризи/рішення, не з цікавості (compensatory control)
 - **Еталон якості тексту:** CHANI. Еталон actionability: AstroBella "How to show up" format
 - **Closest competitor:** Amelie (ameliesadvice.com) — AstroGlow 101, $197
