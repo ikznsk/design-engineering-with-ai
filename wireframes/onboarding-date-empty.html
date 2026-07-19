@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Дата народження · empty — Astro Recipe [wireframe]</title>
+<title>Birth date · empty — Astro Recipe [wireframe]</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: system-ui, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; min-height: 100vh; }
@@ -108,18 +108,18 @@
 
   <div class="nav-section">Onboarding</div>
   <a href="welcome.html">Welcome</a>
-  <a href="onboarding-date.html">Введення дати</a>
+  <a href="onboarding-date.html">Enter birth date</a>
   <div class="state"><a href="onboarding-date-empty.html" class="current">└─ empty</a></div>
   <div class="state"><a href="onboarding-date-error.html">└─ error</a></div>
-  <a href="onboarding-time.html">Введення часу</a>
-  <a href="onboarding-place.html">Введення місця</a>
+  <a href="onboarding-time.html">Enter birth time</a>
+  <a href="onboarding-place.html">Enter birthplace</a>
   <div class="state"><a href="onboarding-place-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-place-error.html">└─ error</a></div>
   <div class="state"><a href="onboarding-place-loading.html">└─ loading</a></div>
-  <a href="onboarding-question.html">Питання "що зараз?"</a>
-  <a href="onboarding-question-2.html">Додаткове питання</a>
+  <a href="onboarding-question.html">Life context question</a>
+  <a href="onboarding-question-2.html">Additional question</a>
 
-  <div class="nav-section">Результати (тизер)</div>
+  <div class="nav-section">Results (free teaser)</div>
   <a href="results.html">Results</a>
   <div class="state"><a href="results-error.html">└─ error</a></div>
   <div class="state"><a href="results-loading.html">└─ loading</a></div>
@@ -133,54 +133,54 @@
   <a href="report.html">Report</a>
 
   <div class="nav-section">Share</div>
-  <a href="share.html">Glow картка</a>
+  <a href="share.html">Glow card</a>
 </nav>
 
 <!-- MAIN -->
 <div class="wf-wrap">
 
   <div class="states-bar">
-    Стани цього екрана:
+    States for this screen:
     <a href="onboarding-date.html">success</a>
-    <span class="current-state">empty (цей)</span>
+    <span class="current-state">empty (this one)</span>
     <a href="onboarding-date-error.html">error</a>
   </div>
 
   <header>
     <div class="logo">Astro Recipe</div>
-    <div class="flow-step">Введення дати народження</div>
+    <div class="flow-step">Birth date</div>
   </header>
 
   <main>
 
-    <a href="welcome.html" class="back-link">← Назад</a>
+    <a href="welcome.html" class="back-link">← Back</a>
 
-    <div class="zone-label">Зона: Форма — дата народження, поле ще порожнє [Main Job — збір даних для карти]</div>
+    <div class="zone-label">Zone: Form — birth date, field still empty [Main Job — chart data]</div>
     <form class="form-block">
       <div class="field">
-        <label for="birth-day">Коли ти народилась?</label>
+        <label for="birth-day">When were you born?</label>
         <div class="date-parts">
           <div class="part">
-            <span class="part-label">День</span>
-            <input type="number" id="birth-day" name="birth-day" min="1" max="31" placeholder="ДД">
+            <span class="part-label">Day</span>
+            <input type="number" id="birth-day" name="birth-day" min="1" max="31" placeholder="DD">
           </div>
           <div class="part">
-            <span class="part-label">Місяць</span>
-            <input type="number" id="birth-month" name="birth-month" min="1" max="12" placeholder="ММ">
+            <span class="part-label">Month</span>
+            <input type="number" id="birth-month" name="birth-month" min="1" max="12" placeholder="MM">
           </div>
           <div class="part">
-            <span class="part-label">Рік</span>
-            <input type="number" id="birth-year" name="birth-year" min="1900" max="2026" placeholder="РРРР">
+            <span class="part-label">Year</span>
+            <input type="number" id="birth-year" name="birth-year" min="1900" max="2026" placeholder="YYYY">
           </div>
         </div>
-        <p class="hint">Точна дата потрібна щоб порахувати положення кожної планети на момент твого народження — від цього залежить вся карта.</p>
+        <p class="hint">We need your exact date to place every planet at the moment you were born — the whole chart depends on it.</p>
       </div>
     </form>
 
-    <div class="zone-label">Зона: Головна дія — неактивна поки поле порожнє [Main Job]</div>
+    <div class="zone-label">Zone: Primary action — inactive while the field is empty [Main Job]</div>
     <div class="action-zone">
-      <button type="button" class="btn-primary" disabled>Далі</button>
-      <p class="hint">Введи дату народження щоб продовжити.</p>
+      <button type="button" class="btn-primary" disabled>Next</button>
+      <p class="hint">Enter your birth date to continue.</p>
     </div>
 
   </main>

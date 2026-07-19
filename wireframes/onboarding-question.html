@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Що зараз відбувається — Astro Recipe [wireframe]</title>
+<title>What's going on right now — Astro Recipe [wireframe]</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: system-ui, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; min-height: 100vh; }
@@ -65,18 +65,18 @@
 
   <div class="nav-section">Onboarding</div>
   <a href="welcome.html">Welcome</a>
-  <a href="onboarding-date.html">Введення дати</a>
+  <a href="onboarding-date.html">Enter birth date</a>
   <div class="state"><a href="onboarding-date-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-date-error.html">└─ error</a></div>
-  <a href="onboarding-time.html">Введення часу</a>
-  <a href="onboarding-place.html">Введення місця</a>
+  <a href="onboarding-time.html">Enter birth time</a>
+  <a href="onboarding-place.html">Enter birthplace</a>
   <div class="state"><a href="onboarding-place-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-place-error.html">└─ error</a></div>
   <div class="state"><a href="onboarding-place-loading.html">└─ loading</a></div>
-  <a href="onboarding-question.html" class="current">Питання "що зараз?"</a>
-  <a href="onboarding-question-2.html">Додаткове питання</a>
+  <a href="onboarding-question.html" class="current">Life context question</a>
+  <a href="onboarding-question-2.html">Additional question</a>
 
-  <div class="nav-section">Результати (тизер)</div>
+  <div class="nav-section">Results (free teaser)</div>
   <a href="results.html">Results</a>
   <div class="state"><a href="results-error.html">└─ error</a></div>
   <div class="state"><a href="results-loading.html">└─ loading</a></div>
@@ -90,56 +90,56 @@
   <a href="report.html">Report</a>
 
   <div class="nav-section">Share</div>
-  <a href="share.html">Glow картка</a>
+  <a href="share.html">Glow card</a>
 </nav>
 
 <div class="wf-wrap">
 
   <div class="states-bar">
-    Стани цього екрана:
-    <span class="current-state">success (цей — питання опціональне, пропуск теж success)</span>
+    States for this screen:
+    <span class="current-state">success (this one — the question is optional, skipping is success too)</span>
   </div>
 
   <header>
     <div class="logo">Astro Recipe</div>
-    <div class="flow-step">Онбординг — крок 1.5</div>
+    <div class="flow-step">Onboarding — step 1.5</div>
   </header>
 
   <main>
 
-    <a href="onboarding-place.html" class="back-link">← Назад</a>
+    <a href="onboarding-place.html" class="back-link">← Back</a>
 
-    <div class="zone-label">Зона: Головне питання — вибір варіанту [Main Job + Emotional job — тригер кризи]</div>
+    <div class="zone-label">Zone: Main question — pick an option [Main Job + Emotional job — crisis trigger]</div>
     <form>
-      <div class="question-title">Що зараз відбувається у твоєму житті?</div>
+      <div class="question-title">What's going on in your life right now?</div>
       <div class="option-list">
         <label class="option-card selected">
           <input type="radio" name="context" value="career" checked>
-          <span class="option-text">Застрягла в кар'єрі чи бізнесі — нічого не рухається</span>
+          <span class="option-text">Stuck in my career or business — nothing's moving</span>
         </label>
         <label class="option-card">
           <input type="radio" name="context" value="relationships">
-          <span class="option-text">Проблеми чи зміни у стосунках</span>
+          <span class="option-text">Relationship trouble or change</span>
         </label>
         <label class="option-card">
           <input type="radio" name="context" value="identity">
-          <span class="option-text">Відчуваю що загубила себе, не розумію хто я зараз</span>
+          <span class="option-text">I feel like I've lost myself, not sure who I am right now</span>
         </label>
         <label class="option-card">
           <input type="radio" name="context" value="decision">
-          <span class="option-text">Стою перед великим рішенням</span>
+          <span class="option-text">Facing a big decision</span>
         </label>
         <label class="option-card">
           <input type="radio" name="context" value="curious">
-          <span class="option-text">Просто цікаво, без конкретної кризи</span>
+          <span class="option-text">Just curious, no particular crisis</span>
         </label>
       </div>
     </form>
 
-    <div class="zone-label">Зона: Головна дія — відповісти або пропустити [Main Job]</div>
+    <div class="zone-label">Zone: Primary action — answer or skip [Main Job]</div>
     <div class="action-zone">
-      <a href="onboarding-question-2.html" class="btn-primary">Далі</a>
-      <a href="onboarding-question-2.html" class="btn-secondary">Пропустити</a>
+      <a href="onboarding-question-2.html" class="btn-primary">Next</a>
+      <a href="onboarding-question-2.html" class="btn-secondary">Skip</a>
     </div>
 
   </main>

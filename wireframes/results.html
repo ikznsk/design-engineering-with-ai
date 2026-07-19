@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Результати — Astro Recipe [wireframe]</title>
+<title>Results — Astro Recipe [wireframe]</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: system-ui, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; min-height: 100vh; }
@@ -102,18 +102,18 @@
 
   <div class="nav-section">Onboarding</div>
   <a href="welcome.html">Welcome</a>
-  <a href="onboarding-date.html">Введення дати</a>
+  <a href="onboarding-date.html">Enter birth date</a>
   <div class="state"><a href="onboarding-date-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-date-error.html">└─ error</a></div>
-  <a href="onboarding-time.html">Введення часу</a>
-  <a href="onboarding-place.html">Введення місця</a>
+  <a href="onboarding-time.html">Enter birth time</a>
+  <a href="onboarding-place.html">Enter birthplace</a>
   <div class="state"><a href="onboarding-place-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-place-error.html">└─ error</a></div>
   <div class="state"><a href="onboarding-place-loading.html">└─ loading</a></div>
-  <a href="onboarding-question.html">Питання "що зараз?"</a>
-  <a href="onboarding-question-2.html">Додаткове питання</a>
+  <a href="onboarding-question.html">Life context question</a>
+  <a href="onboarding-question-2.html">Additional question</a>
 
-  <div class="nav-section">Результати (тизер)</div>
+  <div class="nav-section">Results (free teaser)</div>
   <a href="results.html" class="current">Results</a>
   <div class="state"><a href="results-error.html">└─ error</a></div>
   <div class="state"><a href="results-loading.html">└─ loading</a></div>
@@ -127,31 +127,31 @@
   <a href="report.html">Report</a>
 
   <div class="nav-section">Share</div>
-  <a href="share.html">Glow картка</a>
+  <a href="share.html">Glow card</a>
 </nav>
 
 <!-- MAIN -->
 <div class="wf-wrap">
 
   <div class="states-bar">
-    Стани цього екрана:
-    <span class="current-state">success (цей)</span>
+    States for this screen:
+    <span class="current-state">success (this one)</span>
     <a href="results-error.html">error</a>
     <a href="results-loading.html">loading</a>
   </div>
 
   <header>
     <div class="logo">Astro Recipe</div>
-    <div class="flow-step">Результати — безкоштовний тизер</div>
+    <div class="flow-step">Results — free teaser</div>
   </header>
 
   <main>
 
-    <a href="onboarding-question-2.html" class="back-link">← Назад</a>
+    <a href="onboarding-question-2.html" class="back-link">← Back</a>
 
-    <div class="zone-label">Зона: Натальна карта — візуалізація [Main Job]</div>
+    <div class="zone-label">Zone: Natal chart — visualization [Main Job]</div>
     <article class="chart-block">
-      <svg viewBox="0 0 300 300" width="260" height="260" role="img" aria-label="Схема натальної карти">
+      <svg viewBox="0 0 300 300" width="260" height="260" role="img" aria-label="Natal chart diagram">
         <circle cx="150" cy="150" r="130" fill="none" stroke="#999" stroke-width="1.5"/>
         <circle cx="150" cy="150" r="90" fill="none" stroke="#ccc" stroke-width="1"/>
         <line x1="150" y1="150" x2="280" y2="150" stroke="#ddd"/>
@@ -192,71 +192,71 @@
         <text x="140" y="14" font-size="10" fill="#555">MC</text>
       </svg>
       <div class="chart-legend">
-        <div class="legend-row"><span class="legend-glyph">☉</span> Сонце в Рибах — емоційна, творча основа особистості</div>
-        <div class="legend-row"><span class="legend-glyph">☽</span> Місяць у Раку — що відновлює і що виснажує</div>
-        <div class="legend-row"><span class="legend-glyph">☿</span> Меркурій у Близнюках — стиль мислення і комунікації</div>
-        <div class="legend-row"><span class="legend-glyph">♀</span> Венера у Тельці — природна естетика і стиль</div>
-        <div class="legend-row"><span class="legend-glyph">AC</span> Асцендент у Скорпіоні — перше враження, яке ти справляєш</div>
-        <div class="legend-row"><span class="legend-glyph">MC</span> Midheaven у Козорозі — кар'єрний напрям</div>
+        <div class="legend-row"><span class="legend-glyph">☉</span> Sun in Pisces — the emotional, creative core of your personality</div>
+        <div class="legend-row"><span class="legend-glyph">☽</span> Moon in Cancer — what restores you and what drains you</div>
+        <div class="legend-row"><span class="legend-glyph">☿</span> Mercury in Gemini — how you think and communicate</div>
+        <div class="legend-row"><span class="legend-glyph">♀</span> Venus in Taurus — your natural aesthetic and style</div>
+        <div class="legend-row"><span class="legend-glyph">AC</span> Ascendant in Scorpio — the first impression you make</div>
+        <div class="legend-row"><span class="legend-glyph">MC</span> Midheaven in Capricorn — your career direction</div>
       </div>
     </article>
 
-    <div class="zone-label">Зона: Загальний опис — що таке натальна карта [Main Job]</div>
+    <div class="zone-label">Zone: General explanation — what a natal chart is [Main Job]</div>
     <article class="description-block">
-      <p>Натальна карта — це знімок неба на момент твого народження: де саме була кожна планета, у якому знаку і в якому домі. Ми читаємо ці позиції не по одній, а в комбінації — так, як це робить справжній астролог — і перекладаємо в конкретні відповіді: як вдягатись, як вести кар'єру, що постити, що тебе виснажує. Нижче — перше, що впадає в очі саме в твоїй карті.</p>
+      <p>Your natal chart is a snapshot of the sky at the moment you were born: exactly where every planet sat, in which sign and house. We read these positions in combination, not one at a time — the way a real astrologer would — and translate that into concrete answers: how to dress, how to run your career, what to post, what drains you. Below is the first thing that stands out in your chart specifically.</p>
     </article>
 
-    <div class="zone-label">Зона: Wow-момент — перше впізнавання себе [Emotional job + R1]</div>
+    <div class="zone-label">Zone: Wow moment — first self-recognition [Emotional job + R1]</div>
     <article class="wow-block">
-      <div class="wow-tag">Твоя природня мова</div>
-      <p class="wow-text">Меркурій у Близнюках робить тебе блискавичною — ти хапаєш нову інформацію швидше за всіх навколо і вже думаєш про наступне, поки інші ще дочитують перше речення. Мінус цієї ж риси: тобі важко досидіти до кінця одну справу, якщо поруч миготить щось нове.</p>
+      <div class="wow-tag">Your natural language</div>
+      <p class="wow-text">Mercury in Gemini makes you quick — you grab new information faster than anyone around you and you're already thinking about what's next while others are still finishing the first sentence. The flip side of that same trait: it's hard for you to sit with one thing to the end once something new starts flickering nearby.</p>
     </article>
 
     <div class="scroll-hint">
-      Це лише початок твоєї карти
+      This is just the start of your chart
       <span class="arrow">↓</span>
     </div>
 
-    <div class="zone-label">Зона: CTA — розблокувати повний репорт [Конверсія]</div>
+    <div class="zone-label">Zone: CTA — unlock the full report [Conversion]</div>
     <article class="cta-block">
-      <div class="cta-title">Отримай повний Glow Report</div>
-      <div class="cta-sub">Стиль, кар'єрне позиціонування, енергія і соушал контент — розписано по твоїй карті, не загальними словами.</div>
-      <a href="checkout.html" class="btn-primary">Розблокувати мій Glow Report</a>
+      <div class="cta-title">Get your full Glow Report</div>
+      <div class="cta-sub">Style, career positioning, energy, and social content — mapped to your chart, not generic advice.</div>
+      <a href="checkout.html" class="btn-primary">Unlock my Glow Report</a>
     </article>
 
-    <div class="zone-label">Зона: Прев'ю чужих репортів — соціальний доказ [Конверсія]</div>
+    <div class="zone-label">Zone: Other people's report previews — social proof [Conversion]</div>
     <div class="preview-scroll">
       <article class="preview-card">
-        <div class="preview-name">Оля, Овен + Скорпіон Асц</div>
-        <div class="preview-line">"Твій стиль тяжіє до контрасту — там де інші пом'якшують, ти загострюєш..."</div>
-        <div class="preview-blur">решта тексту — у повному репорті</div>
+        <div class="preview-name">Olya, Aries + Scorpio Asc</div>
+        <div class="preview-line">"Your style leans toward contrast — where others soften, you sharpen..."</div>
+        <div class="preview-blur">rest of the text is in the full report</div>
       </article>
       <article class="preview-card">
-        <div class="preview-name">Артем, Терези + Козоріг МС</div>
-        <div class="preview-line">"Твоя кар'єрна затика — не брак таланту, а страх виглядати недостатньо готовим..."</div>
-        <div class="preview-blur">решта тексту — у повному репорті</div>
+        <div class="preview-name">Artem, Libra + Capricorn MC</div>
+        <div class="preview-line">"Your career sticking point isn't a lack of talent — it's the fear of looking unready..."</div>
+        <div class="preview-blur">rest of the text is in the full report</div>
       </article>
       <article class="preview-card">
-        <div class="preview-name">Марія, Риби + Лев МС</div>
-        <div class="preview-line">"Контент, який тобі природно вести — не поради, а щоденник у реальному часі..."</div>
-        <div class="preview-blur">решта тексту — у повному репорті</div>
+        <div class="preview-name">Maria, Pisces + Leo MC</div>
+        <div class="preview-line">"The content that's natural for you isn't advice — it's a real-time journal..."</div>
+        <div class="preview-blur">rest of the text is in the full report</div>
       </article>
     </div>
 
-    <div class="zone-label">Зона: Відгуки щасливих покупців [Конверсія]</div>
+    <div class="zone-label">Zone: Reviews from happy buyers [Conversion]</div>
     <article class="testimonial">
-      <div class="quote">"Я вже читала купу розборів карти, але тут вперше не просто 'ти творча людина', а конкретно що робити з понеділка."</div>
-      <div class="author">— Настя, контент-мейкер</div>
+      <div class="quote">"I've read plenty of chart breakdowns before, but this was the first time it wasn't just 'you're a creative person' — it was specifically what to do on Monday."</div>
+      <div class="author">— Nastya, content creator</div>
     </article>
     <article class="testimonial">
-      <div class="quote">"Секція про кар'єрні затики влучила так, що я показала її своєму терапевту."</div>
-      <div class="author">— Ігор, соло-консультант</div>
+      <div class="quote">"The section on career sticking points hit so hard I showed it to my therapist."</div>
+      <div class="author">— Igor, solo consultant</div>
     </article>
 
-    <div class="zone-label">Зона: Головна дія — поділитись або розблокувати [Social job / Конверсія]</div>
+    <div class="zone-label">Zone: Primary action — share or unlock [Social job / Conversion]</div>
     <div class="action-zone">
-      <a href="checkout.html" class="btn-primary">Розблокувати мій Glow Report</a>
-      <a href="share.html" class="btn-secondary">Поділитись цим фрагментом</a>
+      <a href="checkout.html" class="btn-primary">Unlock my Glow Report</a>
+      <a href="share.html" class="btn-secondary">Share this bit</a>
     </div>
 
   </main>

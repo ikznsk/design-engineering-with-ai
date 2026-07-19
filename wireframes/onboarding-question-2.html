@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Додаткове питання — Astro Recipe [wireframe]</title>
+<title>Additional question — Astro Recipe [wireframe]</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: system-ui, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; min-height: 100vh; }
@@ -65,18 +65,18 @@
 
   <div class="nav-section">Onboarding</div>
   <a href="welcome.html">Welcome</a>
-  <a href="onboarding-date.html">Введення дати</a>
+  <a href="onboarding-date.html">Enter birth date</a>
   <div class="state"><a href="onboarding-date-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-date-error.html">└─ error</a></div>
-  <a href="onboarding-time.html">Введення часу</a>
-  <a href="onboarding-place.html">Введення місця</a>
+  <a href="onboarding-time.html">Enter birth time</a>
+  <a href="onboarding-place.html">Enter birthplace</a>
   <div class="state"><a href="onboarding-place-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-place-error.html">└─ error</a></div>
   <div class="state"><a href="onboarding-place-loading.html">└─ loading</a></div>
-  <a href="onboarding-question.html">Питання "що зараз?"</a>
-  <a href="onboarding-question-2.html" class="current">Додаткове питання</a>
+  <a href="onboarding-question.html">Life context question</a>
+  <a href="onboarding-question-2.html" class="current">Additional question</a>
 
-  <div class="nav-section">Результати (тизер)</div>
+  <div class="nav-section">Results (free teaser)</div>
   <a href="results.html">Results</a>
   <div class="state"><a href="results-error.html">└─ error</a></div>
   <div class="state"><a href="results-loading.html">└─ loading</a></div>
@@ -90,57 +90,57 @@
   <a href="report.html">Report</a>
 
   <div class="nav-section">Share</div>
-  <a href="share.html">Glow картка</a>
+  <a href="share.html">Glow card</a>
 </nav>
 
 <div class="wf-wrap">
 
   <div class="states-bar">
-    Стани цього екрана:
-    <span class="current-state">success (цей — питання опціональне, пропуск теж success)</span>
+    States for this screen:
+    <span class="current-state">success (this one — the question is optional, skipping is success too)</span>
   </div>
 
   <header>
     <div class="logo">Astro Recipe</div>
-    <div class="flow-step">Онбординг — крок 1.6 (додатково)</div>
+    <div class="flow-step">Onboarding — step 1.6 (optional)</div>
   </header>
 
   <main>
 
-    <a href="onboarding-question.html" class="back-link">← Назад</a>
+    <a href="onboarding-question.html" class="back-link">← Back</a>
 
-    <!-- зміст питання TBD, продукт ще не визначив точне формулювання -->
-    <div class="zone-label">Зона: Додаткове питання — вибір варіанту [Main Job + Emotional job]</div>
+    <!-- question content TBD, product hasn't settled on exact wording yet -->
+    <div class="zone-label">Zone: Additional question — pick an option [Main Job + Emotional job]</div>
     <form>
-      <div class="question-title">Чим ти заробляєш зараз?</div>
+      <div class="question-title">What do you currently do for income?</div>
       <div class="option-list">
         <label class="option-card selected">
           <input type="radio" name="context-2" value="content" checked>
-          <span class="option-text">Контент і особистий бренд</span>
+          <span class="option-text">Content and personal brand</span>
         </label>
         <label class="option-card">
           <input type="radio" name="context-2" value="services">
-          <span class="option-text">Консультації чи послуги</span>
+          <span class="option-text">Consulting or services</span>
         </label>
         <label class="option-card">
           <input type="radio" name="context-2" value="product">
-          <span class="option-text">Свій продукт чи бізнес</span>
+          <span class="option-text">My own product or business</span>
         </label>
         <label class="option-card">
           <input type="radio" name="context-2" value="searching">
-          <span class="option-text">Ще шукаю свій напрям</span>
+          <span class="option-text">Still figuring out my direction</span>
         </label>
         <label class="option-card">
           <input type="radio" name="context-2" value="other">
-          <span class="option-text">Інше</span>
+          <span class="option-text">Other</span>
         </label>
       </div>
     </form>
 
-    <div class="zone-label">Зона: Головна дія — відповісти або пропустити [Main Job]</div>
+    <div class="zone-label">Zone: Primary action — answer or skip [Main Job]</div>
     <div class="action-zone">
-      <a href="results-loading.html" class="btn-primary">Розрахувати мою карту</a>
-      <a href="results-loading.html" class="btn-secondary">Пропустити</a>
+      <a href="results-loading.html" class="btn-primary">Calculate my chart</a>
+      <a href="results-loading.html" class="btn-secondary">Skip</a>
     </div>
 
   </main>

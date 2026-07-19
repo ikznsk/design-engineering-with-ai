@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Час народження — Astro Recipe [wireframe]</title>
+<title>Birth time — Astro Recipe [wireframe]</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: system-ui, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; min-height: 100vh; }
@@ -64,18 +64,18 @@
 
   <div class="nav-section">Onboarding</div>
   <a href="welcome.html">Welcome</a>
-  <a href="onboarding-date.html">Введення дати</a>
+  <a href="onboarding-date.html">Enter birth date</a>
   <div class="state"><a href="onboarding-date-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-date-error.html">└─ error</a></div>
-  <a href="onboarding-time.html" class="current">Введення часу</a>
-  <a href="onboarding-place.html">Введення місця</a>
+  <a href="onboarding-time.html" class="current">Enter birth time</a>
+  <a href="onboarding-place.html">Enter birthplace</a>
   <div class="state"><a href="onboarding-place-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-place-error.html">└─ error</a></div>
   <div class="state"><a href="onboarding-place-loading.html">└─ loading</a></div>
-  <a href="onboarding-question.html">Питання "що зараз?"</a>
-  <a href="onboarding-question-2.html">Додаткове питання</a>
+  <a href="onboarding-question.html">Life context question</a>
+  <a href="onboarding-question-2.html">Additional question</a>
 
-  <div class="nav-section">Результати (тизер)</div>
+  <div class="nav-section">Results (free teaser)</div>
   <a href="results.html">Results</a>
   <div class="state"><a href="results-error.html">└─ error</a></div>
   <div class="state"><a href="results-loading.html">└─ loading</a></div>
@@ -89,54 +89,54 @@
   <a href="report.html">Report</a>
 
   <div class="nav-section">Share</div>
-  <a href="share.html">Glow картка</a>
+  <a href="share.html">Glow card</a>
 </nav>
 
 <div class="wf-wrap">
 
   <div class="states-bar">
-    Стани цього екрана:
-    <span class="current-state">success (цей — інших станів немає)</span>
+    States for this screen:
+    <span class="current-state">success (this one — no other states)</span>
   </div>
 
   <header>
     <div class="logo">Astro Recipe</div>
-    <div class="flow-step">Введення часу народження</div>
+    <div class="flow-step">Birth time</div>
   </header>
 
   <main>
 
-    <a href="onboarding-date.html" class="back-link">← Назад</a>
+    <a href="onboarding-date.html" class="back-link">← Back</a>
 
-    <div class="zone-label">Зона: Форма — час народження [Main Job — точність карти]</div>
+    <div class="zone-label">Zone: Form — birth time [Main Job — chart precision]</div>
     <form class="form-block">
       <div class="field">
-        <label for="birth-time">О котрій годині ти народилась?</label>
+        <label for="birth-time">What time were you born?</label>
         <div class="date-parts">
           <div class="part">
-            <span class="part-label">Година</span>
-            <input type="number" id="birth-time-h" name="birth-time-h" min="0" max="23" value="14" placeholder="ГГ">
+            <span class="part-label">Hour</span>
+            <input type="number" id="birth-time-h" name="birth-time-h" min="0" max="23" value="14" placeholder="HH">
           </div>
           <div class="part">
-            <span class="part-label">Хвилина</span>
-            <input type="number" id="birth-time-m" name="birth-time-m" min="0" max="59" value="30" placeholder="ХХ">
+            <span class="part-label">Minute</span>
+            <input type="number" id="birth-time-m" name="birth-time-m" min="0" max="59" value="30" placeholder="MM">
           </div>
         </div>
-        <p class="hint">Час народження визначає твій Асцендент і доми карти — найточніша частина розрахунку.</p>
+        <p class="hint">Your birth time determines your Ascendant and the houses in your chart — the most precise part of the calculation.</p>
         <label class="checkbox-row">
           <input type="checkbox" id="unknown-time" name="unknown-time">
-          Я не знаю точний час народження
+          I don't know my exact birth time
         </label>
       </div>
     </form>
 
     <div class="notice-block">
-      Без точного часу результат буде дещо менш точним у частині, що стосується твоєї присутності й першого враження — але ми все одно порахуємо головне: стиль, кар'єру, енергію і контент.
+      Without an exact time, the parts of your reading about presence and first impressions will be a little less precise — but we'll still calculate the essentials: style, career, energy, and content.
     </div>
 
-    <div class="zone-label">Зона: Головна дія [Main Job]</div>
+    <div class="zone-label">Zone: Primary action [Main Job]</div>
     <div class="action-zone">
-      <a href="onboarding-place.html" class="btn-primary">Далі</a>
+      <a href="onboarding-place.html" class="btn-primary">Next</a>
     </div>
 
   </main>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -75,18 +75,18 @@
 
   <div class="nav-section">Onboarding</div>
   <a href="welcome.html">Welcome</a>
-  <a href="onboarding-date.html">Введення дати</a>
+  <a href="onboarding-date.html">Enter birth date</a>
   <div class="state"><a href="onboarding-date-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-date-error.html">└─ error</a></div>
-  <a href="onboarding-time.html">Введення часу</a>
-  <a href="onboarding-place.html">Введення місця</a>
+  <a href="onboarding-time.html">Enter birth time</a>
+  <a href="onboarding-place.html">Enter birthplace</a>
   <div class="state"><a href="onboarding-place-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-place-error.html">└─ error</a></div>
   <div class="state"><a href="onboarding-place-loading.html">└─ loading</a></div>
-  <a href="onboarding-question.html">Питання "що зараз?"</a>
-  <a href="onboarding-question-2.html">Додаткове питання</a>
+  <a href="onboarding-question.html">Life context question</a>
+  <a href="onboarding-question-2.html">Additional question</a>
 
-  <div class="nav-section">Результати (тизер)</div>
+  <div class="nav-section">Results (free teaser)</div>
   <a href="results.html">Results</a>
   <div class="state"><a href="results-error.html">└─ error</a></div>
   <div class="state"><a href="results-loading.html">└─ loading</a></div>
@@ -100,47 +100,47 @@
   <a href="report.html">Report</a>
 
   <div class="nav-section">Share</div>
-  <a href="share.html">Glow картка</a>
+  <a href="share.html">Glow card</a>
 </nav>
 
 <!-- MAIN -->
 <div class="wf-wrap">
 
   <div class="states-bar">
-    Стани цього екрана:
-    <span class="current-state">success (цей)</span>
+    States for this screen:
+    <span class="current-state">success (this one)</span>
     <a href="checkout-error.html">error</a>
     <a href="checkout-loading.html">loading</a>
   </div>
 
   <header>
     <div class="logo">Astro Recipe</div>
-    <div class="flow-step">Checkout — email і оплата</div>
+    <div class="flow-step">Checkout — email and payment</div>
   </header>
 
   <main>
 
-    <div class="zone-label">Зона: Що купуєш [Конверсія]</div>
-    <div class="checkout-reminder">Glow Report — стиль, кар'єра, енергія, соушал контент</div>
+    <div class="zone-label">Zone: What you're buying [Conversion]</div>
+    <div class="checkout-reminder">Glow Report — style, career, energy, social content</div>
 
     <form class="checkout-form">
 
-      <div class="zone-label">Зона: Email для отримання репорту [Main Job]</div>
+      <div class="zone-label">Zone: Email to receive the report [Main Job]</div>
       <div class="form-field">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="masha@example.com" autocomplete="email">
       </div>
 
-      <div class="zone-label">Зона: Дані оплати [Конверсія]</div>
+      <div class="zone-label">Zone: Payment details [Conversion]</div>
       <div class="form-row">
         <div class="form-field">
-          <label for="card-number">Номер картки</label>
+          <label for="card-number">Card number</label>
           <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" inputmode="numeric" autocomplete="cc-number">
         </div>
       </div>
       <div class="form-row two-col">
         <div class="form-field">
-          <label for="card-expiry">Термін дії</label>
+          <label for="card-expiry">Expiry</label>
           <input type="text" id="card-expiry" name="card-expiry" placeholder="MM/YY" autocomplete="cc-exp">
         </div>
         <div class="form-field">
@@ -151,10 +151,10 @@
 
     </form>
 
-    <div class="zone-label">Зона: Головна дія [Конверсія]</div>
+    <div class="zone-label">Zone: Primary action [Conversion]</div>
     <div class="action-zone">
-      <a href="report.html" class="btn-primary">Оплатити і отримати Glow Report</a>
-      <a href="results.html" class="btn-secondary">Ще подумаю — повернутись до результатів</a>
+      <a href="report.html" class="btn-primary">Pay and get my Glow Report</a>
+      <a href="results.html" class="btn-secondary">Not yet — back to results</a>
     </div>
 
   </main>

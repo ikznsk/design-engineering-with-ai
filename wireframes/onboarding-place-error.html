@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Місце народження · error — Astro Recipe [wireframe]</title>
+<title>Birthplace · error — Astro Recipe [wireframe]</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: system-ui, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; min-height: 100vh; }
@@ -61,18 +61,18 @@
 
   <div class="nav-section">Onboarding</div>
   <a href="welcome.html">Welcome</a>
-  <a href="onboarding-date.html">Введення дати</a>
+  <a href="onboarding-date.html">Enter birth date</a>
   <div class="state"><a href="onboarding-date-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-date-error.html">└─ error</a></div>
-  <a href="onboarding-time.html">Введення часу</a>
-  <a href="onboarding-place.html">Введення місця</a>
+  <a href="onboarding-time.html">Enter birth time</a>
+  <a href="onboarding-place.html">Enter birthplace</a>
   <div class="state"><a href="onboarding-place-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-place-error.html" class="current">└─ error</a></div>
   <div class="state"><a href="onboarding-place-loading.html">└─ loading</a></div>
-  <a href="onboarding-question.html">Питання "що зараз?"</a>
-  <a href="onboarding-question-2.html">Додаткове питання</a>
+  <a href="onboarding-question.html">Life context question</a>
+  <a href="onboarding-question-2.html">Additional question</a>
 
-  <div class="nav-section">Результати (тизер)</div>
+  <div class="nav-section">Results (free teaser)</div>
   <a href="results.html">Results</a>
   <div class="state"><a href="results-error.html">└─ error</a></div>
   <div class="state"><a href="results-loading.html">└─ loading</a></div>
@@ -86,40 +86,40 @@
   <a href="report.html">Report</a>
 
   <div class="nav-section">Share</div>
-  <a href="share.html">Glow картка</a>
+  <a href="share.html">Glow card</a>
 </nav>
 
 <div class="wf-wrap">
 
   <div class="states-bar">
-    Стани цього екрана:
+    States for this screen:
     <a href="onboarding-place.html">success</a>
     <a href="onboarding-place-empty.html">empty</a>
-    <span class="current-state">error (цей)</span>
+    <span class="current-state">error (this one)</span>
     <a href="onboarding-place-loading.html">loading</a>
   </div>
 
   <header>
     <div class="logo">Astro Recipe</div>
-    <div class="flow-step">Онбординг — крок 1.4: місце народження</div>
+    <div class="flow-step">Birthplace</div>
   </header>
 
   <main>
 
-    <a href="onboarding-time.html" class="back-link">← Назад</a>
+    <a href="onboarding-time.html" class="back-link">← Back</a>
 
-    <div class="zone-label">Зона: Пошук місця народження — місто не знайдено [Main Job — точність карти]</div>
+    <div class="zone-label">Zone: Birthplace search — city not found [Main Job — chart precision]</div>
     <form>
       <div class="field-group">
-        <label for="place">Місце народження</label>
-        <input type="text" id="place" name="place" value="Всртаа">
+        <label for="place">Birthplace</label>
+        <input type="text" id="place" name="place" value="Ostin">
       </div>
     </form>
-    <p class="error-text">Місто не знайдено. Спробуй написати інакше або вибери найближче велике місто.</p>
+    <p class="error-text">City not found. Try a different spelling, or pick the nearest major city.</p>
 
-    <div class="zone-label">Зона: Головна дія [Main Job]</div>
+    <div class="zone-label">Zone: Primary action [Main Job]</div>
     <div class="action-zone">
-      <a href="onboarding-place.html" class="btn-primary">Спробувати ще раз</a>
+      <a href="onboarding-place.html" class="btn-primary">Try again</a>
     </div>
 
   </main>

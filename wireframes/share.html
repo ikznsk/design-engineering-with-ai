@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Поділитись — Astro Recipe [wireframe]</title>
+<title>Share — Astro Recipe [wireframe]</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: system-ui, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; min-height: 100vh; }
@@ -55,18 +55,18 @@
 
   <div class="nav-section">Onboarding</div>
   <a href="welcome.html">Welcome</a>
-  <a href="onboarding-date.html">Введення дати</a>
+  <a href="onboarding-date.html">Enter birth date</a>
   <div class="state"><a href="onboarding-date-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-date-error.html">└─ error</a></div>
-  <a href="onboarding-time.html">Введення часу</a>
-  <a href="onboarding-place.html">Введення місця</a>
+  <a href="onboarding-time.html">Enter birth time</a>
+  <a href="onboarding-place.html">Enter birthplace</a>
   <div class="state"><a href="onboarding-place-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-place-error.html">└─ error</a></div>
   <div class="state"><a href="onboarding-place-loading.html">└─ loading</a></div>
-  <a href="onboarding-question.html">Питання "що зараз?"</a>
-  <a href="onboarding-question-2.html">Додаткове питання</a>
+  <a href="onboarding-question.html">Life context question</a>
+  <a href="onboarding-question-2.html">Additional question</a>
 
-  <div class="nav-section">Результати (тизер)</div>
+  <div class="nav-section">Results (free teaser)</div>
   <a href="results.html">Results</a>
   <div class="state"><a href="results-error.html">└─ error</a></div>
   <div class="state"><a href="results-loading.html">└─ loading</a></div>
@@ -80,36 +80,36 @@
   <a href="report.html">Report</a>
 
   <div class="nav-section">Share</div>
-  <a href="share.html" class="current">Glow картка</a>
+  <a href="share.html" class="current">Glow card</a>
 </nav>
 
 <div class="wf-wrap">
 
   <div class="states-bar">
-    Стани цього екрана:
-    <span class="current-state">success (цей — інших станів немає)</span>
+    States for this screen:
+    <span class="current-state">success (this one — no other states)</span>
   </div>
 
   <header>
     <div class="logo">Astro Recipe</div>
-    <div class="flow-step">Поділитись Glow типом</div>
+    <div class="flow-step">Share your Glow type</div>
   </header>
 
   <main>
 
-    <div class="zone-label">Зона: Картка для поширення [Social job]</div>
+    <div class="zone-label">Zone: Shareable card [Social job]</div>
     <article class="share-card">
-      <div class="share-eyebrow">Мій Glow тип</div>
-      <div class="share-title">Меркурій-Швидкість</div>
-      <div class="share-line">Ти хапаєш нове швидше за всіх — і саме тому тобі важко досидіти до кінця одну справу.</div>
+      <div class="share-eyebrow">My Glow type</div>
+      <div class="share-title">Mercury Velocity</div>
+      <div class="share-line">You pick up new things faster than anyone — and that's exactly why it's hard for you to see one thing through to the end.</div>
       <div class="share-footer">astro-recipe.com</div>
     </article>
 
-    <div class="zone-label">Зона: Головна дія — поширити [Social job]</div>
+    <div class="zone-label">Zone: Primary action — share [Social job]</div>
     <div class="action-zone">
-      <a href="#" class="btn-primary">Скопіювати посилання</a>
-      <a href="#" class="btn-secondary">Поділитись в Instagram</a>
-      <a href="results.html" class="btn-secondary">← Повернутись до результатів</a>
+      <a href="#" class="btn-primary">Copy link</a>
+      <a href="#" class="btn-secondary">Share on Instagram</a>
+      <a href="results.html" class="btn-secondary">← Back to results</a>
     </div>
 
   </main>

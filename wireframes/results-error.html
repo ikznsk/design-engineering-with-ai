@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Результати — error — Astro Recipe [wireframe]</title>
+<title>Results — error — Astro Recipe [wireframe]</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: system-ui, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; min-height: 100vh; }
@@ -60,18 +60,18 @@
 
   <div class="nav-section">Onboarding</div>
   <a href="welcome.html">Welcome</a>
-  <a href="onboarding-date.html">Введення дати</a>
+  <a href="onboarding-date.html">Enter birth date</a>
   <div class="state"><a href="onboarding-date-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-date-error.html">└─ error</a></div>
-  <a href="onboarding-time.html">Введення часу</a>
-  <a href="onboarding-place.html">Введення місця</a>
+  <a href="onboarding-time.html">Enter birth time</a>
+  <a href="onboarding-place.html">Enter birthplace</a>
   <div class="state"><a href="onboarding-place-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-place-error.html">└─ error</a></div>
   <div class="state"><a href="onboarding-place-loading.html">└─ loading</a></div>
-  <a href="onboarding-question.html">Питання "що зараз?"</a>
-  <a href="onboarding-question-2.html">Додаткове питання</a>
+  <a href="onboarding-question.html">Life context question</a>
+  <a href="onboarding-question-2.html">Additional question</a>
 
-  <div class="nav-section">Результати (тизер)</div>
+  <div class="nav-section">Results (free teaser)</div>
   <a href="results.html">Results</a>
   <div class="state"><a href="results-error.html" class="current">└─ error</a></div>
   <div class="state"><a href="results-loading.html">└─ loading</a></div>
@@ -85,38 +85,38 @@
   <a href="report.html">Report</a>
 
   <div class="nav-section">Share</div>
-  <a href="share.html">Glow картка</a>
+  <a href="share.html">Glow card</a>
 </nav>
 
 <div class="wf-wrap">
 
   <div class="states-bar">
-    Стани цього екрана:
+    States for this screen:
     <a href="results.html">success</a>
-    <span class="current-state">error (цей)</span>
+    <span class="current-state">error (this one)</span>
     <a href="results-loading.html">loading</a>
   </div>
 
   <header>
     <div class="logo">Astro Recipe</div>
-    <div class="flow-step">Результати — безкоштовний тизер</div>
+    <div class="flow-step">Results — free teaser</div>
   </header>
 
   <main>
 
-    <a href="onboarding-question-2.html" class="back-link">← Назад</a>
+    <a href="onboarding-question-2.html" class="back-link">← Back</a>
 
-    <div class="zone-label">Зона: Помилка розрахунку карти [Main Job]</div>
+    <div class="zone-label">Zone: Chart calculation error [Main Job]</div>
     <article class="error-block">
       <div class="error-icon">!</div>
-      <div class="error-title">Не вдалось розрахувати карту</div>
-      <p class="error-text">Щось пішло не так під час розрахунку. Найчастіше причина — неточні дані народження. Перевір дату, час і місце і спробуй ще раз.</p>
+      <div class="error-title">We couldn't calculate your chart</div>
+      <p class="error-text">The most common cause is inaccurate birth details. Check your date, time, and place, then try again.</p>
     </article>
 
-    <div class="zone-label">Зона: Вихід — повернутись і перевірити дані [Main Job]</div>
+    <div class="zone-label">Zone: Exit — go back and check your details [Main Job]</div>
     <div class="action-zone">
-      <a href="onboarding-date.html" class="btn-primary">Перевірити дані народження</a>
-      <a href="results.html" class="btn-secondary">Спробувати розрахувати ще раз</a>
+      <a href="onboarding-date.html" class="btn-primary">Check my birth details</a>
+      <a href="results.html" class="btn-secondary">Try recalculating</a>
     </div>
 
   </main>

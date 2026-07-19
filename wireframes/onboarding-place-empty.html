@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Місце народження · empty — Astro Recipe [wireframe]</title>
+<title>Birthplace · empty — Astro Recipe [wireframe]</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: system-ui, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; min-height: 100vh; }
@@ -62,18 +62,18 @@
 
   <div class="nav-section">Onboarding</div>
   <a href="welcome.html">Welcome</a>
-  <a href="onboarding-date.html">Введення дати</a>
+  <a href="onboarding-date.html">Enter birth date</a>
   <div class="state"><a href="onboarding-date-empty.html">└─ empty</a></div>
   <div class="state"><a href="onboarding-date-error.html">└─ error</a></div>
-  <a href="onboarding-time.html">Введення часу</a>
-  <a href="onboarding-place.html">Введення місця</a>
+  <a href="onboarding-time.html">Enter birth time</a>
+  <a href="onboarding-place.html">Enter birthplace</a>
   <div class="state"><a href="onboarding-place-empty.html" class="current">└─ empty</a></div>
   <div class="state"><a href="onboarding-place-error.html">└─ error</a></div>
   <div class="state"><a href="onboarding-place-loading.html">└─ loading</a></div>
-  <a href="onboarding-question.html">Питання "що зараз?"</a>
-  <a href="onboarding-question-2.html">Додаткове питання</a>
+  <a href="onboarding-question.html">Life context question</a>
+  <a href="onboarding-question-2.html">Additional question</a>
 
-  <div class="nav-section">Результати (тизер)</div>
+  <div class="nav-section">Results (free teaser)</div>
   <a href="results.html">Results</a>
   <div class="state"><a href="results-error.html">└─ error</a></div>
   <div class="state"><a href="results-loading.html">└─ loading</a></div>
@@ -87,41 +87,41 @@
   <a href="report.html">Report</a>
 
   <div class="nav-section">Share</div>
-  <a href="share.html">Glow картка</a>
+  <a href="share.html">Glow card</a>
 </nav>
 
 <div class="wf-wrap">
 
   <div class="states-bar">
-    Стани цього екрана:
+    States for this screen:
     <a href="onboarding-place.html">success</a>
-    <span class="current-state">empty (цей)</span>
+    <span class="current-state">empty (this one)</span>
     <a href="onboarding-place-error.html">error</a>
     <a href="onboarding-place-loading.html">loading</a>
   </div>
 
   <header>
     <div class="logo">Astro Recipe</div>
-    <div class="flow-step">Онбординг — крок 1.4: місце народження</div>
+    <div class="flow-step">Birthplace</div>
   </header>
 
   <main>
 
-    <a href="onboarding-time.html" class="back-link">← Назад</a>
+    <a href="onboarding-time.html" class="back-link">← Back</a>
 
-    <div class="zone-label">Зона: Пошук місця народження, поле ще порожнє [Main Job — точність карти]</div>
+    <div class="zone-label">Zone: Birthplace search, field still empty [Main Job — chart precision]</div>
     <form>
       <div class="field-group">
-        <label for="place">Місце народження</label>
-        <input type="text" id="place" name="place" placeholder="Почни вводити назву міста...">
+        <label for="place">Birthplace</label>
+        <input type="text" id="place" name="place" placeholder="Start typing a city name...">
       </div>
     </form>
-    <p class="field-hint">Навіщо це потрібно: місце народження визначає часовий пояс — без нього неможливо точно розрахувати Асцендент і доми твоєї карти.</p>
+    <p class="field-hint">Why we need this: your birthplace determines the time zone — without it we can't accurately calculate your Ascendant and houses.</p>
 
-    <div class="zone-label">Зона: Головна дія — неактивна поки поле порожнє [Main Job]</div>
+    <div class="zone-label">Zone: Primary action — inactive while the field is empty [Main Job]</div>
     <div class="action-zone">
-      <button type="button" class="btn-primary" disabled>Продовжити</button>
-      <p class="field-hint">Введи місто де народилась щоб продовжити.</p>
+      <button type="button" class="btn-primary" disabled>Next</button>
+      <p class="field-hint">Enter the city where you were born to continue.</p>
     </div>
 
   </main>
