@@ -34,20 +34,28 @@
   .zone-label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; margin-top: 28px; }
   .zone-label:first-child { margin-top: 0; }
 
+  .back-link { display: inline-block; font-size: 13px; color: #666; text-decoration: none; margin-bottom: 16px; }
+  .back-link:hover { text-decoration: underline; }
+
+  .question-title { font-size: 17px; font-weight: bold; color: #222; margin-bottom: 16px; line-height: 1.4; }
+
+  .option-list { border: 1px solid #bbb; background: #fff; border-radius: 4px; padding: 8px; margin-bottom: 8px; }
+  .option-card {
+    display: flex; align-items: center; gap: 12px; padding: 14px 12px; border-radius: 3px;
+    border: 1px solid transparent; cursor: pointer;
+  }
+  .option-card:hover { background: #f5f5f5; }
+  .option-card input[type="radio"] { flex: 0 0 auto; }
+  .option-card .option-text { font-size: 14px; color: #222; line-height: 1.4; }
+  .option-card.selected { border-color: #888; background: #f0f0f0; }
+  .option-card + .option-card { border-top: 1px solid #eee; }
+
   .action-zone { margin-top: 12px; border-top: 1px solid #ddd; padding-top: 16px; }
   .btn-primary { display: block; width: 100%; padding: 14px; background: #333; color: #fff; border: none; font-size: 14px; cursor: pointer; text-align: center; border-radius: 3px; text-decoration: none; }
   .btn-secondary { display: block; width: 100%; padding: 10px; background: #fff; color: #333; border: 1px solid #aaa; font-size: 13px; cursor: pointer; text-align: center; border-radius: 3px; text-decoration: none; margin-top: 8px; }
 
   .states-bar { background: #e8e8e8; border-bottom: 1px solid #ccc; padding: 6px 24px; font-size: 11px; color: #666; display: flex; gap: 12px; }
   .states-bar span { color: #999; }
-
-  .form-block { border: 1px solid #bbb; background: #fff; padding: 24px; margin-bottom: 8px; border-radius: 4px; }
-  .field-group label { display: block; font-size: 15px; font-weight: bold; color: #222; margin-bottom: 12px; line-height: 1.4; }
-  .field-group textarea {
-    width: 100%; padding: 12px; font-size: 14px; font-family: inherit;
-    background: #f5f5f5; border: 1px solid #bbb; border-radius: 3px; min-height: 120px; line-height: 1.5; resize: vertical;
-  }
-  .field-hint { font-size: 12px; color: #888; line-height: 1.5; margin-top: 10px; }
 </style>
 </head>
 <body>
@@ -99,12 +107,32 @@
 
   <main>
 
-    <div class="zone-label">Зона: Головне питання [Main Job + Emotional job — тригер кризи]</div>
-    <form class="form-block">
-      <div class="field-group">
-        <label for="context">Що зараз відбувається у твоєму житті?</label>
-        <textarea id="context" name="context" placeholder="Можеш написати своїми словами — це допоможе нам прочитати карту саме під твою ситуацію, а не загально"></textarea>
-        <p class="field-hint">Необов'язково, але допомагає нам говорити конкретно про тебе, а не загальними фразами.</p>
+    <a href="onboarding-place.html" class="back-link">← Назад</a>
+
+    <div class="zone-label">Зона: Головне питання — вибір варіанту [Main Job + Emotional job — тригер кризи]</div>
+    <form>
+      <div class="question-title">Що зараз відбувається у твоєму житті?</div>
+      <div class="option-list">
+        <label class="option-card selected">
+          <input type="radio" name="context" value="career" checked>
+          <span class="option-text">Застрягла в кар'єрі чи бізнесі — нічого не рухається</span>
+        </label>
+        <label class="option-card">
+          <input type="radio" name="context" value="relationships">
+          <span class="option-text">Проблеми чи зміни у стосунках</span>
+        </label>
+        <label class="option-card">
+          <input type="radio" name="context" value="identity">
+          <span class="option-text">Відчуваю що загубила себе, не розумію хто я зараз</span>
+        </label>
+        <label class="option-card">
+          <input type="radio" name="context" value="decision">
+          <span class="option-text">Стою перед великим рішенням</span>
+        </label>
+        <label class="option-card">
+          <input type="radio" name="context" value="curious">
+          <span class="option-text">Просто цікаво, без конкретної кризи</span>
+        </label>
       </div>
     </form>
 

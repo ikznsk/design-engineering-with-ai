@@ -34,20 +34,28 @@
   .zone-label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; margin-top: 28px; }
   .zone-label:first-child { margin-top: 0; }
 
+  .back-link { display: inline-block; font-size: 13px; color: #666; text-decoration: none; margin-bottom: 16px; }
+  .back-link:hover { text-decoration: underline; }
+
+  .question-title { font-size: 17px; font-weight: bold; color: #222; margin-bottom: 16px; line-height: 1.4; }
+
+  .option-list { border: 1px solid #bbb; background: #fff; border-radius: 4px; padding: 8px; margin-bottom: 8px; }
+  .option-card {
+    display: flex; align-items: center; gap: 12px; padding: 14px 12px; border-radius: 3px;
+    border: 1px solid transparent; cursor: pointer;
+  }
+  .option-card:hover { background: #f5f5f5; }
+  .option-card input[type="radio"] { flex: 0 0 auto; }
+  .option-card .option-text { font-size: 14px; color: #222; line-height: 1.4; }
+  .option-card.selected { border-color: #888; background: #f0f0f0; }
+  .option-card + .option-card { border-top: 1px solid #eee; }
+
   .action-zone { margin-top: 12px; border-top: 1px solid #ddd; padding-top: 16px; }
   .btn-primary { display: block; width: 100%; padding: 14px; background: #333; color: #fff; border: none; font-size: 14px; cursor: pointer; text-align: center; border-radius: 3px; text-decoration: none; }
   .btn-secondary { display: block; width: 100%; padding: 10px; background: #fff; color: #333; border: 1px solid #aaa; font-size: 13px; cursor: pointer; text-align: center; border-radius: 3px; text-decoration: none; margin-top: 8px; }
 
   .states-bar { background: #e8e8e8; border-bottom: 1px solid #ccc; padding: 6px 24px; font-size: 11px; color: #666; display: flex; gap: 12px; }
   .states-bar span { color: #999; }
-
-  .form-block { border: 1px solid #bbb; background: #fff; padding: 24px; margin-bottom: 8px; border-radius: 4px; }
-  .field-group label { display: block; font-size: 15px; font-weight: bold; color: #222; margin-bottom: 12px; line-height: 1.4; }
-  .field-group textarea {
-    width: 100%; padding: 12px; font-size: 14px; font-family: inherit;
-    background: #f5f5f5; border: 1px solid #bbb; border-radius: 3px; min-height: 100px; line-height: 1.5; resize: vertical;
-  }
-  .field-hint { font-size: 12px; color: #888; line-height: 1.5; margin-top: 10px; }
 </style>
 </head>
 <body>
@@ -99,13 +107,33 @@
 
   <main>
 
+    <a href="onboarding-question.html" class="back-link">← Назад</a>
+
     <!-- зміст питання TBD, продукт ще не визначив точне формулювання -->
-    <div class="zone-label">Зона: Додаткове питання [Main Job + Emotional job]</div>
-    <form class="form-block">
-      <div class="field-group">
-        <label for="context-2">Чим ти заробляєш зараз?</label>
-        <textarea id="context-2" name="context-2" placeholder="Наприклад: консультації, свій бренд, контент, фриланс..."></textarea>
-        <p class="field-hint">Допоможе точніше говорити про кар'єру і контент саме в твоєму контексті.</p>
+    <div class="zone-label">Зона: Додаткове питання — вибір варіанту [Main Job + Emotional job]</div>
+    <form>
+      <div class="question-title">Чим ти заробляєш зараз?</div>
+      <div class="option-list">
+        <label class="option-card selected">
+          <input type="radio" name="context-2" value="content" checked>
+          <span class="option-text">Контент і особистий бренд</span>
+        </label>
+        <label class="option-card">
+          <input type="radio" name="context-2" value="services">
+          <span class="option-text">Консультації чи послуги</span>
+        </label>
+        <label class="option-card">
+          <input type="radio" name="context-2" value="product">
+          <span class="option-text">Свій продукт чи бізнес</span>
+        </label>
+        <label class="option-card">
+          <input type="radio" name="context-2" value="searching">
+          <span class="option-text">Ще шукаю свій напрям</span>
+        </label>
+        <label class="option-card">
+          <input type="radio" name="context-2" value="other">
+          <span class="option-text">Інше</span>
+        </label>
       </div>
     </form>
 
