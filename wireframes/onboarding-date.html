@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дата народження — Astro Recipe [wireframe]</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; min-height: 100vh; }
+
+  /* NAV TREE */
+  nav.wf-nav {
+    width: 220px; min-width: 220px; background: #e8e8e8; border-right: 1px solid #ccc;
+    padding: 16px 0; font-size: 12px; line-height: 1.8; position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  }
+  nav.wf-nav .nav-logo { padding: 0 16px 12px; font-weight: bold; border-bottom: 1px solid #ccc; margin-bottom: 8px; font-size: 13px; }
+  nav.wf-nav .nav-section { padding: 6px 16px 2px; font-weight: bold; color: #555; text-transform: uppercase; font-size: 10px; letter-spacing: 1px; margin-top: 8px; }
+  nav.wf-nav a { display: block; padding: 2px 16px; color: #333; text-decoration: none; }
+  nav.wf-nav a:hover { background: #ddd; }
+  nav.wf-nav a.current { font-weight: bold; background: #d0d0d0; }
+  nav.wf-nav .state { padding-left: 32px; color: #666; font-size: 11px; }
+  nav.wf-nav .state a { padding: 1px 16px 1px 32px; color: #666; }
+
+  /* MAIN WRAP */
+  .wf-wrap { flex: 1; display: flex; flex-direction: column; }
+
+  header {
+    background: #e0e0e0; border-bottom: 1px solid #ccc; padding: 12px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  header .logo { font-weight: bold; font-size: 16px; }
+  header .flow-step { font-size: 12px; color: #666; border: 1px solid #aaa; padding: 3px 10px; border-radius: 3px; }
+
+  main { padding: 24px; max-width: 640px; margin: 0 auto; width: 100%; }
+
+  /* ZONE LABELS */
+  .zone-label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; margin-top: 28px; }
+  .zone-label:first-child { margin-top: 0; }
+
+  /* WOW MOMENT */
+  .wow-block {
+    border: 2px solid #aaa; background: #fff; padding: 20px; margin-bottom: 8px; border-radius: 4px;
+  }
+  .wow-block .wow-tag { font-size: 10px; color: #888; margin-bottom: 8px; }
+  .wow-block .wow-text { font-size: 18px; line-height: 1.5; color: #111; }
+
+  /* SCROLL HINT */
+  .scroll-hint { text-align: center; padding: 16px 0; color: #999; font-size: 12px; }
+  .scroll-hint .arrow { font-size: 20px; display: block; margin-top: 4px; }
+
+  /* CTA BLOCK */
+  .cta-block {
+    border: 2px solid #888; background: #fff; padding: 24px; margin-bottom: 8px; border-radius: 4px; text-align: center;
+  }
+  .cta-block .cta-title { font-weight: bold; font-size: 17px; margin-bottom: 8px; }
+  .cta-block .cta-sub { font-size: 13px; color: #555; margin-bottom: 16px; }
+
+  /* PREVIEW CARDS */
+  .preview-scroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 4px; }
+  .preview-card {
+    border: 1px solid #bbb; background: #fff; border-radius: 4px; padding: 14px; min-width: 200px; flex: 0 0 auto;
+  }
+  .preview-card .preview-name { font-weight: bold; font-size: 13px; margin-bottom: 6px; }
+  .preview-card .preview-line { font-size: 12px; color: #555; line-height: 1.5; }
+  .preview-card .preview-blur { color: #aaa; font-size: 11px; margin-top: 8px; font-style: italic; }
+
+  /* TESTIMONIALS */
+  .testimonial { border: 1px solid #ccc; background: #fff; border-radius: 4px; padding: 16px; margin-bottom: 10px; }
+  .testimonial .quote { font-size: 13px; color: #222; line-height: 1.6; margin-bottom: 8px; }
+  .testimonial .author { font-size: 11px; color: #888; }
+
+  /* ACTION */
+  .action-zone { margin-top: 12px; border-top: 1px solid #ddd; padding-top: 16px; }
+  .btn-primary { display: block; width: 100%; padding: 14px; background: #333; color: #fff; border: none; font-size: 14px; cursor: pointer; text-align: center; border-radius: 3px; text-decoration: none; }
+  .btn-secondary { display: block; width: 100%; padding: 10px; background: #fff; color: #333; border: 1px solid #aaa; font-size: 13px; cursor: pointer; text-align: center; border-radius: 3px; text-decoration: none; margin-top: 8px; }
+
+  .states-bar { background: #e8e8e8; border-bottom: 1px solid #ccc; padding: 6px 24px; font-size: 11px; color: #666; display: flex; gap: 12px; }
+  .states-bar span { color: #999; }
+  .states-bar a { color: #555; text-decoration: none; }
+  .states-bar a:hover { text-decoration: underline; }
+  .states-bar .current-state { font-weight: bold; color: #333; }
+
+  /* FORM ELEMENTS (onboarding additions) */
+  .form-block { border: 1px solid #bbb; background: #fff; padding: 24px; margin-bottom: 8px; border-radius: 4px; }
+  .field { margin-bottom: 18px; }
+  .field:last-child { margin-bottom: 0; }
+  .field > label { display: block; font-size: 13px; font-weight: bold; color: #333; margin-bottom: 8px; }
+  .date-parts { display: flex; gap: 10px; }
+  .date-parts .part { flex: 1; }
+  .date-parts .part .part-label { display: block; font-size: 11px; color: #888; margin-bottom: 4px; }
+  .date-parts input { background: #eee; border: 1px solid #fff; box-shadow: 0 0 0 1px #ccc; padding: 10px 12px; font-size: 14px; border-radius: 3px; width: 100%; font-family: inherit; }
+  .field.has-error .date-parts input { box-shadow: 0 0 0 1px #333; border: 1px solid #333; }
+  .hint { font-size: 12px; color: #777; margin-top: 10px; line-height: 1.5; }
+  .error-text { font-size: 12px; color: #222; font-weight: bold; margin-top: 10px; }
+  .checkbox-row { display: flex; align-items: flex-start; gap: 8px; margin-top: 20px; font-size: 13px; color: #333; }
+  .checkbox-row input { margin-top: 3px; }
+  .notice-block { border: 1px solid #bbb; background: #f5f5f5; padding: 14px 16px; border-radius: 4px; font-size: 13px; color: #333; line-height: 1.6; margin-top: 14px; }
+  .btn-primary:disabled, .btn-primary[disabled] { background: #ccc; color: #888; cursor: not-allowed; }
+</style>
+</head>
+<body>
+
+<!-- NAV TREE -->
+<nav class="wf-nav">
+  <div class="nav-logo">Astro Recipe</div>
+
+  <div class="nav-section">Onboarding</div>
+  <a href="welcome.html">Welcome</a>
+  <a href="onboarding-date.html" class="current">Введення дати</a>
+  <div class="state"><a href="onboarding-date-empty.html">└─ empty</a></div>
+  <div class="state"><a href="onboarding-date-error.html">└─ error</a></div>
+  <a href="onboarding-time.html">Введення часу</a>
+  <a href="onboarding-place.html">Введення місця</a>
+  <div class="state"><a href="onboarding-place-empty.html">└─ empty</a></div>
+  <div class="state"><a href="onboarding-place-error.html">└─ error</a></div>
+  <div class="state"><a href="onboarding-place-loading.html">└─ loading</a></div>
+  <a href="onboarding-question.html">Питання "що зараз?"</a>
+  <a href="onboarding-question-2.html">Додаткове питання</a>
+
+  <div class="nav-section">Результати (тизер)</div>
+  <a href="results.html">Results</a>
+  <div class="state"><a href="results-error.html">└─ error</a></div>
+  <div class="state"><a href="results-loading.html">└─ loading</a></div>
+
+  <div class="nav-section">Checkout</div>
+  <a href="checkout.html">Checkout</a>
+  <div class="state"><a href="checkout-error.html">└─ error</a></div>
+  <div class="state"><a href="checkout-loading.html">└─ loading</a></div>
+
+  <div class="nav-section">Glow Report</div>
+  <a href="report.html">Report</a>
+
+  <div class="nav-section">Share</div>
+  <a href="share.html">Glow картка</a>
+</nav>
+
+<!-- MAIN -->
+<div class="wf-wrap">
+
+  <div class="states-bar">
+    Стани цього екрана:
+    <span class="current-state">success (цей)</span>
+    <a href="onboarding-date-empty.html">empty</a>
+    <a href="onboarding-date-error.html">error</a>
+  </div>
+
+  <header>
+    <div class="logo">Astro Recipe</div>
+    <div class="flow-step">Введення дати народження</div>
+  </header>
+
+  <main>
+
+    <div class="zone-label">Зона: Форма — дата народження [Main Job — збір даних для карти]</div>
+    <form class="form-block">
+      <div class="field">
+        <label for="birth-day">Коли ти народилась?</label>
+        <div class="date-parts">
+          <div class="part">
+            <span class="part-label">День</span>
+            <input type="number" id="birth-day" name="birth-day" min="1" max="31" value="22" placeholder="ДД">
+          </div>
+          <div class="part">
+            <span class="part-label">Місяць</span>
+            <input type="number" id="birth-month" name="birth-month" min="1" max="12" value="3" placeholder="ММ">
+          </div>
+          <div class="part">
+            <span class="part-label">Рік</span>
+            <input type="number" id="birth-year" name="birth-year" min="1900" max="2026" value="1994" placeholder="РРРР">
+          </div>
+        </div>
+        <p class="hint">Точна дата потрібна щоб порахувати положення кожної планети на момент твого народження — від цього залежить вся карта.</p>
+      </div>
+    </form>
+
+    <div class="zone-label">Зона: Головна дія [Main Job]</div>
+    <div class="action-zone">
+      <a href="onboarding-time.html" class="btn-primary">Далі</a>
+    </div>
+
+  </main>
+</div>
+
+</body>
+</html>

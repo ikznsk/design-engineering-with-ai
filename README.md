@@ -15,7 +15,7 @@ An astrology website that turns a birth chart into concrete, actionable guidance
 | **Audience** | Solopreneurs & content creators, 24–35, digital nomad / traveller context (Bali, SEA), English-speaking. |
 | **Platform** | Website (not an app) — mobile-first web → desktop. |
 | **Niche** | Glow — style + career/talents + social content + energy through the birth chart. |
-| **Status** | Personas + JTBD + IA done, wireframes in progress (Lesson 4) |
+| **Status** | Personas + JTBD + IA + Wireframes done (Lesson 4), main flow only |
 
 Full brief → [CLAUDE.md](./CLAUDE.md)
 
@@ -50,7 +50,7 @@ research/
 personas.md              # 4 персони (primary: Маша, 3 secondary)
 jtbd.md                  # Jobs + матриця + висновок про MVP
 
-wireframes/              # Low-fi flows (в процесі — Урок 4)
+wireframes/              # Low-fi flows — головний flow готовий (Урок 4): онбординг → тизер → checkout → репорт → share
 concept/                 # Visual direction (не починали)
 tokens/                  # Design tokens (не починали)
 components/              # UI components (не починали)
@@ -75,7 +75,7 @@ handoff/                 # Dev specs (не починали)
 | IA — Sitemap | ✅ Done | sitemap.md |
 | IA — Flows | ✅ Done | flows.md |
 | IA — консолідація | ✅ Done | ia.html |
-| Wireframes | 🟡 В процесі | wireframes/ |
+| Wireframes | ✅ Done (головний flow) | wireframes/ |
 | Concept | ⬜ Not started | |
 | Design system | ⬜ Not started | |
 | Handoff | ⬜ Not started | |

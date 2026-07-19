@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glow Report — Astro Recipe [wireframe]</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; min-height: 100vh; }
+
+  nav.wf-nav {
+    width: 220px; min-width: 220px; background: #e8e8e8; border-right: 1px solid #ccc;
+    padding: 16px 0; font-size: 12px; line-height: 1.8; position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  }
+  nav.wf-nav .nav-logo { padding: 0 16px 12px; font-weight: bold; border-bottom: 1px solid #ccc; margin-bottom: 8px; font-size: 13px; }
+  nav.wf-nav .nav-section { padding: 6px 16px 2px; font-weight: bold; color: #555; text-transform: uppercase; font-size: 10px; letter-spacing: 1px; margin-top: 8px; }
+  nav.wf-nav a { display: block; padding: 2px 16px; color: #333; text-decoration: none; }
+  nav.wf-nav a:hover { background: #ddd; }
+  nav.wf-nav a.current { font-weight: bold; background: #d0d0d0; }
+  nav.wf-nav .state { padding-left: 32px; color: #666; font-size: 11px; }
+  nav.wf-nav .state a { padding: 1px 16px 1px 32px; color: #666; }
+
+  .wf-wrap { flex: 1; display: flex; flex-direction: column; }
+
+  header {
+    background: #e0e0e0; border-bottom: 1px solid #ccc; padding: 12px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  header .logo { font-weight: bold; font-size: 16px; }
+  header .flow-step { font-size: 12px; color: #666; border: 1px solid #aaa; padding: 3px 10px; border-radius: 3px; }
+
+  main { padding: 24px; max-width: 640px; margin: 0 auto; width: 100%; }
+
+  .zone-label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; margin-top: 28px; }
+  .zone-label:first-child { margin-top: 0; }
+
+  .report-header { border: 1px solid #ccc; background: #fff; padding: 20px; border-radius: 4px; margin-bottom: 8px; }
+  .report-header .report-name { font-weight: bold; font-size: 17px; margin-bottom: 4px; }
+  .report-header .report-meta { font-size: 12px; color: #888; margin-bottom: 10px; }
+  .report-header .report-summary { font-size: 14px; color: #333; line-height: 1.6; }
+
+  .report-section { border: 1px solid #bbb; background: #fff; border-radius: 4px; padding: 20px; margin-bottom: 8px; }
+  .report-section .section-title { font-weight: bold; font-size: 15px; margin-bottom: 10px; color: #222; }
+  .report-section p { font-size: 13px; color: #333; line-height: 1.65; margin-bottom: 10px; }
+  .report-section p:last-child { margin-bottom: 0; }
+
+  .action-zone { margin-top: 12px; border-top: 1px solid #ddd; padding-top: 16px; }
+  .btn-primary { display: block; width: 100%; padding: 14px; background: #333; color: #fff; border: none; font-size: 14px; cursor: pointer; text-align: center; border-radius: 3px; text-decoration: none; }
+  .btn-secondary { display: block; width: 100%; padding: 10px; background: #fff; color: #333; border: 1px solid #aaa; font-size: 13px; cursor: pointer; text-align: center; border-radius: 3px; text-decoration: none; margin-top: 8px; }
+
+  .states-bar { background: #e8e8e8; border-bottom: 1px solid #ccc; padding: 6px 24px; font-size: 11px; color: #666; display: flex; gap: 12px; }
+  .states-bar span { color: #999; }
+</style>
+</head>
+<body>
+
+<nav class="wf-nav">
+  <div class="nav-logo">Astro Recipe</div>
+
+  <div class="nav-section">Onboarding</div>
+  <a href="welcome.html">Welcome</a>
+  <a href="onboarding-date.html">Введення дати</a>
+  <div class="state"><a href="onboarding-date-empty.html">└─ empty</a></div>
+  <div class="state"><a href="onboarding-date-error.html">└─ error</a></div>
+  <a href="onboarding-time.html">Введення часу</a>
+  <a href="onboarding-place.html">Введення місця</a>
+  <div class="state"><a href="onboarding-place-empty.html">└─ empty</a></div>
+  <div class="state"><a href="onboarding-place-error.html">└─ error</a></div>
+  <div class="state"><a href="onboarding-place-loading.html">└─ loading</a></div>
+  <a href="onboarding-question.html">Питання "що зараз?"</a>
+  <a href="onboarding-question-2.html">Додаткове питання</a>
+
+  <div class="nav-section">Результати (тизер)</div>
+  <a href="results.html">Results</a>
+  <div class="state"><a href="results-error.html">└─ error</a></div>
+  <div class="state"><a href="results-loading.html">└─ loading</a></div>
+
+  <div class="nav-section">Checkout</div>
+  <a href="checkout.html">Checkout</a>
+  <div class="state"><a href="checkout-error.html">└─ error</a></div>
+  <div class="state"><a href="checkout-loading.html">└─ loading</a></div>
+
+  <div class="nav-section">Glow Report</div>
+  <a href="report.html" class="current">Report</a>
+
+  <div class="nav-section">Share</div>
+  <a href="share.html">Glow картка</a>
+</nav>
+
+<div class="wf-wrap">
+
+  <div class="states-bar">
+    Стани цього екрана:
+    <span class="current-state">success (цей — інших станів немає, репорт існує лише після оплати)</span>
+  </div>
+
+  <header>
+    <div class="logo">Astro Recipe</div>
+    <div class="flow-step">Твій Glow Report</div>
+  </header>
+
+  <main>
+
+    <div class="zone-label">Зона: Хедер репорту [Main Job]</div>
+    <article class="report-header">
+      <div class="report-name">Маша</div>
+      <div class="report-meta">22.03.1994 · 14:30 · Київ</div>
+      <p class="report-summary">Меркурій у Близнюках, Сонце у Рибах, Асцендент у Скорпіоні — ти водночас швидка на думку і глибока за відчуттями. Цей репорт — конкретно про те, як з цим жити: як вдягатись, як подавати себе в кар'єрі, що постити і що тебе виснажує.</p>
+    </article>
+
+    <div class="zone-label">Зона: Розділ 1 — Стиль [R1]</div>
+    <section class="report-section">
+      <div class="section-title">Твій стиль</div>
+      <p>Венера у Тельці дає тобі природний потяг до якісних матеріалів і спокійних, насичених кольорів — там, де інші женуться за трендом, тобі йде витриманість. Уникай перевантажених образів з купою дрібних деталей: вони розпорошують саме ту силу, яку дає твоя Венера.</p>
+      <p>Конкретно: капсульний гардероб з 5–7 базових речей у теплій, землистій палітрі підходить тобі краще, ніж часта зміна образів.</p>
+    </section>
+
+    <div class="zone-label">Зона: Розділ 2 — Кар'єра і таланти [R2]</div>
+    <section class="report-section">
+      <div class="section-title">Кар'єра і таланти</div>
+      <p>Midheaven у Козорозі в комбінації з Сатурном показує природну здатність будувати довгострокові структури — тобі варто позиціонувати себе як людину що доводить проєкти до кінця, а не просто генерує ідеї.</p>
+      <p>Затика: Сатурн у 10 домі часто означає страх виглядати недостатньо готовою, через що ти відкладаєш публічні кроки. Конкретний крок: постав собі дедлайн на one публічну дію цього тижня, навіть недосконалу.</p>
+    </section>
+
+    <div class="zone-label">Зона: Розділ 3 — Енергія [R3]</div>
+    <section class="report-section">
+      <div class="section-title">Енергія</div>
+      <p>Місяць у Раку означає що тебе відновлює усамітнення і побутовий ритуал — не соціальні заходи. Виснажує тебе постійна доступність для інших без власного простору.</p>
+      <p>Конкретно: заклади в розклад хоча б одну годину на день, коли ти фізично недоступна для повідомлень.</p>
+    </section>
+
+    <div class="zone-label">Зона: Розділ 4 — Соушал медіа контент [R4]</div>
+    <section class="report-section">
+      <div class="section-title">Соушал медіа контент</div>
+      <p>Меркурій у Близнюках — твій природний контент-формат це швидкі, живі нотатки в моменті, а не відполіровані пости. Довгі, ретельно сплановані сторітейли тебе виснажують і виглядають награно.</p>
+      <p>Конкретно: сторіз у реальному часі й короткі відео "думаю вголос" конвертують краще за твоєю картою, ніж карусельні пости з порадами.</p>
+    </section>
+
+    <div class="zone-label">Зона: Головна дія — поділитись [Social job]</div>
+    <div class="action-zone">
+      <a href="share.html" class="btn-primary">Поділитись своїм Glow типом</a>
+    </div>
+
+  </main>
+</div>
+
+</body>
+</html>

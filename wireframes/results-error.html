@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Результати — error — Astro Recipe [wireframe]</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; min-height: 100vh; }
+
+  nav.wf-nav {
+    width: 220px; min-width: 220px; background: #e8e8e8; border-right: 1px solid #ccc;
+    padding: 16px 0; font-size: 12px; line-height: 1.8; position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  }
+  nav.wf-nav .nav-logo { padding: 0 16px 12px; font-weight: bold; border-bottom: 1px solid #ccc; margin-bottom: 8px; font-size: 13px; }
+  nav.wf-nav .nav-section { padding: 6px 16px 2px; font-weight: bold; color: #555; text-transform: uppercase; font-size: 10px; letter-spacing: 1px; margin-top: 8px; }
+  nav.wf-nav a { display: block; padding: 2px 16px; color: #333; text-decoration: none; }
+  nav.wf-nav a:hover { background: #ddd; }
+  nav.wf-nav a.current { font-weight: bold; background: #d0d0d0; }
+  nav.wf-nav .state { padding-left: 32px; color: #666; font-size: 11px; }
+  nav.wf-nav .state a { padding: 1px 16px 1px 32px; color: #666; }
+
+  .wf-wrap { flex: 1; display: flex; flex-direction: column; }
+
+  header {
+    background: #e0e0e0; border-bottom: 1px solid #ccc; padding: 12px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  header .logo { font-weight: bold; font-size: 16px; }
+  header .flow-step { font-size: 12px; color: #666; border: 1px solid #aaa; padding: 3px 10px; border-radius: 3px; }
+
+  main { padding: 24px; max-width: 600px; margin: 0 auto; width: 100%; }
+
+  .zone-label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; margin-top: 20px; }
+
+  .error-block {
+    border: 2px solid #999; background: #fff; padding: 24px; margin-bottom: 8px; border-radius: 4px; text-align: center;
+  }
+  .error-block .error-icon { font-size: 24px; color: #888; margin-bottom: 12px; }
+  .error-block .error-title { font-weight: bold; font-size: 16px; margin-bottom: 8px; }
+  .error-block .error-text { font-size: 13px; color: #555; line-height: 1.5; }
+
+  .action-zone { margin-top: 24px; border-top: 1px solid #ddd; padding-top: 16px; }
+  .btn-primary { display: block; width: 100%; padding: 14px; background: #333; color: #fff; border: none; font-size: 14px; cursor: pointer; text-align: center; border-radius: 3px; text-decoration: none; }
+  .btn-secondary { display: block; width: 100%; padding: 10px; background: #fff; color: #333; border: 1px solid #aaa; font-size: 13px; cursor: pointer; text-align: center; border-radius: 3px; text-decoration: none; margin-top: 8px; }
+
+  .states-bar { background: #e8e8e8; border-bottom: 1px solid #ccc; padding: 6px 24px; font-size: 11px; color: #666; display: flex; gap: 12px; }
+  .states-bar span { color: #999; }
+  .states-bar a { color: #555; text-decoration: none; }
+  .states-bar a:hover { text-decoration: underline; }
+  .states-bar .current-state { font-weight: bold; color: #333; }
+</style>
+</head>
+<body>
+
+<nav class="wf-nav">
+  <div class="nav-logo">Astro Recipe</div>
+
+  <div class="nav-section">Onboarding</div>
+  <a href="welcome.html">Welcome</a>
+  <a href="onboarding-date.html">Введення дати</a>
+  <div class="state"><a href="onboarding-date-empty.html">└─ empty</a></div>
+  <div class="state"><a href="onboarding-date-error.html">└─ error</a></div>
+  <a href="onboarding-time.html">Введення часу</a>
+  <a href="onboarding-place.html">Введення місця</a>
+  <div class="state"><a href="onboarding-place-empty.html">└─ empty</a></div>
+  <div class="state"><a href="onboarding-place-error.html">└─ error</a></div>
+  <div class="state"><a href="onboarding-place-loading.html">└─ loading</a></div>
+  <a href="onboarding-question.html">Питання "що зараз?"</a>
+  <a href="onboarding-question-2.html">Додаткове питання</a>
+
+  <div class="nav-section">Результати (тизер)</div>
+  <a href="results.html">Results</a>
+  <div class="state"><a href="results-error.html" class="current">└─ error</a></div>
+  <div class="state"><a href="results-loading.html">└─ loading</a></div>
+
+  <div class="nav-section">Checkout</div>
+  <a href="checkout.html">Checkout</a>
+  <div class="state"><a href="checkout-error.html">└─ error</a></div>
+  <div class="state"><a href="checkout-loading.html">└─ loading</a></div>
+
+  <div class="nav-section">Glow Report</div>
+  <a href="report.html">Report</a>
+
+  <div class="nav-section">Share</div>
+  <a href="share.html">Glow картка</a>
+</nav>
+
+<div class="wf-wrap">
+
+  <div class="states-bar">
+    Стани цього екрана:
+    <a href="results.html">success</a>
+    <span class="current-state">error (цей)</span>
+    <a href="results-loading.html">loading</a>
+  </div>
+
+  <header>
+    <div class="logo">Astro Recipe</div>
+    <div class="flow-step">Результати — безкоштовний тизер</div>
+  </header>
+
+  <main>
+
+    <div class="zone-label">Зона: Помилка розрахунку карти [Main Job]</div>
+    <article class="error-block">
+      <div class="error-icon">!</div>
+      <div class="error-title">Не вдалось розрахувати карту</div>
+      <p class="error-text">Щось пішло не так під час розрахунку. Найчастіше причина — неточні дані народження. Перевір дату, час і місце і спробуй ще раз.</p>
+    </article>
+
+    <div class="zone-label">Зона: Вихід — повернутись і перевірити дані [Main Job]</div>
+    <div class="action-zone">
+      <a href="onboarding-date.html" class="btn-primary">Перевірити дані народження</a>
+      <a href="results.html" class="btn-secondary">Спробувати розрахувати ще раз</a>
+    </div>
+
+  </main>
+</div>
+
+</body>
+</html>

@@ -95,6 +95,9 @@ Do NOT just collect birth data. Ask "what's happening in your life right now?" �
 One-time report, paid at checkout (product owner, Notion notes, 2026-07-17): free teaser page (chart + brief wow-moment summary) → pay to unlock the full report. Possibly tiered plans, e.g. "Style only" vs "Style + career positioning + social media (how to run it, content type)". Product owner's own framing: "це комплексна інструкція" (it's a comprehensive instruction) — leans toward the bundle being the primary offer, tiers still open.
 Price signals: one-time report $7–50 range (Matrix Destiny, Astrology Hub, Gallup), course $197 (Amelie), subscription ~$12/mo (CHANI) — still useful as external price anchors even though the model itself (one-time report) is now decided.
 
+## Wireframes
+`wireframes/` — low-fi HTML, grayscale, semantic markup, real domain text (Урок 4). Main flow fully built and linked: welcome → onboarding (date/time/place/questions) → results (free teaser: chart + brief) → checkout (email + payment) → report (paid, 4 sections: style/career/energy/social content) → share. All states (empty/error/loading) covered per `_screens.md`. Profile screens (5.1/5.2, [SIROTA]) intentionally not built — need unconfirmed without persistent navigation. See `_critique.md` for the audit.
+
 ## Name
 **Astro Recipe** (working title)
 
@@ -102,4 +105,4 @@ Price signals: one-time report $7–50 range (Matrix Destiny, Astrology Hub, Gal
 TBD
 
 ## Status
-Brief v0.7 — Glow niche confirmed, audience narrowed to solopreneurs/content creators, platform confirmed as website (not app). Product is a funnel, not an app: onboarding → free teaser page (chart + brief) → scroll → paywall (report previews + testimonials) → checkout → paid Glow Report. The four Glow dimensions (style, career/talents, energy, social content) live inside the Report, not as separate site screens. sitemap.md, flows.md, ia.html, jtbd.md all synced to this (2026-07-17).
+Brief v0.8 — Glow niche confirmed, audience narrowed to solopreneurs/content creators, platform confirmed as website (not app). Product is a funnel, not an app: onboarding → free teaser page (chart + brief) → scroll → paywall (report previews + testimonials) → checkout → paid Glow Report. The four Glow dimensions (style, career/talents, energy, social content) live inside the Report, not as separate site screens. sitemap.md, flows.md, ia.html, jtbd.md all synced to this (2026-07-17). Wireframes (Урок 4) done for the whole main flow — 18 HTML files, grayscale, all states, linked, audited (2026-07-19).
