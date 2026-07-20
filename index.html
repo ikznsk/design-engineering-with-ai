@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astro Recipe — Project Hub</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; min-height: 100vh; color: #222; }
+
+  /* NAV TREE */
+  nav.wf-nav {
+    width: 280px; min-width: 280px; background: #e8e8e8; border-right: 1px solid #ccc;
+    padding: 16px 0; font-size: 12px; line-height: 1.75; position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  }
+  nav.wf-nav .nav-logo { padding: 0 16px 12px; font-weight: bold; border-bottom: 1px solid #ccc; margin-bottom: 8px; font-size: 13px; }
+  nav.wf-nav .nav-lesson { padding: 10px 16px 2px; font-weight: bold; color: #444; text-transform: uppercase; font-size: 10px; letter-spacing: 1px; margin-top: 6px; }
+  nav.wf-nav .nav-lesson .lesson-status { float: right; font-weight: normal; text-transform: none; letter-spacing: 0; color: #999; }
+  nav.wf-nav a { display: block; padding: 2px 16px; color: #333; text-decoration: none; }
+  nav.wf-nav a:hover { background: #ddd; }
+  nav.wf-nav a.file-md { color: #666; }
+  nav.wf-nav .group { padding: 4px 16px 1px 24px; color: #888; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  nav.wf-nav .state { padding-left: 40px; color: #777; font-size: 11px; }
+  nav.wf-nav .state a { padding: 1px 16px 1px 40px; color: #777; }
+  nav.wf-nav .screen-group { padding-left: 24px; }
+  nav.wf-nav .screen-group a { padding-left: 24px; }
+  nav.wf-nav .screen-group .state a { padding-left: 48px; }
+
+  /* MAIN */
+  .wf-wrap { flex: 1; display: flex; flex-direction: column; }
+  main { padding: 40px; max-width: 720px; margin: 0 auto; width: 100%; }
+  main h1 { font-size: 24px; margin-bottom: 8px; }
+  main .sub { color: #666; margin-bottom: 28px; font-size: 14px; }
+  main .note { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 16px 18px; font-size: 13px; color: #444; line-height: 1.6; margin-bottom: 16px; }
+  main .note strong { color: #222; }
+  main .repo-link { font-size: 13px; margin-top: 8px; }
+  main .repo-link a { color: #333; }
+</style>
+</head>
+<body>
+
+<!-- NAV TREE: every stage of the project so far -->
+<nav class="wf-nav">
+  <div class="nav-logo">Astro Recipe — Project</div>
+
+  <div class="nav-lesson">Урок 1 — Research</div>
+  <a href="research/research.html">Research (усе разом)</a>
+  <a href="research/index.html">Research (перша версія)</a>
+  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/research/influencers.md">Influencers.md</a>
+  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/research/video-analysis.md">Video-analysis.md</a>
+
+  <div class="nav-lesson">Урок 2–3 — Персони, JTBD, IA</div>
+  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/personas.md">Personas.md</a>
+  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/jtbd.md">JTBD.md</a>
+  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/sitemap.md">Sitemap.md</a>
+  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/flows.md">Flows.md</a>
+  <a href="ia.html">IA (консолідована сторінка)</a>
+
+  <div class="nav-lesson">Урок 4 — Wireframes</div>
+  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/wireframes/_screens.md">_screens.md</a>
+  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/wireframes/_conventions.md">_conventions.md</a>
+  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/wireframes/_critique.md">_critique.md</a>
+
+  <div class="group">Onboarding</div>
+  <a href="wireframes/welcome.html">Welcome</a>
+  <a href="wireframes/onboarding-date.html">Enter birth date</a>
+  <div class="state"><a href="wireframes/onboarding-date-empty.html">└─ empty</a></div>
+  <div class="state"><a href="wireframes/onboarding-date-error.html">└─ error</a></div>
+  <a href="wireframes/onboarding-time.html">Enter birth time</a>
+  <a href="wireframes/onboarding-place.html">Enter birthplace</a>
+  <div class="state"><a href="wireframes/onboarding-place-empty.html">└─ empty</a></div>
+  <div class="state"><a href="wireframes/onboarding-place-error.html">└─ error</a></div>
+  <div class="state"><a href="wireframes/onboarding-place-loading.html">└─ loading</a></div>
+  <a href="wireframes/onboarding-question.html">Life context question</a>
+  <a href="wireframes/onboarding-question-2.html">Additional question</a>
+
+  <div class="group">Results (free teaser)</div>
+  <a href="wireframes/results.html">Results</a>
+  <div class="state"><a href="wireframes/results-error.html">└─ error</a></div>
+  <div class="state"><a href="wireframes/results-loading.html">└─ loading</a></div>
+
+  <div class="group">Checkout</div>
+  <a href="wireframes/checkout.html">Checkout</a>
+  <div class="state"><a href="wireframes/checkout-error.html">└─ error</a></div>
+  <div class="state"><a href="wireframes/checkout-loading.html">└─ loading</a></div>
+
+  <div class="group">Glow Report</div>
+  <a href="wireframes/report.html">Report</a>
+
+  <div class="group">Share</div>
+  <a href="wireframes/share.html">Glow card</a>
+
+  <div class="nav-lesson">Урок 5 — Voice</div>
+  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/voice.md">Voice.md</a>
+  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/microcopy.md">Microcopy.md</a>
+
+  <div class="nav-lesson">Урок 6 — Концепт <span class="lesson-status">в процесі</span></div>
+  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/concept.md">Concept.md</a>
+  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/concept/references.md">References.md</a>
+  <a href="concept/directions.html">Directions (3 напрями)</a>
+</nav>
+
+<!-- MAIN -->
+<div class="wf-wrap">
+  <main>
+    <h1>Astro Recipe</h1>
+    <div class="sub">Натальна карта як персональна інструкція до дій — для соло-підприємців і контент-крейторів.</div>
+
+    <div class="note">
+      <strong>Це навігаційний хаб проєкту</strong>, не продуктовий екран. Ліва панель — дерево всього зробленого по уроках: дослідження → персони/JTBD/IA → вайрфрейми → голос → концепт (у процесі).
+    </div>
+    <div class="note">
+      Файли <code>.md</code> відкриваються на GitHub (рендер markdown), файли <code>.html</code> — тут-таки на GitHub Pages.
+    </div>
+
+    <div class="repo-link">Репозиторій: <a href="https://github.com/ikznsk/design-engineering-with-ai">github.com/ikznsk/design-engineering-with-ai</a></div>
+  </main>
+</div>
+
+</body>
+</html>
