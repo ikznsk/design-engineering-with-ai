@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concept Directions — Astro Recipe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;700&family=Bricolage+Grotesque:wght@400;600;800&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Inter, system-ui, sans-serif; background: #f0f0f0; padding: 32px 20px 80px; color: #222; }
+
+  .page-head { max-width: 1200px; margin: 0 auto 32px; }
+  .page-head h1 { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+  .page-head p { font-size: 14px; color: #555; max-width: 640px; line-height: 1.6; }
+  .page-head .instructions { margin-top: 16px; background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 16px 18px; font-size: 13px; color: #444; line-height: 1.6; }
+
+  .directions { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 980px) { .directions { grid-template-columns: 1fr; } }
+
+  .direction { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .direction-head { padding: 20px 20px 16px; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .direction-num { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; opacity: 0.6; }
+  .direction-name { font-size: 20px; font-weight: 600; margin-top: 4px; }
+  .direction-tag { font-size: 12px; margin-top: 4px; opacity: 0.65; }
+
+  .direction-body { padding: 20px; }
+  .section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.5; margin: 18px 0 8px; }
+  .section-label:first-child { margin-top: 0; }
+
+  .swatches { display: flex; gap: 6px; flex-wrap: wrap; }
+  .swatch { width: 44px; height: 44px; border-radius: 8px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 3px; }
+  .swatch span { font-size: 8px; font-family: monospace; opacity: 0.7; }
+
+  .type-sample .display-line { line-height: 1.25; margin-bottom: 6px; }
+  .type-sample .body-line { font-size: 13px; line-height: 1.55; opacity: 0.8; }
+  .type-fonts { font-size: 11px; opacity: 0.55; margin-top: 8px; font-family: monospace; }
+
+  .demo-card { border-radius: 12px; overflow: hidden; }
+  .demo-card img { width: 100%; height: 150px; object-fit: cover; display: block; }
+  .demo-card-body { padding: 14px 16px; }
+  .demo-card-tag { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.6; margin-bottom: 4px; }
+  .demo-card-title { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+  .demo-card-text { font-size: 12px; opacity: 0.75; line-height: 1.5; }
+
+  .demo-row { display: flex; align-items: center; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .demo-btn { display: inline-block; padding: 10px 18px; border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; }
+  .demo-badge { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+
+  .icon-row { display: flex; gap: 14px; margin-top: 10px; }
+  .icon-row svg { width: 22px; height: 22px; }
+
+  /* ============ DIRECTION A — CHANI Warm ============ */
+  .dir-a { --bg: #faf6f0; --ink: #2e2620; --accent: #c98a6b; --accent2: #b8a3d1; }
+  .dir-a .direction-head, .dir-a .direction-body { background: var(--bg); color: var(--ink); }
+  .dir-a .display-line { font-family: 'Fraunces', serif; font-weight: 500; font-size: 24px; color: var(--ink); }
+  .dir-a .body-line { font-family: 'Karla', sans-serif; }
+  .dir-a .demo-card { background: #fff; border: 1px solid #ece3d7; }
+  .dir-a .demo-card-tag { color: var(--accent); }
+  .dir-a .demo-card-title { font-family: 'Fraunces', serif; }
+  .dir-a .demo-btn { background: var(--ink); color: var(--bg); font-family: 'Karla', sans-serif; }
+  .dir-a .demo-badge { background: #f1e4da; color: #8a5a3f; font-family: 'Karla', sans-serif; }
+  .dir-a .icon-row svg { stroke: var(--ink); }
+
+  /* ============ DIRECTION B — Aurora Glow ============ */
+  .dir-b { --bg: #16121f; --ink: #f3eefc; --accent: #c9a6ff; --accent2: #7fd8d0; }
+  .dir-b .direction-head, .dir-b .direction-body {
+    background: radial-gradient(circle at 20% 0%, #3a2a5c 0%, #16121f 55%), linear-gradient(160deg, #201a33, #12101c);
+    color: var(--ink);
+  }
+  .dir-b .display-line { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 600; font-size: 24px; background: linear-gradient(90deg, #c9a6ff, #7fd8d0); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .dir-b .body-line { font-family: 'Inter', sans-serif; color: #cfc7e0; }
+  .dir-b .demo-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); backdrop-filter: blur(6px); }
+  .dir-b .demo-card-tag { color: var(--accent2); }
+  .dir-b .demo-card-title { font-family: 'Bricolage Grotesque', sans-serif; color: #fff; }
+  .dir-b .demo-card-text { color: #cfc7e0; }
+  .dir-b .demo-btn { background: linear-gradient(90deg, #a06bf0, #6fd8c8); color: #14101f; font-family: 'Bricolage Grotesque', sans-serif; }
+  .dir-b .demo-badge { background: rgba(201,166,255,0.18); color: #dcc6ff; border: 1px solid rgba(201,166,255,0.35); }
+  .dir-b .icon-row svg { stroke: var(--accent2); }
+  .dir-b .swatch:nth-child(1) { box-shadow: 0 0 16px rgba(122,90,200,0.6); }
+
+  /* ============ DIRECTION C — Astrologer's Ledger ============ */
+  .dir-c { --bg: #f4ede2; --ink: #2b241c; --accent: #9c3d2e; --accent2: #6b5842; }
+  .dir-c .direction-head, .dir-c .direction-body { background: var(--bg); color: var(--ink); }
+  .dir-c .display-line { font-family: 'Lora', serif; font-style: italic; font-weight: 600; font-size: 23px; color: var(--accent); }
+  .dir-c .body-line { font-family: 'Source Serif 4', serif; }
+  .dir-c .demo-card { background: #fbf7f0; border: 1px solid #e3d5bf; }
+  .dir-c .demo-card-tag { color: var(--accent); font-family: 'Source Serif 4', serif; font-style: italic; }
+  .dir-c .demo-card-title { font-family: 'Lora', serif; }
+  .dir-c .demo-btn { background: var(--accent); color: #fbf3e8; font-family: 'Source Serif 4', serif; }
+  .dir-c .demo-badge { background: #ece0cc; color: var(--accent2); font-family: 'Source Serif 4', serif; }
+  .dir-c .icon-row svg { stroke: var(--accent2); }
+</style>
+</head>
+<body>
+
+<div class="page-head">
+  <h1>Concept Directions — Astro Recipe</h1>
+  <p>Three contrasting directions, each built from a real reference (CHANI, Aurora/ethereal glow trend, professional astrologer reports) and from the attribute pairs in <code>concept.md</code>. No direction is a full clone of its reference.</p>
+  <div class="instructions">
+    <strong>What to do with this page:</strong> open it in a browser, look at all three side by side — palette, type, the card with a real photo, button, badge, icons. Pick the one that feels right (or tell me to blend specific pieces). Reply with a plain sentence: the number and name, e.g. "Обрано напрям 2 — Aurora Glow."
+  </div>
+</div>
+
+<div class="directions">
+
+  <!-- ============ DIRECTION 1 ============ -->
+  <article class="direction dir-a">
+    <div class="direction-head">
+      <div class="direction-num">Direction 1</div>
+      <div class="direction-name">CHANI Warm</div>
+      <div class="direction-tag">Human, editorial, restrained — trust through familiarity</div>
+    </div>
+    <div class="direction-body">
+      <div class="section-label">Palette</div>
+      <div class="swatches">
+        <div class="swatch" style="background:#faf6f0; border:1px solid #e6dccb;"><span>#faf6f0</span></div>
+        <div class="swatch" style="background:#2e2620;"><span style="color:#faf6f0">#2e2620</span></div>
+        <div class="swatch" style="background:#c98a6b;"><span style="color:#fff">#c98a6b</span></div>
+        <div class="swatch" style="background:#b8a3d1;"><span style="color:#fff">#b8a3d1</span></div>
+      </div>
+
+      <div class="section-label">Type</div>
+      <div class="type-sample">
+        <div class="display-line">Your natural language</div>
+        <div class="body-line">Mercury in Gemini makes you quick — you grab new information faster than anyone around you.</div>
+        <div class="type-fonts">Fraunces (display) + Karla (body)</div>
+      </div>
+
+      <div class="section-label">Card, button, badge</div>
+      <div class="demo-card">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&q=80&auto=format&fit=crop" alt="Warm portrait, natural light">
+        <div class="demo-card-body">
+          <div class="demo-card-tag">Preview</div>
+          <div class="demo-card-title">Olya, Aries + Scorpio Asc</div>
+          <div class="demo-card-text">"Your style leans toward contrast — where others soften, you sharpen..."</div>
+        </div>
+      </div>
+      <div class="demo-row">
+        <a class="demo-btn" href="#">Unlock my Glow Report</a>
+        <span class="demo-badge">Free teaser</span>
+      </div>
+
+      <div class="section-label">Icons (Solar-style, linear)</div>
+      <div class="icon-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2 2M17 17l2 2M4.9 19.1l2-2M17 7l2-2"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-5.3-7.5"/><path d="M20 4v5h-5"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8 12h8M12 8v8"/></svg>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============ DIRECTION 2 ============ -->
+  <article class="direction dir-b">
+    <div class="direction-head">
+      <div class="direction-num">Direction 2</div>
+      <div class="direction-name">Aurora Glow</div>
+      <div class="direction-tag">Dreamy, celestial, ambient — matches the "Glow" name literally</div>
+    </div>
+    <div class="direction-body">
+      <div class="section-label">Palette</div>
+      <div class="swatches">
+        <div class="swatch" style="background:#16121f;"><span style="color:#fff">#16121f</span></div>
+        <div class="swatch" style="background:#c9a6ff;"><span>#c9a6ff</span></div>
+        <div class="swatch" style="background:#7fd8d0;"><span>#7fd8d0</span></div>
+        <div class="swatch" style="background:#f3eefc;"><span>#f3eefc</span></div>
+      </div>
+
+      <div class="section-label">Type</div>
+      <div class="type-sample">
+        <div class="display-line">Your natural language</div>
+        <div class="body-line">Mercury in Gemini makes you quick — you grab new information faster than anyone around you.</div>
+        <div class="type-fonts">Bricolage Grotesque (display) + Inter (body)</div>
+      </div>
+
+      <div class="section-label">Card, button, badge</div>
+      <div class="demo-card">
+        <img src="https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?w=500&q=80&auto=format&fit=crop" alt="Starry night sky">
+        <div class="demo-card-body">
+          <div class="demo-card-tag">Preview</div>
+          <div class="demo-card-title">Olya, Aries + Scorpio Asc</div>
+          <div class="demo-card-text">"Your style leans toward contrast — where others soften, you sharpen..."</div>
+        </div>
+      </div>
+      <div class="demo-row">
+        <a class="demo-btn" href="#">Unlock my Glow Report</a>
+        <span class="demo-badge">Free teaser</span>
+      </div>
+
+      <div class="section-label">Icons (Solar-style, bold-duotone)</div>
+      <div class="icon-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" fill="currentColor" fill-opacity="0.25"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-5.3-7.5" fill="currentColor" fill-opacity="0.2"/><path d="M20 4v5h-5"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="6" fill="currentColor" fill-opacity="0.2"/><path d="M8 12h8M12 8v8"/></svg>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============ DIRECTION 3 ============ -->
+  <article class="direction dir-c">
+    <div class="direction-head">
+      <div class="direction-num">Direction 3</div>
+      <div class="direction-name">Astrologer's Ledger</div>
+      <div class="direction-tag">Editorial, document-like — feels worth paying for</div>
+    </div>
+    <div class="direction-body">
+      <div class="section-label">Palette</div>
+      <div class="swatches">
+        <div class="swatch" style="background:#f4ede2; border:1px solid #e3d5bf;"><span>#f4ede2</span></div>
+        <div class="swatch" style="background:#2b241c;"><span style="color:#f4ede2">#2b241c</span></div>
+        <div class="swatch" style="background:#9c3d2e;"><span style="color:#fff">#9c3d2e</span></div>
+        <div class="swatch" style="background:#6b5842;"><span style="color:#fff">#6b5842</span></div>
+      </div>
+
+      <div class="section-label">Type</div>
+      <div class="type-sample">
+        <div class="display-line">Your natural language</div>
+        <div class="body-line">Mercury in Gemini makes you quick — you grab new information faster than anyone around you.</div>
+        <div class="type-fonts">Lora italic (display) + Source Serif 4 (body)</div>
+      </div>
+
+      <div class="section-label">Card, button, badge</div>
+      <div class="demo-card">
+        <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=500&q=80&auto=format&fit=crop" alt="Portrait against a terracotta wall">
+        <div class="demo-card-body">
+          <div class="demo-card-tag">Preview</div>
+          <div class="demo-card-title">Olya, Aries + Scorpio Asc</div>
+          <div class="demo-card-text">"Your style leans toward contrast — where others soften, you sharpen..."</div>
+        </div>
+      </div>
+      <div class="demo-row">
+        <a class="demo-btn" href="#">Unlock my Glow Report</a>
+        <span class="demo-badge">Free teaser</span>
+      </div>
+
+      <div class="section-label">Icons (Solar-style, bold)</div>
+      <div class="icon-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-5.3-7.5"/><path d="M20 4v5h-5"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12h8M12 8v8"/></svg>
+      </div>
+    </div>
+  </article>
+
+</div>
+
+</body>
+</html>
