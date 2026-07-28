@@ -111,6 +111,11 @@
   .linkrow a{font-family:var(--mono); font-size:12px; text-decoration:none; color:var(--ink); background:var(--surface); border:1px solid var(--line-soft); border-radius:100px; padding:10px 16px}
   .linkrow a:hover{border-color:var(--accent)}
 
+  .subhead{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:28px 0 12px}
+  a.rc{text-decoration:none; color:var(--ink); transition:transform .18s ease, box-shadow .18s ease}
+  a.rc:hover{transform:translateY(-3px); box-shadow:var(--shadow)}
+  a.rc .go{margin-top:12px; display:inline-block; font-family:var(--mono); font-size:11px; color:var(--accent-deep)}
+  .rc .kind{font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
   @media (max-width:840px){ .cards3,.dirs{grid-template-columns:1fr} .cols2,.aura{grid-template-columns:1fr} .aura .phone{max-width:340px} }
 </style>
 </head>
@@ -222,13 +227,39 @@
     </div>
   </section>
 
-  <footer>
-    <p class="eyebrow" style="margin-bottom:12px">Explore the interactive pieces</p>
-    <div class="linkrow">
-      <a href="https://claude.ai/code/artifact/e50923f2-9a7f-48f5-8550-e96c6ff48b20" target="_blank" rel="noopener">Three directions ↗</a>
-      <a href="https://claude.ai/code/artifact/3224b6a0-d881-4ffe-8b78-14af6168df1c" target="_blank" rel="noopener">Liquid Aura stand ↗</a>
-      <a href="https://claude.ai/code/artifact/377d617c-ac48-4a5f-94c1-3747fc2628c5" target="_blank" rel="noopener">Full visual research hub ↗</a>
+  <section>
+    <div class="sh"><span class="n">07</span><h2>All reports in one place</h2></div>
+    <p class="si">Every deliverable behind this concept — interactive pages open in a new tab; source documents link to the repo.</p>
+
+    <div class="subhead">Visual research — inputs</div>
+    <div class="cards3">
+      <a class="rc" href="https://claude.ai/code/artifact/377d617c-ac48-4a5f-94c1-3747fc2628c5" target="_blank" rel="noopener"><div class="kind">Interactive</div><h3>Visual research hub</h3><p>Moodboards, CHANI teardown, competitor research and references — the whole picture in one scroll.</p><span class="go">Open ↗</span></a>
+      <a class="rc" href="https://claude.ai/code/artifact/8753a5e4-4a10-4607-ab22-d177882e9444" target="_blank" rel="noopener"><div class="kind">Interactive</div><h3>Neptunian style board</h3><p>The dreamy branding direction, with the four rules that keep it functional.</p><span class="go">Open ↗</span></a>
+      <a class="rc" href="https://claude.ai/code/artifact/673d9757-52c1-4a61-b3b7-a9055e3942a3" target="_blank" rel="noopener"><div class="kind">Interactive</div><h3>Elevated references</h3><p>The taste bar — mymind / Cosmos / Vyrao tier, grouped and clickable.</p><span class="go">Open ↗</span></a>
+      <a class="rc" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/concept/moodboard-analysis.md" target="_blank" rel="noopener"><div class="kind">Document · repo</div><h3>Moodboard analysis</h3><p>The Neptunian / Pisces read of the boards, two saturations.</p><span class="go">GitHub ↗</span></a>
+      <a class="rc" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/research/mobbin-visual-research.md" target="_blank" rel="noopener"><div class="kind">Document · repo</div><h3>Mobbin competitor research</h3><p>Palette / type / mood of the field, plus the CHANI profile.</p><span class="go">GitHub ↗</span></a>
+      <a class="rc" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/concept/neptunian-ui-references.md" target="_blank" rel="noopener"><div class="kind">Document · repo</div><h3>Functional UI references</h3><p>How dreamy stays usable — real shipping products, by surface.</p><span class="go">GitHub ↗</span></a>
     </div>
+
+    <div class="subhead">Concept &amp; chosen language</div>
+    <div class="cards3">
+      <a class="rc" href="https://claude.ai/code/artifact/e50923f2-9a7f-48f5-8550-e96c6ff48b20" target="_blank" rel="noopener"><div class="kind">Interactive</div><h3>Three directions</h3><p>Moon Dream / Liquid Aura ✓ / Golden Hour — the chooser.</p><span class="go">Open ↗</span></a>
+      <a class="rc" href="https://claude.ai/code/artifact/3224b6a0-d881-4ffe-8b78-14af6168df1c" target="_blank" rel="noopener"><div class="kind">Interactive</div><h3>Liquid Aura — language stand</h3><p>Palette, type, form, icons and live components — annotated with attributes.</p><span class="go">Open ↗</span></a>
+      <a class="rc" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/concept.md" target="_blank" rel="noopener"><div class="kind">Document · repo</div><h3>Taste &amp; attributes</h3><p>Designer's taste, anti-references, and the six attribute pairs.</p><span class="go">GitHub ↗</span></a>
+    </div>
+
+    <div class="subhead">The language, applied — screens</div>
+    <div class="cards3">
+      <a class="rc" href="https://claude.ai/code/artifact/b1e8a74f-a21e-45e6-a229-aa6cec94108d" target="_blank" rel="noopener"><div class="kind">Interactive</div><h3>Results — wow-moment</h3><p>The free teaser: the chart inside an iridescent aura.</p><span class="go">Open ↗</span></a>
+      <a class="rc" href="https://claude.ai/code/artifact/30b70b6c-591c-4097-b894-7f03ddc17cfc" target="_blank" rel="noopener"><div class="kind">Interactive</div><h3>Glow Report — paid</h3><p>The dense document, with an iridescent emblem per Glow dimension.</p><span class="go">Open ↗</span></a>
+      <a class="rc" href="https://claude.ai/code/artifact/98b46e62-e748-4094-a221-92c2589c7739" target="_blank" rel="noopener"><div class="kind">Interactive · state</div><h3>Results — loading</h3><p>Aura pulse + shimmer skeletons.</p><span class="go">Open ↗</span></a>
+      <a class="rc" href="https://claude.ai/code/artifact/518fdf6a-8c27-423e-91de-1069a0d9cac8" target="_blank" rel="noopener"><div class="kind">Interactive · state</div><h3>Results — error</h3><p>Calm rose, not alarm red (per voice).</p><span class="go">Open ↗</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <p class="eyebrow" style="margin-bottom:10px">Astro Recipe · Visual concept · Lesson 6</p>
+    <p class="lead" style="max-width:60ch">Full source on GitHub — <a class="link" href="https://github.com/ikznsk/design-engineering-with-ai" target="_blank" rel="noopener">github.com/ikznsk/design-engineering-with-ai</a>. Next: roll the language across the whole product (Lesson 7) and extract design tokens (Lesson 8).</p>
   </footer>
 
 </div>
