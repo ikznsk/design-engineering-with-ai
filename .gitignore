@@ -1,0 +1,13 @@
+# Course materials & large media (kept local, not in repo)
+Lessons/
+Videos/
+*.mp4
+*.MP4
+
+# Artifact build artifacts — inlined copies generated for publishing to claude.ai
+**/_*-hosted.html
+
+# OS / misc
+.DS_Store
+**/.DS_Store
+*.command

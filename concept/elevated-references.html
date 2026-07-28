@@ -1,0 +1,179 @@
+<title>Astro Recipe — Elevated References</title>
+<meta name="description" content="Recalibrated, high-taste dreamy references for Astro Recipe — mymind / Cosmos / Vyrao tier, grouped and clickable.">
+<style>
+  :root{
+    --ground:#F2EDE4; --ground-2:#ECE6DA; --ink:#221E1A; --ink-soft:#5C554C; --muted:#948B7E;
+    --line:rgba(34,30,26,.14); --line-soft:rgba(34,30,26,.07);
+    --accent:#9A7F86; --accent-deep:#7C6068;
+    --mauve:#C9B2BE; --peach:#EAD3BE; --oyster:#DAD3E0; --sky:#CBD6D9;
+    --card:rgba(255,253,249,.55); --card-strong:rgba(255,253,249,.8);
+    --serif:"Didot","Bodoni 72","Hoefler Text",Georgia,serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--ground); color:var(--ink); font-family:var(--sans); font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden}
+  /* one contained atmospheric move + matte grain */
+  .aura{position:fixed; z-index:-2; width:70vw; height:70vw; right:-18vw; top:-22vw; border-radius:50%; background:radial-gradient(circle at 50% 50%,var(--mauve),var(--peach) 42%,transparent 68%); opacity:.5; filter:blur(30px)}
+  .grain{position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.05; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 26px}
+  .eyebrow{font-family:var(--mono); font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--accent-deep)}
+
+  header.top{display:flex; align-items:baseline; justify-content:space-between; padding:30px 26px; max-width:var(--maxw); margin:0 auto}
+  .brand{font-family:var(--serif); font-size:21px}.brand em{font-style:italic}
+  header.top .eyebrow{color:var(--muted)}
+
+  .hero{padding:52px 0 20px; max-width:20ch}
+  .hero h1{font-family:var(--serif); font-weight:400; font-size:clamp(40px,6.6vw,72px); line-height:1.02; letter-spacing:-.01em; margin:16px 0 0; text-wrap:balance}
+  .hero h1 em{font-style:italic}
+  .hero p{max-width:54ch; margin:20px 0 0; font-size:18px; color:var(--ink-soft)}
+  .anchors{margin:22px 0 0; font-size:15px; color:var(--ink-soft)}
+  .anchors b{color:var(--ink)}
+
+  /* principles */
+  .principles{margin:44px 0 8px; display:grid; grid-template-columns:repeat(2,1fr); gap:10px 34px; padding:26px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+  .principles .p{display:flex; gap:12px; align-items:flex-start}
+  .principles .p .k{font-family:var(--mono); font-size:11px; color:var(--accent-deep); padding-top:3px; white-space:nowrap}
+  .principles .p p{margin:0; font-size:14px; color:var(--ink-soft)}
+  .principles .p b{color:var(--ink)}
+
+  section.tier{padding:44px 0 8px}
+  .tier-head{display:flex; align-items:baseline; gap:14px; margin-bottom:22px}
+  .tier-head h2{font-family:var(--serif); font-weight:400; font-size:clamp(24px,3.2vw,34px); margin:0; letter-spacing:-.01em}
+  .tier-head .count{font-family:var(--mono); font-size:12px; color:var(--muted)}
+  .tier-head .lead{margin-left:auto; font-size:13px; color:var(--ink-soft); max-width:34ch; text-align:right}
+
+  .cards{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+  .card{display:flex; flex-direction:column; gap:6px; text-decoration:none; color:var(--ink);
+    background:var(--card); backdrop-filter:blur(8px); border:1px solid var(--line-soft);
+    border-radius:16px; padding:22px 22px 18px; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
+  .card:hover{transform:translateY(-3px); border-color:var(--line); box-shadow:0 24px 50px -34px rgba(34,30,26,.5)}
+  .card .cat{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent-deep)}
+  .card h3{font-family:var(--serif); font-weight:400; font-size:25px; margin:2px 0 2px; letter-spacing:-.01em}
+  .card h3 em{font-style:italic}
+  .card .why{margin:0; font-size:14px; color:var(--ink-soft)}
+  .card .dev{margin:2px 0 0; font-size:12.5px; color:var(--muted)}
+  .card .go{margin-top:12px; font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--accent-deep)}
+  .card .go .alt{color:var(--muted)}
+  .card.feature{grid-column:1/-1; background:var(--card-strong)}
+  .card.feature h3{font-size:30px}
+
+  .galleries{margin-top:20px; display:flex; flex-wrap:wrap; gap:10px}
+  .galleries a{font-family:var(--sans); font-size:13px; text-decoration:none; color:var(--ink); background:var(--card-strong); border:1px solid var(--line-soft); border-radius:100px; padding:9px 15px; transition:border-color .2s, transform .15s}
+  .galleries a:hover{border-color:var(--accent); transform:translateY(-2px)}
+  .galleries a .h{font-family:var(--mono); font-size:10px; color:var(--muted); margin-left:6px}
+
+  .note{margin-top:14px; font-size:13.5px; color:var(--ink-soft); max-width:64ch}
+  .note b{color:var(--ink)}
+
+  footer{padding:56px 0 80px}
+  footer .eyebrow{display:block; margin-bottom:8px; color:var(--muted)}
+  footer p{margin:0; max-width:60ch; color:var(--ink-soft); font-size:14.5px}
+
+  @media (max-width:720px){
+    .principles,.cards{grid-template-columns:1fr}
+    .tier-head{flex-wrap:wrap}.tier-head .lead{margin-left:0; text-align:left}
+    header.top{flex-direction:column; gap:8px}
+  }
+</style>
+
+<div class="aura" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="brand">Astro <em>Recipe</em></div>
+  <div class="eyebrow">Elevated references · recalibrated</div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">The taste bar</div>
+    <h1>Dreamy, but <em>expensive</em>.</h1>
+    <p>The re-run, filtered hard for craft. No SaaS glassmorphism, no vibecoder gradients — only work that feels like a beauty house, a gallery, or a boutique brand.</p>
+    <p class="anchors">Anchored to your calls: <b>mymind</b> (most similar) and <b>ABY Journal</b> (closer). <b>Sanctuary</b> is the floor, not the ceiling.</p>
+  </div>
+
+  <div class="principles">
+    <div class="p"><span class="k">Type, not effect</span><p>Lead with a real serif at editorial scale. The gradient is never the design.</p></div>
+    <div class="p"><span class="k">One move, contained</span><p>A single aura orb or one misty photo against large empty space — not a wall of gradient.</p></div>
+    <div class="p"><span class="k">Art direction &gt; CSS</span><p>Styled photography and film grain carry a texture a gradient can't fake.</p></div>
+    <div class="p"><span class="k">Matte, never glossy</span><p>Dusty mauve, sand, oyster, dawn-peach. High-shine blue-purple is the cheap tell.</p></div>
+  </div>
+
+  <section class="tier">
+    <div class="tier-head"><h2>Closest to your anchors</h2><span class="count">04</span><span class="lead">Restrained editorial dream — mymind / ABY register.</span></div>
+    <div class="cards">
+      <a class="card" href="https://mobbin.com/screens/95f9a0e7-1230-4605-9a1f-c0408f063c62" target="_blank" rel="noopener"><span class="cat">Art-adjacent · app</span><h3>Cosmos</h3><p class="why">Near-empty canvas, one iridescent liquid “stone,” hairline italic serif. Confidence through emptiness — the single closest thing.</p><p class="dev">Oil-slick pebble suspended in a starfield.</p><span class="go">Mobbin ↗ <span class="alt">· <a href="https://mobbin.com/sites/sections/eab202a7-4893-4cf9-a2ef-024d9bf504fc" target="_blank" rel="noopener" style="color:inherit">web hero</a></span></span></a>
+      <a class="card" href="https://mobbin.com/screens/bd7821c9-39fa-4b09-90bb-b5fcecb07319" target="_blank" rel="noopener"><span class="cat">Journal · app</span><h3>Dot</h3><p class="why">Peach-to-mauve dawn haze, a tiny mark, one refined serif line, deep breathing room. Meditative and premium.</p><p class="dev">A “mood,” not a “gradient.”</p><span class="go">Mobbin ↗</span></a>
+      <a class="card" href="https://mobbin.com/sites/sections/bc474f52-81ee-4be1-a75b-f9f5658155c3" target="_blank" rel="noopener"><span class="cat">Creative studio</span><h3>OFF+BRAND</h3><p class="why">Big editorial caps arranged around a soft iridescent sphere — proof iridescence reads luxe when the type is disciplined.</p><p class="dev">One pastel aura orb behind sharp type.</p><span class="go">Mobbin ↗ <span class="alt">· <a href="https://mobbin.com/sites/sections/5bc9ede6-eb6d-41c3-95f5-509e61755ef2" target="_blank" rel="noopener" style="color:inherit">iridescent flower</a></span></span></a>
+      <a class="card" href="https://mobbin.com/screens/6ff3455d-e55f-4d03-8b40-dc499074f777" target="_blank" rel="noopener"><span class="cat">Notes · your pick</span><h3>mymind</h3><p class="why">One soft aura orb, a warm serif set tight, nothing else. Restraint is the whole design.</p><p class="dev">Blurred lilac-coral halo — soft, matte, no gloss.</p><span class="go">Mobbin ↗ <span class="alt">· <a href="https://mymind.com/" target="_blank" rel="noopener" style="color:inherit">mymind.com</a></span></span></a>
+    </div>
+  </section>
+
+  <section class="tier">
+    <div class="tier-head"><h2>Astrology, done with taste</h2><span class="count">02</span><span class="lead">Domain peers — the rare few that aren’t cheap.</span></div>
+    <div class="cards">
+      <a class="card" href="https://www.asknovaastrology.com/daily-horoscope" target="_blank" rel="noopener"><span class="cat">Astrology · product</span><h3>AskNova</h3><p class="why">The rare astrology product with real art direction — warm, editorial, calm, strong type & data-viz. Directly on our funnel.</p><p class="dev">Warm editorial calm, not dark-cosmic cliché.</p><span class="go">asknovaastrology.com ↗</span></a>
+      <a class="card" href="https://sanctuaryworld.co/" target="_blank" rel="noopener"><span class="cat">Astrology · brand</span><h3>Sanctuary</h3><p class="why">The floor you named, and it holds — refined serif/sans, real crystal photography, spacious. Premium, not template mysticism.</p><p class="dev">Soft nebula gradients with depth.</p><span class="go">sanctuaryworld.co ↗</span></a>
+    </div>
+  </section>
+
+  <section class="tier">
+    <div class="tier-head"><h2>Luxury beauty &amp; fragrance</h2><span class="count">06</span><span class="lead">Aesop-tier brand-world — the bridge to “expensive.”</span></div>
+    <div class="cards">
+      <a class="card" href="https://vyrao.com/en-us" target="_blank" rel="noopener"><span class="cat">Fragrance</span><h3>Vyrao</h3><p class="why">Crystal-infused perfumery (SSENSE, Cult Beauty). Polychromatic solid-glass bottles — mysticism as genuine luxury, not woo.</p><p class="dev">Iridescent jewel-toned glass, celestial brand world.</p><span class="go">vyrao.com ↗</span></a>
+      <a class="card" href="https://ffern.co/" target="_blank" rel="noopener"><span class="cat">Fragrance</span><h3>Ffern</h3><p class="why">Quiet-luxury editorial with a gallery sensibility — fragrances as craft-led artefacts. Restraint as the flex.</p><p class="dev">Muted earth tones, seasonal landscape film stills — your sand/stone board.</p><span class="go">ffern.co ↗</span></a>
+      <a class="card" href="https://www.buly1803.com/" target="_blank" rel="noopener"><span class="cat">Apothecary</span><h3>Buly 1803</h3><p class="why">Museum-calibrated restraint — marble textures, jewel accents, literary copy. Beauty as intellectual, not glossy.</p><p class="dev">Classical apothecary atmosphere, marble + bordeaux.</p><span class="go">buly1803.com ↗</span></a>
+      <a class="card" href="https://susannekaufmann.com/" target="_blank" rel="noopener"><span class="cat">Wellness · spa</span><h3>Susanne Kaufmann</h3><p class="why">The design whispers rather than shouts — soft whites, pale cream, Alpine botanicals, understated sans.</p><p class="dev">Serene pastel/earth palette, breathing layouts.</p><span class="go">susannekaufmann.com ↗</span></a>
+      <a class="card" href="https://mobbin.com/sites/sections/2ea7ceb2-4478-4e39-94ac-b441c40c4e46" target="_blank" rel="noopener"><span class="cat">Personal care</span><h3>re_</h3><p class="why">Warm terracotta still-life with an oversized serif laid confidently over the objects. Art-directed photography = instant expensive.</p><p class="dev">Golden-hour amber wash across the scene.</p><span class="go">Mobbin ↗</span></a>
+      <a class="card" href="https://mobbin.com/sites/sections/b266b4bd-2c02-4ac4-afb3-9b9efea2c39d" target="_blank" rel="noopener"><span class="cat">Skincare · editorial</span><h3>Face Formula</h3><p class="why">Editorial diptych under a massive tight-tracked wordmark; About pairs a deep serif with a fogged-mountain photo. Magazine logic.</p><p class="dev">A literal cloud/mist photograph as the hero.</p><span class="go">Mobbin ↗ <span class="alt">· <a href="https://mobbin.com/sites/sections/7446404d-31fb-4f96-9f65-2a8752d7abf6" target="_blank" rel="noopener" style="color:inherit">about page</a></span></span></a>
+    </div>
+  </section>
+
+  <section class="tier">
+    <div class="tier-head"><h2>Meditation &amp; wellness, art-directed</h2><span class="count">03</span><span class="lead">Warmth from photography, not effects.</span></div>
+    <div class="cards">
+      <a class="card" href="https://mobbin.com/screens/084d5db1-92f7-45dd-8fde-76e63893d492" target="_blank" rel="noopener"><span class="cat">Meditation</span><h3>Open</h3><p class="why">Cinematic film-grade photography, wide letterspaced caps, generous negative space. Reads like a fashion campaign.</p><p class="dev">Warm amber-to-shadow gradient bleed.</p><span class="go">Mobbin ↗ <span class="alt">· <a href="https://mobbin.com/screens/de590cd4-4006-4504-a451-7c5115348cfe" target="_blank" rel="noopener" style="color:inherit">ios home</a></span></span></a>
+      <a class="card" href="https://mobbin.com/screens/ed413bc9-2772-4650-b2fd-81a3e89bd964" target="_blank" rel="noopener"><span class="cat">Focus · wellness</span><h3>TIDE</h3><p class="why">Full-bleed misty ocean-at-dusk photo, frosted cards that barely tint the image. Frosted glass as restraint, not effect.</p><p class="dev">Dawn sea-mist haze; translucent, not shiny.</p><span class="go">Mobbin ↗</span></a>
+      <a class="card" href="https://mobbin.com/screens/86fffa38-3d05-4c6a-8c21-84fafa1a9f34" target="_blank" rel="noopener"><span class="cat">Journaling</span><h3>5 Minute Journal</h3><p class="why">Warm interior photography — candlelight, linen, a still-life tray — a classic serif for “Guides.” Spa-editorial warmth.</p><p class="dev">Candle-glow, soft-focus interior light.</p><span class="go">Mobbin ↗</span></a>
+    </div>
+  </section>
+
+  <section class="tier">
+    <div class="tier-head"><h2>Iridescent art — the ceiling</h2><span class="count">03</span><span class="lead">The craft to aspire to; for the glow moment, not the whole UI.</span></div>
+    <div class="cards">
+      <a class="card" href="https://refikanadol.com/" target="_blank" rel="noopener"><span class="cat">Fine art</span><h3>Refik Anadol</h3><p class="why">Museum-scale generative art (MoMA-tier), gallery-like full-bleed site. The fine-art end of iridescent.</p><p class="dev">Flowing data-pigment fields — Neptunian in motion.</p><span class="go">refikanadol.com ↗</span></a>
+      <a class="card" href="https://www.universaleverything.com/" target="_blank" rel="noopener"><span class="cat">Digital art studio</span><h3>Universal Everything</h3><p class="why">Internationally exhibited studio — flowing iridescent figurative work. Gallery energy, not agency-brochure.</p><p class="dev">Liquid chrome-iridescent figures against soft voids.</p><span class="go">universaleverything.com ↗</span></a>
+      <a class="card" href="https://immersive-g.com/" target="_blank" rel="noopener"><span class="cat">Studio · Dior/Cartier</span><h3>Immersive Garden</h3><p class="why">Awwwards Agency of the Year 2025; Louis Vuitton, Cartier, Dior. Luxury-tier art direction, exquisite 3D.</p><p class="dev">Immersive ethereal 3D, symbolic scene-building.</p><span class="go">immersive-g.com ↗</span></a>
+    </div>
+  </section>
+
+  <section class="tier">
+    <div class="tier-head"><h2>Type specimens</h2><span class="count">02</span><span class="lead">For the “Moon Dream” fashion-serif voice.</span></div>
+    <div class="cards">
+      <a class="card" href="https://mobbin.com/screens/16026b99-b050-4935-ae9b-d7a1452db62e" target="_blank" rel="noopener"><span class="cat">Companion app</span><h3>Tolan</h3><p class="why">Cream page, high-contrast serif with a hand-set italic accent (“Welcome to <em>your</em> notebook”). A type specimen more than a screen.</p><p class="dev">Calm is the point — a restraint reference.</p><span class="go">Mobbin ↗</span></a>
+      <a class="card" href="https://mobbin.com/sites/sections/7f12bf1b-35f6-473b-bec7-19c4e2a4a1c9" target="_blank" rel="noopener"><span class="cat">Type · specimen</span><h3>Claude Type — <em>French Atelier</em></h3><p class="why">A flowing calligraphic fashion-serif on warm ivory. Direct reference for the “Moon Dream” typographic register.</p><p class="dev">Ivory ground, ink calligraphy.</p><span class="go">Mobbin ↗</span></a>
+    </div>
+  </section>
+
+  <section class="tier">
+    <div class="tier-head"><h2>Galleries to keep exploring</h2><span class="count">at this level</span></div>
+    <div class="galleries">
+      <a href="https://www.awwwards.com/websites/fashion/" target="_blank" rel="noopener">Awwwards<span class="h">Fashion</span></a>
+      <a href="https://www.awwwards.com/websites/sites_of_the_year/" target="_blank" rel="noopener">Awwwards<span class="h">Sites of the Year</span></a>
+      <a href="https://www.awwwards.com/awwwards_collections/collections/trendy-gradients/" target="_blank" rel="noopener">Awwwards<span class="h">Gradients</span></a>
+      <a href="https://godly.design/" target="_blank" rel="noopener">Godly</a>
+      <a href="https://land-book.com/" target="_blank" rel="noopener">Land-book<span class="h">elegant filter</span></a>
+    </div>
+    <p class="note"><b>Browse directly (blocked automated preview):</b> <a href="https://www.aesop.com/us/" target="_blank" rel="noopener" style="color:var(--accent-deep)">Aesop</a> — the canonical editorial quiet-luxury reference, belongs here.</p>
+  </section>
+
+  <footer>
+    <span class="eyebrow">Astro Recipe — elevated references</span>
+    <p>The insight worth keeping: <b>astrology as a category is a wasteland of cheap</b> — so the elevated direction is borrowed from beauty, meditation and creative-studio work, not from astrology competitors. That gap is the opening. Once you mark the keepers, they fold into the main visual hub, and the styleboard dials down toward this restraint.</p>
+  </footer>
+
+</div>

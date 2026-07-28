@@ -3,95 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Results — Astro Recipe [wireframe]</title>
+<title>Results — Astro Recipe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif&family=Figtree:wght@400;500;600&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: system-ui, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; min-height: 100vh; }
-
-  /* NAV TREE */
-  nav.wf-nav {
-    width: 220px; min-width: 220px; background: #e8e8e8; border-right: 1px solid #ccc;
-    padding: 16px 0; font-size: 12px; line-height: 1.8; position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  /* ===== Liquid Aura — applied from concept.html (Lesson 6, Step 5). Text & structure unchanged. ===== */
+  :root{
+    --ground:#EDEEF3; --surface:#FBFAFF; --frost:rgba(255,255,255,.74);
+    --ink:#241F2E; --ink-soft:#544C62; --muted:#6E6678;
+    --line:rgba(36,31,46,.12); --line-soft:rgba(36,31,46,.07);
+    --accent:#6E5FE0; --accent-deep:#5A4BD4; --accent-wash:#ECE9FB;
+    --error:#B24E68;
+    --serif:"Hedvig Letters Serif",Georgia,serif;
+    --sans:"Figtree",system-ui,-apple-system,sans-serif;
+    --mono:"Martian Mono",ui-monospace,Menlo,monospace;
+    --r:18px; --r-ctl:12px; --blur:13px;
+    --shadow:0 24px 50px -32px rgba(60,55,110,.45); --shadow-sm:0 10px 26px -18px rgba(60,55,110,.5);
+    /* iridescent aura — oil-on-water / MOON DREAM, authored to match the moodboards */
+    --iris:
+      radial-gradient(55% 60% at 20% 26%, #D9C4F5 0%, transparent 56%),
+      radial-gradient(52% 56% at 80% 20%, #F7CBDD 0%, transparent 54%),
+      radial-gradient(56% 62% at 80% 82%, #BFE8E3 0%, transparent 56%),
+      radial-gradient(52% 56% at 22% 84%, #FBDCC0 0%, transparent 54%),
+      radial-gradient(62% 72% at 50% 52%, #E4EBFF 0%, transparent 64%),
+      linear-gradient(120deg, #EDE3F6, #E7EEF6);
+    --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
-  nav.wf-nav .nav-logo { padding: 0 16px 12px; font-weight: bold; border-bottom: 1px solid #ccc; margin-bottom: 8px; font-size: 13px; }
-  nav.wf-nav .nav-section { padding: 6px 16px 2px; font-weight: bold; color: #555; text-transform: uppercase; font-size: 10px; letter-spacing: 1px; margin-top: 8px; }
-  nav.wf-nav a { display: block; padding: 2px 16px; color: #333; text-decoration: none; }
-  nav.wf-nav a:hover { background: #ddd; }
-  nav.wf-nav a.current { font-weight: bold; background: #d0d0d0; }
-  nav.wf-nav .state { padding-left: 32px; color: #666; font-size: 11px; }
-  nav.wf-nav .state a { padding: 1px 16px 1px 32px; color: #666; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); font-size: 15px; color: var(--ink); line-height: 1.6; display: flex; min-height: 100vh; -webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(90% 55% at 85% -5%, #DCE6FF, transparent 55%),
+      radial-gradient(90% 65% at 5% 104%, #F2DCEB, transparent 55%),
+      radial-gradient(70% 55% at 50% 45%, #E7F1EF, transparent 72%),
+      var(--ground);
+    background-attachment: fixed;
+  }
 
-  /* MAIN WRAP */
+  /* NAV TREE — review scaffolding, de-emphasized */
+  nav.wf-nav {
+    width: 220px; min-width: 220px; background: rgba(255,255,255,.5); backdrop-filter: blur(10px);
+    border-right: 1px solid var(--line-soft); padding: 16px 0; font-size: 12px; line-height: 1.8;
+    position: sticky; top: 0; height: 100vh; overflow-y: auto; font-family: var(--mono); font-size: 10.5px;
+  }
+  nav.wf-nav .nav-logo { padding: 0 16px 12px; font-weight: 500; border-bottom: 1px solid var(--line-soft); margin-bottom: 8px; font-family: var(--serif); font-size: 15px; color: var(--ink); }
+  nav.wf-nav .nav-section { padding: 8px 16px 2px; font-weight: 500; color: var(--muted); text-transform: uppercase; font-size: 9px; letter-spacing: 1px; margin-top: 8px; }
+  nav.wf-nav a { display: block; padding: 2px 16px; color: var(--ink-soft); text-decoration: none; }
+  nav.wf-nav a:hover { background: var(--accent-wash); }
+  nav.wf-nav a.current { font-weight: 500; color: var(--accent-deep); background: var(--accent-wash); }
+  nav.wf-nav .state { padding-left: 32px; color: var(--muted); font-size: 10px; }
+  nav.wf-nav .state a { padding: 1px 16px 1px 32px; color: var(--muted); }
+
   .wf-wrap { flex: 1; display: flex; flex-direction: column; }
 
   header {
-    background: #e0e0e0; border-bottom: 1px solid #ccc; padding: 12px 24px;
-    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255,255,255,.55); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line-soft);
+    padding: 14px 24px; display: flex; justify-content: space-between; align-items: center;
   }
-  header .logo { font-weight: bold; font-size: 16px; }
-  header .flow-step { font-size: 12px; color: #666; border: 1px solid #aaa; padding: 3px 10px; border-radius: 3px; }
+  header .logo { font-family: var(--serif); font-weight: 400; font-size: 20px; letter-spacing: -.01em; }
+  header .flow-step { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-deep); border: 1px solid var(--line); padding: 5px 11px; border-radius: 100px; background: var(--surface); }
 
-  main { padding: 24px; max-width: 640px; margin: 0 auto; width: 100%; }
+  main { padding: 28px 24px 40px; max-width: 640px; margin: 0 auto; width: 100%; }
 
-  /* ZONE LABELS */
-  .zone-label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; margin-top: 28px; }
+  /* ZONE LABELS — pedagogical annotation, quiet */
+  .zone-label { font-family: var(--mono); font-size: 9.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px; margin-top: 32px; }
   .zone-label:first-child { margin-top: 0; }
 
-  .back-link { display: inline-block; font-size: 13px; color: #666; text-decoration: none; margin-bottom: 16px; }
-  .back-link:hover { text-decoration: underline; }
+  .back-link { display: inline-block; font-size: 13px; color: var(--ink-soft); text-decoration: none; margin-bottom: 8px; }
+  .back-link:hover { color: var(--accent-deep); }
 
-  /* NATAL CHART */
-  .chart-block { border: 1px solid #bbb; background: #fff; padding: 24px; margin-bottom: 8px; border-radius: 4px; text-align: center; }
-  .chart-block svg { display: block; margin: 0 auto; }
-  .chart-legend { text-align: left; margin-top: 16px; border-top: 1px solid #eee; padding-top: 14px; }
-  .chart-legend .legend-row { display: flex; gap: 10px; font-size: 12px; color: #444; padding: 3px 0; }
-  .chart-legend .legend-glyph { flex: 0 0 22px; color: #777; font-weight: bold; }
+  /* NATAL CHART — the Liquid Aura signature: line-art wheel inside an iridescent aura */
+  .chart-block { border-radius: var(--r); overflow: hidden; background: var(--frost); backdrop-filter: blur(var(--blur)); border: 1px solid rgba(255,255,255,.8); box-shadow: var(--shadow); }
+  .chart-aura { position: relative; background: var(--iris); padding: 30px 0 34px; overflow: hidden; }
+  .chart-aura::before { content: ""; position: absolute; inset: -10%; background: var(--grain); opacity: .06; mix-blend-mode: overlay; pointer-events: none; }
+  .chart-aura .halo { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 47%, rgba(255,255,255,.72), rgba(255,255,255,.15) 34%, transparent 52%); }
+  .chart-aura .spark { position: absolute; color: #fff; opacity: .9; filter: drop-shadow(0 0 6px rgba(255,255,255,.9)); }
+  .chart-block svg.wheel { display: block; margin: 0 auto; position: relative; z-index: 1; }
+  .chart-legend { text-align: left; padding: 18px 20px 20px; }
+  .chart-legend .legend-row { display: flex; gap: 12px; font-size: 13px; color: var(--ink-soft); padding: 5px 0; align-items: baseline; }
+  .chart-legend .legend-glyph { flex: 0 0 26px; font-family: var(--mono); color: var(--accent-deep); font-size: 12px; }
 
-  .description-block { border: 1px solid #ccc; background: #fff; padding: 18px 20px; margin-bottom: 8px; border-radius: 4px; }
-  .description-block p { font-size: 13px; color: #444; line-height: 1.6; }
+  .description-block { border-radius: var(--r); background: var(--frost); backdrop-filter: blur(var(--blur)); border: 1px solid rgba(255,255,255,.7); padding: 20px 22px; box-shadow: var(--shadow-sm); }
+  .description-block p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.66; }
 
-  /* WOW MOMENT */
-  .wow-block {
-    border: 2px solid #aaa; background: #fff; padding: 20px; margin-bottom: 8px; border-radius: 4px;
-  }
-  .wow-block .wow-tag { font-size: 10px; color: #888; margin-bottom: 8px; }
-  .wow-block .wow-text { font-size: 18px; line-height: 1.5; color: #111; }
+  /* WOW MOMENT — the emotional peak, serif on a soft iridescent-washed card */
+  .wow-block { border-radius: var(--r); padding: 24px 22px; box-shadow: var(--shadow-sm); border: 1px solid rgba(255,255,255,.8);
+    background: linear-gradient(135deg, rgba(205,186,242,.34), rgba(191,232,227,.3)), var(--surface); }
+  .wow-block .wow-tag { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-deep); margin-bottom: 12px; }
+  .wow-block .wow-text { font-family: var(--serif); font-size: 21px; line-height: 1.42; color: var(--ink); }
 
-  /* SCROLL HINT */
-  .scroll-hint { text-align: center; padding: 16px 0; color: #999; font-size: 12px; }
-  .scroll-hint .arrow { font-size: 20px; display: block; margin-top: 4px; }
+  .scroll-hint { text-align: center; padding: 20px 0; color: var(--muted); font-size: 12px; font-family: var(--mono); letter-spacing: .04em; }
+  .scroll-hint .arrow { font-size: 20px; display: block; margin-top: 6px; color: var(--accent); }
 
   /* CTA BLOCK */
-  .cta-block {
-    border: 2px solid #888; background: #fff; padding: 24px; margin-bottom: 8px; border-radius: 4px; text-align: center;
-  }
-  .cta-block .cta-title { font-weight: bold; font-size: 17px; margin-bottom: 8px; }
-  .cta-block .cta-sub { font-size: 13px; color: #555; margin-bottom: 16px; }
+  .cta-block { border-radius: var(--r); padding: 26px 24px; box-shadow: var(--shadow-sm); text-align: center; border: 1px solid rgba(255,255,255,.8);
+    background: linear-gradient(160deg, rgba(220,230,255,.5), rgba(242,220,235,.4)), var(--surface); }
+  .cta-block .cta-title { font-family: var(--serif); font-weight: 400; font-size: 24px; margin-bottom: 10px; }
+  .cta-block .cta-sub { font-size: 14px; color: var(--ink-soft); margin-bottom: 20px; max-width: 42ch; margin-left: auto; margin-right: auto; }
 
   /* PREVIEW CARDS */
-  .preview-scroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 4px; }
-  .preview-card {
-    border: 1px solid #bbb; background: #fff; border-radius: 4px; padding: 14px; min-width: 200px; flex: 0 0 auto;
-  }
-  .preview-card .preview-name { font-weight: bold; font-size: 13px; margin-bottom: 6px; }
-  .preview-card .preview-line { font-size: 12px; color: #555; line-height: 1.5; }
-  .preview-card .preview-blur { color: #aaa; font-size: 11px; margin-top: 8px; font-style: italic; }
+  .preview-scroll { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 6px; }
+  .preview-card { position: relative; border-radius: var(--r-ctl); background: var(--surface); border: 1px solid var(--line-soft); padding: 20px 16px 16px; min-width: 210px; flex: 0 0 auto; box-shadow: var(--shadow-sm); overflow: hidden; }
+  .preview-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #CDBAF2, #F5C7DB, #F8DBBE, #BFE8E3); }
+  .preview-card .preview-name { font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; color: var(--accent-deep); margin-bottom: 8px; }
+  .preview-card .preview-line { font-family: var(--serif); font-size: 15px; color: var(--ink); line-height: 1.4; }
+  .preview-card .preview-blur { color: var(--muted); font-size: 11px; margin-top: 10px; font-style: italic; }
 
   /* TESTIMONIALS */
-  .testimonial { border: 1px solid #ccc; background: #fff; border-radius: 4px; padding: 16px; margin-bottom: 10px; }
-  .testimonial .quote { font-size: 13px; color: #222; line-height: 1.6; margin-bottom: 8px; }
-  .testimonial .author { font-size: 11px; color: #888; }
+  .testimonial { border-radius: var(--r-ctl); background: var(--frost); backdrop-filter: blur(var(--blur)); border: 1px solid rgba(255,255,255,.7); padding: 18px 20px; margin-bottom: 12px; box-shadow: var(--shadow-sm); }
+  .testimonial .quote { font-size: 14.5px; color: var(--ink); line-height: 1.62; margin-bottom: 10px; }
+  .testimonial .author { font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; color: var(--muted); }
 
   /* ACTION */
-  .action-zone { margin-top: 12px; border-top: 1px solid #ddd; padding-top: 16px; }
-  .btn-primary { display: block; width: 100%; padding: 14px; background: #333; color: #fff; border: none; font-size: 14px; cursor: pointer; text-align: center; border-radius: 3px; text-decoration: none; }
-  .btn-secondary { display: block; width: 100%; padding: 10px; background: #fff; color: #333; border: 1px solid #aaa; font-size: 13px; cursor: pointer; text-align: center; border-radius: 3px; text-decoration: none; margin-top: 8px; }
+  .action-zone { margin-top: 16px; }
+  .btn-primary { display: block; width: 100%; padding: 15px; background: var(--accent-deep); color: #fff; border: none; font-family: var(--sans); font-size: 15px; font-weight: 600; cursor: pointer; text-align: center; border-radius: 100px; text-decoration: none; box-shadow: var(--shadow-sm); transition: transform .16s ease, background .16s ease; }
+  .btn-primary:hover { transform: translateY(-2px); background: #4c3ec6; }
+  .btn-secondary { display: block; width: 100%; padding: 13px; background: var(--surface); color: var(--accent-deep); border: 1px solid var(--line); font-family: var(--sans); font-size: 14px; font-weight: 600; cursor: pointer; text-align: center; border-radius: 100px; text-decoration: none; margin-top: 10px; }
+  .btn-secondary:hover { border-color: var(--accent); }
 
-  .states-bar { background: #e8e8e8; border-bottom: 1px solid #ccc; padding: 6px 24px; font-size: 11px; color: #666; display: flex; gap: 12px; }
-  .states-bar span { color: #999; }
-  .states-bar a { color: #555; text-decoration: none; }
+  .states-bar { background: rgba(255,255,255,.5); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line-soft); padding: 8px 24px; font-family: var(--mono); font-size: 10px; letter-spacing: .04em; color: var(--muted); display: flex; gap: 14px; }
+  .states-bar span { color: var(--muted); }
+  .states-bar a { color: var(--accent-deep); text-decoration: none; }
   .states-bar a:hover { text-decoration: underline; }
-  .states-bar .current-state { font-weight: bold; color: #333; }
+  .states-bar .current-state { font-weight: 500; color: var(--ink); }
+  .scroll-hint .arrow svg { display: inline-block; margin-top: 4px; }
+
+  /* keyboard focus */
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+  /* responsive: collapse the review nav on small screens (product is mobile-first) */
+  @media (max-width: 760px) {
+    body { flex-direction: column; }
+    nav.wf-nav { width: 100%; min-width: 0; height: auto; position: static; display: flex; flex-wrap: wrap; gap: 2px 4px; padding: 10px 12px; }
+    nav.wf-nav .nav-logo { width: 100%; }
+    nav.wf-nav .nav-section { width: 100%; }
+    nav.wf-nav .state { padding-left: 8px; }
+    main { padding: 24px 18px 40px; }
+  }
 </style>
 </head>
 <body>
@@ -151,46 +199,52 @@
 
     <div class="zone-label">Zone: Natal chart — visualization [Main Job]</div>
     <article class="chart-block">
-      <svg viewBox="0 0 300 300" width="260" height="260" role="img" aria-label="Natal chart diagram">
-        <circle cx="150" cy="150" r="130" fill="none" stroke="#999" stroke-width="1.5"/>
-        <circle cx="150" cy="150" r="90" fill="none" stroke="#ccc" stroke-width="1"/>
-        <line x1="150" y1="150" x2="280" y2="150" stroke="#ddd"/>
-        <line x1="150" y1="150" x2="262.6" y2="215" stroke="#ddd"/>
-        <line x1="150" y1="150" x2="215" y2="262.6" stroke="#ddd"/>
-        <line x1="150" y1="150" x2="150" y2="280" stroke="#ddd"/>
-        <line x1="150" y1="150" x2="85" y2="262.6" stroke="#ddd"/>
-        <line x1="150" y1="150" x2="37.4" y2="215" stroke="#ddd"/>
-        <line x1="150" y1="150" x2="20" y2="150" stroke="#ddd"/>
-        <line x1="150" y1="150" x2="37.4" y2="85" stroke="#ddd"/>
-        <line x1="150" y1="150" x2="85" y2="37.4" stroke="#ddd"/>
-        <line x1="150" y1="150" x2="150" y2="20" stroke="#ddd"/>
-        <line x1="150" y1="150" x2="215" y2="37.4" stroke="#ddd"/>
-        <line x1="150" y1="150" x2="262.6" y2="85" stroke="#ddd"/>
-        <text x="248" y="154" font-size="10" fill="#999">1</text>
-        <text x="234" y="203" font-size="10" fill="#999">2</text>
-        <text x="196" y="239" font-size="10" fill="#999">3</text>
-        <text x="147" y="253" font-size="10" fill="#999">4</text>
-        <text x="93" y="239" font-size="10" fill="#999">5</text>
-        <text x="55" y="203" font-size="10" fill="#999">6</text>
-        <text x="42" y="154" font-size="10" fill="#999">7</text>
-        <text x="55" y="104" font-size="10" fill="#999">8</text>
-        <text x="93" y="68" font-size="10" fill="#999">9</text>
-        <text x="144" y="54" font-size="10" fill="#999">10</text>
-        <text x="194" y="68" font-size="10" fill="#999">11</text>
-        <text x="228" y="104" font-size="10" fill="#999">12</text>
-        <circle cx="228" cy="90" r="4" fill="#666"/>
-        <text x="234" y="83" font-size="11" fill="#333">☉</text>
-        <circle cx="95" cy="205" r="4" fill="#666"/>
-        <text x="101" y="212" font-size="11" fill="#333">☽</text>
-        <circle cx="230" cy="190" r="4" fill="#666"/>
-        <text x="236" y="197" font-size="11" fill="#333">☿</text>
-        <circle cx="205" cy="230" r="4" fill="#666"/>
-        <text x="211" y="238" font-size="11" fill="#333">♀</text>
-        <circle cx="20" cy="150" r="4" fill="#333"/>
-        <text x="8" y="145" font-size="10" fill="#555">AC</text>
-        <circle cx="150" cy="20" r="4" fill="#333"/>
-        <text x="140" y="14" font-size="10" fill="#555">MC</text>
-      </svg>
+      <div class="chart-aura">
+        <div class="halo"></div>
+        <svg class="spark" style="top:16px; left:22px; width:20px; height:20px" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.5 5.5 4.5 9.5 12 12-7.5 2.5-11.5 6.5-12 12-.5-5.5-4.5-9.5-12-12 7.5-2.5 11.5-6.5 12-12z"/></svg>
+        <svg class="spark" style="bottom:24px; right:30px; width:13px; height:13px" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.5 5.5 4.5 9.5 12 12-7.5 2.5-11.5 6.5-12 12-.5-5.5-4.5-9.5-12-12 7.5-2.5 11.5-6.5 12-12z"/></svg>
+        <svg class="spark" style="top:40px; right:44px; width:9px; height:9px" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.5 5.5 4.5 9.5 12 12-7.5 2.5-11.5 6.5-12 12-.5-5.5-4.5-9.5-12-12 7.5-2.5 11.5-6.5 12-12z"/></svg>
+        <svg class="wheel" viewBox="0 0 300 300" width="260" height="260" role="img" aria-label="Natal chart diagram">
+          <circle cx="150" cy="150" r="130" fill="none" stroke="#2b2440" stroke-opacity="0.6" stroke-width="1.3"/>
+          <circle cx="150" cy="150" r="90" fill="none" stroke="#2b2440" stroke-opacity="0.32" stroke-width="1"/>
+          <line x1="150" y1="150" x2="280" y2="150" stroke="#2b2440" stroke-opacity="0.28"/>
+          <line x1="150" y1="150" x2="262.6" y2="215" stroke="#2b2440" stroke-opacity="0.28"/>
+          <line x1="150" y1="150" x2="215" y2="262.6" stroke="#2b2440" stroke-opacity="0.28"/>
+          <line x1="150" y1="150" x2="150" y2="280" stroke="#2b2440" stroke-opacity="0.28"/>
+          <line x1="150" y1="150" x2="85" y2="262.6" stroke="#2b2440" stroke-opacity="0.28"/>
+          <line x1="150" y1="150" x2="37.4" y2="215" stroke="#2b2440" stroke-opacity="0.28"/>
+          <line x1="150" y1="150" x2="20" y2="150" stroke="#2b2440" stroke-opacity="0.28"/>
+          <line x1="150" y1="150" x2="37.4" y2="85" stroke="#2b2440" stroke-opacity="0.28"/>
+          <line x1="150" y1="150" x2="85" y2="37.4" stroke="#2b2440" stroke-opacity="0.28"/>
+          <line x1="150" y1="150" x2="150" y2="20" stroke="#2b2440" stroke-opacity="0.28"/>
+          <line x1="150" y1="150" x2="215" y2="37.4" stroke="#2b2440" stroke-opacity="0.28"/>
+          <line x1="150" y1="150" x2="262.6" y2="85" stroke="#2b2440" stroke-opacity="0.28"/>
+          <text x="248" y="154" font-size="10" fill="#2b2440" fill-opacity="0.6" font-family="ui-monospace,monospace">1</text>
+          <text x="234" y="203" font-size="10" fill="#2b2440" fill-opacity="0.6" font-family="ui-monospace,monospace">2</text>
+          <text x="196" y="239" font-size="10" fill="#2b2440" fill-opacity="0.6" font-family="ui-monospace,monospace">3</text>
+          <text x="147" y="253" font-size="10" fill="#2b2440" fill-opacity="0.6" font-family="ui-monospace,monospace">4</text>
+          <text x="93" y="239" font-size="10" fill="#2b2440" fill-opacity="0.6" font-family="ui-monospace,monospace">5</text>
+          <text x="55" y="203" font-size="10" fill="#2b2440" fill-opacity="0.6" font-family="ui-monospace,monospace">6</text>
+          <text x="42" y="154" font-size="10" fill="#2b2440" fill-opacity="0.6" font-family="ui-monospace,monospace">7</text>
+          <text x="55" y="104" font-size="10" fill="#2b2440" fill-opacity="0.6" font-family="ui-monospace,monospace">8</text>
+          <text x="93" y="68" font-size="10" fill="#2b2440" fill-opacity="0.6" font-family="ui-monospace,monospace">9</text>
+          <text x="144" y="54" font-size="10" fill="#2b2440" fill-opacity="0.6" font-family="ui-monospace,monospace">10</text>
+          <text x="194" y="68" font-size="10" fill="#2b2440" fill-opacity="0.6" font-family="ui-monospace,monospace">11</text>
+          <text x="228" y="104" font-size="10" fill="#2b2440" fill-opacity="0.6" font-family="ui-monospace,monospace">12</text>
+          <circle cx="228" cy="90" r="4" fill="#5A4BD4"/>
+          <text x="234" y="83" font-size="12" fill="#241F2E">☉</text>
+          <circle cx="95" cy="205" r="4" fill="#5A4BD4"/>
+          <text x="101" y="212" font-size="12" fill="#241F2E">☽</text>
+          <circle cx="230" cy="190" r="4" fill="#5A4BD4"/>
+          <text x="236" y="197" font-size="12" fill="#241F2E">☿</text>
+          <circle cx="205" cy="230" r="4" fill="#5A4BD4"/>
+          <text x="211" y="238" font-size="12" fill="#241F2E">♀</text>
+          <circle cx="20" cy="150" r="4" fill="#241F2E"/>
+          <text x="8" y="145" font-size="10" fill="#241F2E">AC</text>
+          <circle cx="150" cy="20" r="4" fill="#241F2E"/>
+          <text x="140" y="14" font-size="10" fill="#241F2E">MC</text>
+        </svg>
+      </div>
       <div class="chart-legend">
         <div class="legend-row"><span class="legend-glyph">☉</span> Sun in Pisces — the emotional, creative core of your personality</div>
         <div class="legend-row"><span class="legend-glyph">☽</span> Moon in Cancer — what restores you and what drains you</div>
@@ -214,7 +268,7 @@
 
     <div class="scroll-hint">
       This is just the start of your chart
-      <span class="arrow">↓</span>
+      <span class="arrow"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg></span>
     </div>
 
     <div class="zone-label">Zone: CTA — unlock the full report [Conversion]</div>

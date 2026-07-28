@@ -15,7 +15,7 @@ An astrology website that turns a birth chart into concrete, actionable guidance
 | **Audience** | Solopreneurs & content creators, 24–35, digital nomad / traveller context (Bali, SEA), English-speaking. |
 | **Platform** | Website (not an app) — mobile-first web → desktop. |
 | **Niche** | Glow — style + career/talents + social content + energy through the birth chart. |
-| **Status** | Personas + JTBD + IA + Wireframes + Voice done (Lesson 5), main flow only |
+| **Status** | Personas + JTBD + IA + Wireframes + Voice + Visual Concept done (Lesson 6). Chosen language: **Liquid Aura** — iridescent, warm-luminous, Neptunian. Main flow painted (results + report). |
 
 Full brief → [CLAUDE.md](./CLAUDE.md)
 
@@ -53,9 +53,10 @@ jtbd.md                  # Jobs + матриця + висновок про MVP
 voice.md                 # Voice principles, dictionary, forbidden list, microcopy rules (Урок 5)
 microcopy.md             # Весь текст інтерфейсу, по екранах — джерело правди
 
-wireframes/              # Low-fi flows — головний flow готовий, текст англійською за voice.md (Уроки 4–5): онбординг → тизер → checkout → репорт → share
-concept/                 # Visual direction (не починали)
-tokens/                  # Design tokens (не починали)
+wireframes/              # Low-fi flows — тепер пофарбовані в мову Liquid Aura (results + report + стани), текст англійською за voice.md (Уроки 4–6)
+concept/                 # Visual concept (Урок 6): references.md, moodboard-analysis.md, neptunian-ui-references.md, elevated-references.html, directions.html (3 напрями), style-direction/visual-style-hub/concept-presentation
+concept.md · concept.html # Смак+атрибути · стенд обраної мови «Liquid Aura»
+tokens/                  # Design tokens (не починали — Урок 8)
 components/              # UI components (не починали)
 design-system/           # Design system (не починали)
 handoff/                 # Dev specs (не починали)
@@ -80,8 +81,8 @@ handoff/                 # Dev specs (не починали)
 | IA — консолідація | ✅ Done | ia.html |
 | Wireframes | ✅ Done (головний flow) | wireframes/ |
 | Voice | ✅ Done | voice.md, microcopy.md |
-| Concept | ⬜ Not started | |
-| Design system | ⬜ Not started | |
+| Concept | ✅ Done (Урок 6) | concept.md, concept.html, concept/, wireframes/ (results + report painted) |
+| Design system | ⬜ Not started (Урок 8) | |
 | Handoff | ⬜ Not started | |
 
 ---

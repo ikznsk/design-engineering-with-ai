@@ -101,6 +101,13 @@ Price signals: one-time report $7–50 range (Matrix Destiny, Astrology Hub, Gal
 ## Voice
 Product copy is English (audience is English-speaking). `voice.md` — 4 principles (concrete action not character description, specific chart placement not abstract trait, honest about limits, advice tied to this person's chart), dictionary, forbidden list (no AI clichés, no "successfully", no exclamation marks/emoji in system messages), microcopy rules by element type. `microcopy.md` is the source of truth — every interface line, by screen. All 18 `wireframes/*.html` rewritten to this voice (Урок 5, 2026-07-19).
 
+## Visual Concept
+Chosen visual language (Урок 6): **Liquid Aura** — Neptunian / Pisces, warm-luminous, iridescent, elevated (not the purple-cosmic cliché, not cheap SaaS glassmorphism). One oil-on-water iridescent aura holds the chart; everything else stays calm and legible (dream at full behind the chart, dream at low under text).
+- **Ground:** cool pale `#EDEEF3` washed with soft lavender/blush/aqua. **Accent:** periwinkle `#6E5FE0` (deep `#5A4BD4` for AA), CTA only. **Ink:** warm violet-black `#241F2E`.
+- **Type — three voices:** Hedvig Letters Serif (display) + Figtree (body) + Martian Mono (data/labels).
+- **Signature:** iridescent aura gradient (`--iris`, authored oil-on-water mesh from the moodboards) + halo behind the chart; frosted near-white panels for content; per-dimension iridescent emblems in the report.
+- Sources of taste: `concept.md` (Designer's taste + 6 attribute pairs), `concept/references.md`, `concept/moodboard-analysis.md`, `research/mobbin-visual-research.md`, `concept/neptunian-ui-references.md`, `concept/elevated-references.html`. Directions chooser: `concept/directions.html` (Moon Dream / **Liquid Aura ✓** / Golden Hour). Language stand: `concept.html`. Applied on two screens: `wireframes/results.html` (+ states) and `wireframes/report.html`. Design tokens + DESIGN.md come in Урок 8.
+
 ## Name
 **Astro Recipe** (working title)
 
@@ -108,5 +115,6 @@ Product copy is English (audience is English-speaking). `voice.md` — 4 princip
 TBD
 
 ## Status
+Brief v1.0 — Visual Concept established (Урок 6, 2026-07-28): language **Liquid Aura** chosen from three directions and applied to the two proof screens (results + report). See `## Visual Concept`. Design tokens / DESIGN.md next (Урок 8).
 Brief v0.9 — Voice established and applied to all wireframes, product copy is English (Урок 5, 2026-07-19).
 Brief v0.8 — Glow niche confirmed, audience narrowed to solopreneurs/content creators, platform confirmed as website (not app). Product is a funnel, not an app: onboarding → free teaser page (chart + brief) → scroll → paywall (report previews + testimonials) → checkout → paid Glow Report. The four Glow dimensions (style, career/talents, energy, social content) live inside the Report, not as separate site screens. sitemap.md, flows.md, ia.html, jtbd.md all synced to this (2026-07-17). Wireframes (Урок 4) done for the whole main flow — 18 HTML files, grayscale, all states, linked, audited (2026-07-19).

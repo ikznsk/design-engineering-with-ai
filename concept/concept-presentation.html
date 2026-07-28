@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Astro Recipe — Visual Concept (Lesson 6)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif&family=Figtree:wght@400;500;600&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#EDEEF3; --surface:#FBFAFF; --frost:rgba(255,255,255,.72);
+    --ink:#241F2E; --ink-soft:#544C62; --muted:#8B8498;
+    --line:rgba(36,31,46,.12); --line-soft:rgba(36,31,46,.07);
+    --accent:#6E5FE0; --accent-deep:#5A4BD4; --accent-wash:#ECE9FB;
+    --error:#B24E68;
+    --serif:"Hedvig Letters Serif",Georgia,serif;
+    --sans:"Figtree",system-ui,-apple-system,sans-serif;
+    --mono:"Martian Mono",ui-monospace,Menlo,monospace;
+    --r:18px; --shadow:0 24px 50px -32px rgba(60,55,110,.45); --shadow-sm:0 10px 26px -18px rgba(60,55,110,.5);
+  }
+  *{box-sizing:border-box}
+  body{margin:0; font-family:var(--sans); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;
+    background:radial-gradient(90% 55% at 85% -5%,#DCE6FF,transparent 55%),radial-gradient(90% 65% at 5% 104%,#F2DCEB,transparent 55%),radial-gradient(70% 55% at 50% 45%,#E7F1EF,transparent 72%),var(--ground); background-attachment:fixed}
+  .wrap{max-width:1060px; margin:0 auto; padding:0 26px}
+  .eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent-deep)}
+  .lead{color:var(--ink-soft)}
+  .mono{font-family:var(--mono)}
+  a.link{color:var(--accent-deep); text-decoration:none; border-bottom:1px solid var(--line)}
+  a.link:hover{border-color:var(--accent)}
+
+  header.hero{padding:64px 0 20px}
+  header.hero h1{font-family:var(--serif); font-weight:400; font-size:clamp(44px,7vw,84px); line-height:1; margin:16px 0 0; letter-spacing:-.01em}
+  header.hero p{max-width:60ch; margin:20px 0 0; font-size:19px; color:var(--ink-soft)}
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:22px}
+  .chip{font-family:var(--mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; padding:7px 12px; border-radius:100px; background:var(--frost); backdrop-filter:blur(8px); border:1px solid var(--line-soft); color:var(--ink-soft)}
+
+  section{padding:52px 0; border-top:1px solid var(--line-soft)}
+  .sh{display:flex; align-items:baseline; gap:14px; margin-bottom:8px}
+  .sh h2{font-family:var(--serif); font-weight:400; font-size:clamp(26px,3.6vw,40px); margin:0; letter-spacing:-.005em}
+  .sh .n{font-family:var(--mono); font-size:12px; color:var(--muted)}
+  .si{color:var(--ink-soft); max-width:62ch; margin:0 0 26px}
+
+  .moods{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+  .moods figure{margin:0; border-radius:var(--r); overflow:hidden; box-shadow:var(--shadow-sm); border:1px solid var(--line-soft); background:var(--surface)}
+  .moods img{display:block; width:100%; height:auto}
+  .moods figcaption{font-family:var(--mono); font-size:10.5px; letter-spacing:.04em; color:var(--muted); padding:10px 12px; text-transform:uppercase}
+
+  .cards3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+  .rc{background:var(--frost); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.7); border-radius:var(--r); padding:20px; box-shadow:var(--shadow-sm)}
+  .rc .k{font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-deep)}
+  .rc h3{font-family:var(--serif); font-weight:400; font-size:21px; margin:6px 0 6px}
+  .rc p{margin:0; font-size:13.5px; color:var(--ink-soft)}
+  .rc .go{margin-top:12px; display:inline-block}
+
+  .cols2{display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start}
+  .taste h4{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin:0 0 8px}
+  .taste ul{margin:0 0 18px; padding-left:18px}
+  .taste li{margin:4px 0; font-size:14.5px; color:var(--ink-soft)}
+  .taste li b{color:var(--ink)}
+  .attrs{counter-reset:a}
+  .attrs .a{padding:11px 0; border-bottom:1px solid var(--line-soft); font-size:14px}
+  .attrs .a b{color:var(--ink)}
+  .attrs .a .src{font-family:var(--mono); font-size:10px; color:var(--muted); display:block; margin-top:2px}
+
+  .dirs{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+  .dir{border-radius:var(--r); overflow:hidden; border:1px solid var(--line-soft); box-shadow:var(--shadow-sm); position:relative}
+  .dir .band{height:78px}
+  .dir .db{padding:16px 16px 18px; background:var(--surface)}
+  .dir .dn{font-family:var(--mono); font-size:10px; color:var(--muted); letter-spacing:.1em; text-transform:uppercase}
+  .dir h3{font-family:var(--serif); font-weight:400; font-size:22px; margin:5px 0 6px}
+  .dir p{margin:0; font-size:13px; color:var(--ink-soft)}
+  .dir .pick{position:absolute; top:12px; right:12px; font-family:var(--mono); font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; background:var(--accent-deep); color:#fff; padding:5px 9px; border-radius:100px}
+  .dir.chosen{outline:2px solid var(--accent); outline-offset:-2px}
+
+  /* liquid aura showcase */
+  .aura{display:grid; grid-template-columns:320px 1fr; gap:34px; align-items:start}
+  .phone{background:var(--surface); border-radius:30px; padding:14px; box-shadow:var(--shadow); border:1px solid var(--line-soft)}
+  .rcard{border-radius:16px; overflow:hidden; background:var(--frost); backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,.8)}
+  .rcard .phw{position:relative}
+  .rcard .ph{display:block; width:100%; aspect-ratio:16/11; object-fit:cover}
+  .rcard .halo{position:absolute; inset:0; background:radial-gradient(circle at 50% 46%,rgba(255,255,255,.45),transparent 40%),radial-gradient(circle at 50% 46%,rgba(150,120,240,.26),transparent 62%)}
+  .rcard .wheel{position:absolute; inset:0; display:grid; place-items:center}
+  .rcard .wheel svg{width:104px; height:104px; opacity:.92}
+  .rcard .b{padding:15px 16px 17px}
+  .rcard .plc{font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:var(--accent-deep)}
+  .rcard h3{font-family:var(--serif); font-weight:400; font-size:22px; margin:7px 0 6px; line-height:1.14}
+  .rcard p{margin:0; font-size:13.5px; color:var(--ink-soft)}
+  .rcard .foot{display:flex; align-items:center; justify-content:space-between; margin-top:15px; gap:10px}
+  .badge{display:inline-flex; align-items:center; gap:6px; font-size:11px; padding:5px 11px; border-radius:100px; background:linear-gradient(90deg,#e4dcf8,#f6dcea); color:var(--accent-deep); font-weight:500}
+  .btn{border:none; cursor:pointer; font-family:var(--sans); font-size:13.5px; font-weight:600; padding:10px 16px; border-radius:100px; color:#fff; background:var(--accent-deep); box-shadow:var(--shadow-sm)}
+  .specs .row{margin-bottom:18px}
+  .specs .lbl{font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:8px}
+  .pal{display:flex; border-radius:12px; overflow:hidden; border:1px solid var(--line)}
+  .pal i{flex:1; height:44px}
+  .palr{display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:8px}
+  .palr span{font-family:var(--mono); font-size:10px; color:var(--muted)}
+  .tp .d{font-family:var(--serif); font-size:30px; line-height:1}
+  .tp .bd{font-size:15px; color:var(--ink-soft); margin-top:4px}
+  .tp .mn{font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-deep); margin-top:6px}
+  svg.ic{fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round}
+  svg.ic.bold{fill:currentColor; stroke:none}
+
+  .next{display:flex; flex-wrap:wrap; gap:12px; margin-top:6px}
+  .step{flex:1; min-width:200px; background:var(--frost); backdrop-filter:blur(8px); border:1px solid var(--line-soft); border-radius:14px; padding:16px}
+  .step .s{font-family:var(--mono); font-size:10px; color:var(--accent-deep); letter-spacing:.1em; text-transform:uppercase}
+  .step p{margin:6px 0 0; font-size:13.5px; color:var(--ink-soft)}
+
+  footer{padding:44px 0 80px}
+  .linkrow{display:flex; flex-wrap:wrap; gap:10px}
+  .linkrow a{font-family:var(--mono); font-size:12px; text-decoration:none; color:var(--ink); background:var(--surface); border:1px solid var(--line-soft); border-radius:100px; padding:10px 16px}
+  .linkrow a:hover{border-color:var(--accent)}
+
+  @media (max-width:840px){ .cards3,.dirs{grid-template-columns:1fr} .cols2,.aura{grid-template-columns:1fr} .aura .phone{max-width:340px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Astro Recipe · Visual Concept · Lesson 6</div>
+    <h1>A dream you can read.</h1>
+    <p>An astrology product that turns a natal chart into concrete guidance — how to dress, position your career, run your content, manage your energy. This deck walks the look: from references, to taste, to three directions, to the chosen language — <b>Liquid Aura</b>.</p>
+    <div class="chips"><span class="chip">Neptunian / Pisces</span><span class="chip">Iridescent · luminous</span><span class="chip">Warm, not purple-cosmic</span><span class="chip">Elevated, not cheap-SaaS</span></div>
+  </header>
+
+  <section>
+    <div class="sh"><span class="n">01</span><h2>The starting point — the moodboards</h2></div>
+    <p class="si">Iryna's own references. They read as one Neptunian / Pisces vibe at two saturations: a vivid iridescent dream (boards 1–3) and a muted warm dream (board 4). Shared thread: light, water, aura, translucency.</p>
+    <div class="moods">
+      <figure><img src="MOOD1" alt="Moodboard 1"><figcaption>Board 1 — ethereal glow / MOON DREAM</figcaption></figure>
+      <figure><img src="MOOD2" alt="Moodboard 2"><figcaption>Board 2 — iridescent / holographic</figcaption></figure>
+      <figure><img src="MOOD3" alt="Moodboard 3"><figcaption>Board 3 — celestial · sparkle · water</figcaption></figure>
+      <figure><img src="MOOD4" alt="Moodboard 4"><figcaption>Board 4 — warm quiet luxury</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">02</span><h2>What we studied</h2></div>
+    <p class="si">Reference is an input, not an output. We pulled techniques from real products — never cloning one — and mapped where the category goes wrong.</p>
+    <div class="cards3">
+      <div class="rc"><div class="k">Benchmark</div><h3>CHANI, torn down</h3><p>Profiled from a real screen recording — warmer and more playful than its reputation: a three-voice type system (serif + sans + mono) and hand-drawn squiggle dividers.</p></div>
+      <div class="rc"><div class="k">The field</div><h3>Competitors on Mobbin</h3><p>Two traps to avoid: Co-Star's cold grayscale, and the purple-cosmic starfield (Nebula, Moonly). Closest to us: warm document (Tolan) and photographic warmth (Calm).</p></div>
+      <div class="rc"><div class="k">The taste bar</div><h3>Elevated references</h3><p>mymind, Cosmos, Vyrao — dreamy done <em>expensively</em>. What separates it from cheap: type leads (not the gradient), one contained glow, matte not glossy, negative space.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">03</span><h2>Taste &amp; attributes</h2></div>
+    <div class="cols2">
+      <div class="taste">
+        <h4>Named references</h4>
+        <ul><li><b>mymind</b> — restraint is the design</li><li><b>ABY Journal</b> — legible text on a dreamy ground</li><li><b>CHANI</b> — the type &amp; voice benchmark</li></ul>
+        <h4>Anti-references (confirmed)</h4>
+        <ul><li><b>Aura, Opal, Air</b> — cheap SaaS glassmorphism</li><li>Dark <b>purple-cosmic</b> starfield</li><li>Cold grayscale SaaS · the “cozy” cream+terracotta reflex</li></ul>
+      </div>
+      <div class="attrs">
+        <h4 style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px">Six attribute pairs (each from data)</h4>
+        <div class="a"><b>Expressive display serif</b> ↔ neutral body<span class="src">← personas.md: reads like a real astrologer</span></div>
+        <div class="a"><b>Warm misted ground</b> ↔ cool iridescent accent<span class="src">← report.md + Glow register</span></div>
+        <div class="a"><b>Editorial density (report)</b> ↔ airy app spacing<span class="src">← the report is the paid deliverable</span></div>
+        <div class="a"><b>Iridescence in one object</b> ↔ no illustration<span class="src">← honest about mysticism</span></div>
+        <div class="a"><b>Dream at full</b> ↔ dream at low<span class="src">← wow-moment vs legible reading</span></div>
+        <div class="a"><b>Elevated restraint</b> ↔ cheap glassmorphism<span class="src">← Iryna's taste (mymind in, Aura out)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">04</span><h2>Three directions</h2></div>
+    <p class="si">All luminous, all inside the moodboards — but different temperatures. Iryna chose Direction 02.</p>
+    <div class="dirs">
+      <div class="dir">
+        <div class="band" style="background:radial-gradient(120% 90% at 20% 0%,#E9D9F6,transparent 60%),radial-gradient(110% 90% at 100% 10%,#FBD9E7,transparent 55%),#CDEDE8"></div>
+        <div class="db"><div class="dn">Direction 01</div><h3>Moon Dream</h3><p>Pastel iridescent cloud-sky + fashion serif. The dreamiest — kept for the wow-moment.</p></div>
+      </div>
+      <div class="dir chosen">
+        <span class="pick">Chosen</span>
+        <div class="band" style="background:radial-gradient(120% 90% at 80% 0%,#DCE6FF,transparent 55%),radial-gradient(120% 90% at 0% 100%,#F2DCEB,transparent 55%),linear-gradient(120deg,#CDBAF2,#F5C7DB,#BFE8E3)"></div>
+        <div class="db"><div class="dn">Direction 02</div><h3>Liquid Aura</h3><p>One oil-on-water iridescent field + an aura ring behind the chart, on calm space.</p></div>
+      </div>
+      <div class="dir">
+        <div class="band" style="background:radial-gradient(120% 90% at 80% 0%,#F6E2BE,transparent 55%),radial-gradient(110% 90% at 0% 100%,#F2D6C3,transparent 52%),#FBF1DF"></div>
+        <div class="db"><div class="dn">Direction 03</div><h3>Golden Hour</h3><p>Warm sacred light + ring-of-light halo. Kept for the report's keepsake warmth.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">05</span><h2>The chosen language — Liquid Aura</h2></div>
+    <p class="si">One iridescent aura holds the chart; everything else stays calm and readable. The dream lives at the branding layer; the interface underneath stays functional.</p>
+    <div class="aura">
+      <div class="phone">
+        <article class="rcard">
+          <div class="phw">
+            <img class="ph" src="PHOTO" alt="Iridescent aura behind a natal chart">
+            <div class="halo"></div>
+            <div class="wheel"><svg viewBox="0 0 120 120" fill="none" stroke="#2b2440" stroke-opacity=".62" stroke-width=".8" aria-hidden="true"><circle cx="60" cy="60" r="50"/><circle cx="60" cy="60" r="38"/><circle cx="60" cy="60" r="16"/><g id="spokes"></g><path d="M22 74 L96 44" stroke-dasharray="2.5 3.5" stroke-opacity=".45"/></svg></div>
+          </div>
+          <div class="b">
+            <div class="plc">RISING · SCORPIO</div>
+            <h3>You read a room before you enter it.</h3>
+            <p>Lead with the slow reveal — mystery is your first language, not a flaw to fix.</p>
+            <div class="foot"><span class="badge"><svg class="ic bold" viewBox="0 0 24 24" width="12" height="12"><path d="M12 0c.5 5.5 4.5 9.5 12 12-7.5 2.5-11.5 6.5-12 12-.5-5.5-4.5-9.5-12-12 7.5-2.5 11.5-6.5 12-12z"/></svg>Free reading</span><button class="btn">Reveal my chart</button></div>
+          </div>
+        </article>
+      </div>
+      <div class="specs">
+        <div class="row"><div class="lbl">Palette</div><div class="pal"><i style="background:#EDEEF3"></i><i style="background:#FBFAFF"></i><i style="background:linear-gradient(120deg,#CDBAF2,#F5C7DB,#F8DBBE,#BFE8E3)"></i><i style="background:#6E5FE0"></i><i style="background:#241F2E"></i></div><div class="palr"><span>#EDEEF3 ground</span><span>iridescent field</span><span>#6E5FE0 periwinkle</span><span>#241F2E ink</span></div></div>
+        <div class="row tp"><div class="lbl">Type — three voices</div><div class="d">A chart you drift into</div><div class="bd">Figtree keeps long-form reading effortless and calm.</div><div class="mn">Rising · Scorpio — Martian Mono for data</div></div>
+        <div class="row"><div class="lbl">The rule</div><p style="margin:0;font-size:14px;color:var(--ink-soft)">Atmosphere in the background · content on a frosted panel · one solid action · warm-light not purple-cosmic. The dream turns up behind the chart and down under the words.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">06</span><h2>What's next</h2></div>
+    <div class="next">
+      <div class="step"><div class="s">Now</div><p>Paint two real screens in this language — the free results (wow-moment) and the paid report (dense) — with all states.</p></div>
+      <div class="step"><div class="s">Lesson 7</div><p>Extract design tokens and generate DESIGN.md from the built screens.</p></div>
+      <div class="step"><div class="s">On file</div><p>Moon Dream &amp; Golden Hour recorded as alternates — likely per-surface moods, not discarded.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="eyebrow" style="margin-bottom:12px">Explore the interactive pieces</p>
+    <div class="linkrow">
+      <a href="https://claude.ai/code/artifact/e50923f2-9a7f-48f5-8550-e96c6ff48b20" target="_blank" rel="noopener">Three directions ↗</a>
+      <a href="https://claude.ai/code/artifact/3224b6a0-d881-4ffe-8b78-14af6168df1c" target="_blank" rel="noopener">Liquid Aura stand ↗</a>
+      <a href="https://claude.ai/code/artifact/377d617c-ac48-4a5f-94c1-3747fc2628c5" target="_blank" rel="noopener">Full visual research hub ↗</a>
+    </div>
+  </footer>
+
+</div>
+<script>
+  (function(){var g=document.getElementById('spokes'); if(!g)return; for(var i=0;i<12;i++){var a=i/12*Math.PI*2-Math.PI/2; g.insertAdjacentHTML('beforeend','<line x1="'+(60+38*Math.cos(a))+'" y1="'+(60+38*Math.sin(a))+'" x2="'+(60+50*Math.cos(a))+'" y2="'+(60+50*Math.sin(a))+'"/>');}})();
+</script>
+</body>
+</html>

@@ -3,50 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Results — loading — Astro Recipe [wireframe]</title>
+<title>Results — loading — Astro Recipe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif&family=Figtree:wght@400;500;600&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: system-ui, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; min-height: 100vh; }
-
-  nav.wf-nav {
-    width: 220px; min-width: 220px; background: #e8e8e8; border-right: 1px solid #ccc;
-    padding: 16px 0; font-size: 12px; line-height: 1.8; position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  :root{
+    --ground:#EDEEF3; --surface:#FBFAFF; --frost:rgba(255,255,255,.74);
+    --ink:#241F2E; --ink-soft:#544C62; --muted:#6E6678;
+    --line:rgba(36,31,46,.12); --line-soft:rgba(36,31,46,.07);
+    --accent:#6E5FE0; --accent-deep:#5A4BD4; --accent-wash:#ECE9FB;
+    --serif:"Hedvig Letters Serif",Georgia,serif;
+    --sans:"Figtree",system-ui,-apple-system,sans-serif;
+    --mono:"Martian Mono",ui-monospace,Menlo,monospace;
+    --r:18px; --shadow:0 24px 50px -32px rgba(60,55,110,.45); --shadow-sm:0 10px 26px -18px rgba(60,55,110,.5);
   }
-  nav.wf-nav .nav-logo { padding: 0 16px 12px; font-weight: bold; border-bottom: 1px solid #ccc; margin-bottom: 8px; font-size: 13px; }
-  nav.wf-nav .nav-section { padding: 6px 16px 2px; font-weight: bold; color: #555; text-transform: uppercase; font-size: 10px; letter-spacing: 1px; margin-top: 8px; }
-  nav.wf-nav a { display: block; padding: 2px 16px; color: #333; text-decoration: none; }
-  nav.wf-nav a:hover { background: #ddd; }
-  nav.wf-nav a.current { font-weight: bold; background: #d0d0d0; }
-  nav.wf-nav .state { padding-left: 32px; color: #666; font-size: 11px; }
-  nav.wf-nav .state a { padding: 1px 16px 1px 32px; color: #666; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); font-size: 15px; color: var(--ink); line-height: 1.6; display: flex; min-height: 100vh; -webkit-font-smoothing:antialiased;
+    background: radial-gradient(90% 55% at 85% -5%, #DCE6FF, transparent 55%), radial-gradient(90% 65% at 5% 104%, #F2DCEB, transparent 55%), radial-gradient(70% 55% at 50% 45%, #E7F1EF, transparent 72%), var(--ground); background-attachment: fixed; }
+
+  nav.wf-nav { width: 220px; min-width: 220px; background: rgba(255,255,255,.5); backdrop-filter: blur(10px); border-right: 1px solid var(--line-soft); padding: 16px 0; line-height: 1.8; position: sticky; top: 0; height: 100vh; overflow-y: auto; font-family: var(--mono); font-size: 10.5px; }
+  nav.wf-nav .nav-logo { padding: 0 16px 12px; border-bottom: 1px solid var(--line-soft); margin-bottom: 8px; font-family: var(--serif); font-size: 15px; color: var(--ink); }
+  nav.wf-nav .nav-section { padding: 8px 16px 2px; color: var(--muted); text-transform: uppercase; font-size: 9px; letter-spacing: 1px; margin-top: 8px; }
+  nav.wf-nav a { display: block; padding: 2px 16px; color: var(--ink-soft); text-decoration: none; }
+  nav.wf-nav a:hover { background: var(--accent-wash); }
+  nav.wf-nav a.current { font-weight: 500; color: var(--accent-deep); background: var(--accent-wash); }
+  nav.wf-nav .state { padding-left: 32px; color: var(--muted); font-size: 10px; }
+  nav.wf-nav .state a { padding: 1px 16px 1px 32px; color: var(--muted); }
 
   .wf-wrap { flex: 1; display: flex; flex-direction: column; }
+  header { background: rgba(255,255,255,.55); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line-soft); padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
+  header .logo { font-family: var(--serif); font-weight: 400; font-size: 20px; }
+  header .flow-step { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-deep); border: 1px solid var(--line); padding: 5px 11px; border-radius: 100px; background: var(--surface); }
+  main { padding: 28px 24px 40px; max-width: 600px; margin: 0 auto; width: 100%; }
+  .zone-label { font-family: var(--mono); font-size: 9.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px; margin-top: 20px; }
 
-  header {
-    background: #e0e0e0; border-bottom: 1px solid #ccc; padding: 12px 24px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  header .logo { font-weight: bold; font-size: 16px; }
-  header .flow-step { font-size: 12px; color: #666; border: 1px solid #aaa; padding: 3px 10px; border-radius: 3px; }
-
-  main { padding: 24px; max-width: 600px; margin: 0 auto; width: 100%; }
-
-  .zone-label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; margin-top: 20px; }
-
-  .loading-block {
-    border: 2px solid #ccc; background: #fff; padding: 24px; margin-bottom: 8px; border-radius: 4px; text-align: center;
-  }
-  .loading-block .loading-text { font-size: 14px; color: #666; margin-bottom: 16px; }
-  .skeleton-line { height: 12px; background: #e0e0e0; border-radius: 2px; margin-bottom: 8px; }
+  /* LOADING — aura pulse + shimmering skeletons */
+  .loading-block { border-radius: var(--r); background: var(--frost); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.8); padding: 32px 24px; box-shadow: var(--shadow); text-align: center; }
+  .aura-pulse { width: 92px; height: 92px; margin: 4px auto 20px; border-radius: 50%; background: conic-gradient(from 200deg, #CDBAF2, #F5C7DB, #F8DBBE, #BFE8E3, #CDBAF2); filter: blur(6px); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { transform: scale(1); opacity: .85; } 50% { transform: scale(1.08); opacity: 1; } }
+  .loading-block .loading-text { font-family: var(--serif); font-size: 19px; color: var(--ink); margin-bottom: 22px; }
+  .skeleton-line { height: 12px; border-radius: 100px; margin-bottom: 10px; background: linear-gradient(90deg, rgba(110,95,224,.1), rgba(110,95,224,.22), rgba(110,95,224,.1)); background-size: 200% 100%; animation: shimmer 1.6s ease-in-out infinite; }
+  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
   .skeleton-line.w-80 { width: 80%; margin-left: auto; margin-right: auto; }
   .skeleton-line.w-60 { width: 60%; margin-left: auto; margin-right: auto; }
   .skeleton-line.w-90 { width: 90%; margin-left: auto; margin-right: auto; }
+  @media (prefers-reduced-motion: reduce) { .aura-pulse, .skeleton-line { animation: none; } }
 
-  .states-bar { background: #e8e8e8; border-bottom: 1px solid #ccc; padding: 6px 24px; font-size: 11px; color: #666; display: flex; gap: 12px; }
-  .states-bar span { color: #999; }
-  .states-bar a { color: #555; text-decoration: none; }
+  .states-bar { background: rgba(255,255,255,.5); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line-soft); padding: 8px 24px; font-family: var(--mono); font-size: 10px; letter-spacing: .04em; color: var(--muted); display: flex; gap: 14px; }
+  .states-bar a { color: var(--accent-deep); text-decoration: none; }
   .states-bar a:hover { text-decoration: underline; }
-  .states-bar .current-state { font-weight: bold; color: #333; }
+  .states-bar .current-state { font-weight: 500; color: var(--ink); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+  @media (max-width: 760px) {
+    body { flex-direction: column; }
+    nav.wf-nav { width: 100%; min-width: 0; height: auto; position: static; display: flex; flex-wrap: wrap; gap: 2px 4px; padding: 10px 12px; }
+    nav.wf-nav .nav-logo, nav.wf-nav .nav-section { width: 100%; }
+    nav.wf-nav .state { padding-left: 8px; }
+    main { padding: 24px 18px 40px; }
+  }
 </style>
 </head>
 <body>
@@ -102,6 +117,7 @@
 
     <div class="zone-label">Zone: Chart calculation [Main Job]</div>
     <article class="loading-block">
+      <div class="aura-pulse"></div>
       <div class="loading-text">Calculating your chart and finding the highlights...</div>
       <div class="skeleton-line w-90"></div>
       <div class="skeleton-line w-80"></div>
