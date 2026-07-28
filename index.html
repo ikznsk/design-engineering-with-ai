@@ -3,45 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Astro Recipe — Project Hub</title>
+<title>Astro Recipe — Project Hub &amp; Visual Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif&family=Figtree:wght@400;500;600&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: system-ui, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; min-height: 100vh; color: #222; }
-
-  /* NAV TREE */
-  nav.wf-nav {
-    width: 280px; min-width: 280px; background: #e8e8e8; border-right: 1px solid #ccc;
-    padding: 16px 0; font-size: 12px; line-height: 1.75; position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  :root{
+    --ground:#EDEEF3; --surface:#FBFAFF; --frost:rgba(255,255,255,.72);
+    --ink:#241F2E; --ink-soft:#544C62; --muted:#6E6678;
+    --line:rgba(36,31,46,.12); --line-soft:rgba(36,31,46,.07);
+    --accent:#6E5FE0; --accent-deep:#5A4BD4; --accent-wash:#ECE9FB;
+    --serif:"Hedvig Letters Serif",Georgia,serif;
+    --sans:"Figtree",system-ui,-apple-system,sans-serif;
+    --mono:"Martian Mono",ui-monospace,Menlo,monospace;
+    --r:18px; --shadow:0 24px 50px -32px rgba(60,55,110,.45); --shadow-sm:0 10px 26px -18px rgba(60,55,110,.5);
+    --iris:radial-gradient(55% 60% at 20% 26%,#D9C4F5 0%,transparent 56%),radial-gradient(52% 56% at 80% 20%,#F7CBDD 0%,transparent 54%),radial-gradient(56% 62% at 80% 82%,#BFE8E3 0%,transparent 56%),radial-gradient(52% 56% at 22% 84%,#FBDCC0 0%,transparent 54%),radial-gradient(62% 72% at 50% 52%,#E4EBFF 0%,transparent 64%),linear-gradient(120deg,#EDE3F6,#E7EEF6);
   }
-  nav.wf-nav .nav-logo { padding: 0 16px 12px; font-weight: bold; border-bottom: 1px solid #ccc; margin-bottom: 8px; font-size: 13px; }
-  nav.wf-nav .nav-lesson { padding: 10px 16px 2px; font-weight: bold; color: #444; text-transform: uppercase; font-size: 10px; letter-spacing: 1px; margin-top: 6px; }
-  nav.wf-nav .nav-lesson .lesson-status { float: right; font-weight: normal; text-transform: none; letter-spacing: 0; color: #999; }
-  nav.wf-nav a { display: block; padding: 2px 16px; color: #333; text-decoration: none; }
-  nav.wf-nav a:hover { background: #ddd; }
-  nav.wf-nav a.file-md { color: #666; }
-  nav.wf-nav .group { padding: 4px 16px 1px 24px; color: #888; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
-  nav.wf-nav .state { padding-left: 40px; color: #777; font-size: 11px; }
-  nav.wf-nav .state a { padding: 1px 16px 1px 40px; color: #777; }
-  nav.wf-nav .screen-group { padding-left: 24px; }
-  nav.wf-nav .screen-group a { padding-left: 24px; }
-  nav.wf-nav .screen-group .state a { padding-left: 48px; }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{font-family:var(--sans); font-size:15px; color:var(--ink); line-height:1.6; display:flex; min-height:100vh; -webkit-font-smoothing:antialiased;
+    background:radial-gradient(90% 55% at 85% -5%,#DCE6FF,transparent 55%),radial-gradient(90% 65% at 5% 104%,#F2DCEB,transparent 55%),radial-gradient(70% 55% at 50% 45%,#E7F1EF,transparent 72%),var(--ground); background-attachment:fixed}
 
-  /* MAIN */
-  .wf-wrap { flex: 1; display: flex; flex-direction: column; }
-  main { padding: 40px; max-width: 720px; margin: 0 auto; width: 100%; }
-  main h1 { font-size: 24px; margin-bottom: 8px; }
-  main .sub { color: #666; margin-bottom: 28px; font-size: 14px; }
-  main .note { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 16px 18px; font-size: 13px; color: #444; line-height: 1.6; margin-bottom: 16px; }
-  main .note strong { color: #222; }
-  main .repo-link { font-size: 13px; margin-top: 8px; }
-  main .repo-link a { color: #333; }
+  /* NAV TREE — every stage, by lesson */
+  nav.wf-nav{width:280px; min-width:280px; background:rgba(255,255,255,.55); backdrop-filter:blur(12px); border-right:1px solid var(--line-soft);
+    padding:18px 0; font-family:var(--mono); font-size:11px; line-height:1.7; position:sticky; top:0; height:100vh; overflow-y:auto}
+  nav.wf-nav .nav-logo{padding:0 18px 12px; font-family:var(--serif); font-size:17px; border-bottom:1px solid var(--line-soft); margin-bottom:8px}
+  nav.wf-nav .nav-lesson{padding:12px 18px 3px; font-weight:500; color:var(--ink); text-transform:uppercase; font-size:9.5px; letter-spacing:.1em; margin-top:6px}
+  nav.wf-nav .nav-lesson .lesson-status{float:right; font-weight:400; text-transform:none; letter-spacing:0; color:var(--accent-deep)}
+  nav.wf-nav a{display:block; padding:2px 18px; color:var(--ink-soft); text-decoration:none}
+  nav.wf-nav a:hover{background:var(--accent-wash); color:var(--accent-deep)}
+  nav.wf-nav a.file-md{color:var(--muted)}
+  nav.wf-nav a.jump{color:var(--accent-deep)}
+  nav.wf-nav .group{padding:5px 18px 1px 26px; color:var(--muted); font-size:9px; text-transform:uppercase; letter-spacing:.06em}
+  nav.wf-nav .state a{padding:1px 18px 1px 42px; color:var(--muted); font-size:10px}
+  nav.wf-nav .screen-group a{padding-left:26px}
+
+  .wf-wrap{flex:1; display:flex; flex-direction:column; min-width:0}
+  main{padding:0 0 60px; width:100%}
+  .wrap{max-width:900px; margin:0 auto; padding:0 30px}
+  .eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent-deep)}
+
+  header.hero{padding:56px 0 8px}
+  header.hero h1{font-family:var(--serif); font-weight:400; font-size:clamp(38px,6vw,66px); line-height:1.02; margin:14px 0 0; letter-spacing:-.01em}
+  header.hero .sub{max-width:58ch; margin:18px 0 0; font-size:18px; color:var(--ink-soft)}
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:20px}
+  .chip{font-family:var(--mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; padding:7px 12px; border-radius:100px; background:var(--frost); backdrop-filter:blur(8px); border:1px solid var(--line-soft); color:var(--ink-soft)}
+
+  section{padding:46px 0; scroll-margin-top:16px}
+  section + section{border-top:1px solid var(--line-soft)}
+  .sh{display:flex; align-items:baseline; gap:14px; margin-bottom:8px}
+  .sh h2{font-family:var(--serif); font-weight:400; font-size:clamp(24px,3.4vw,36px); margin:0}
+  .sh .n{font-family:var(--mono); font-size:12px; color:var(--muted)}
+  .si{color:var(--ink-soft); max-width:62ch; margin:0 0 24px}
+
+  .moods{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+  .moods figure{margin:0; border-radius:var(--r); overflow:hidden; box-shadow:var(--shadow-sm); border:1px solid var(--line-soft); background:var(--surface)}
+  .moods img{display:block; width:100%; height:auto}
+  .moods figcaption{font-family:var(--mono); font-size:10.5px; letter-spacing:.04em; color:var(--muted); padding:10px 12px; text-transform:uppercase}
+
+  .cards3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+  .rc{background:var(--frost); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.7); border-radius:var(--r); padding:20px; box-shadow:var(--shadow-sm)}
+  .rc .k{font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-deep)}
+  .rc h3{font-family:var(--serif); font-weight:400; font-size:20px; margin:6px 0 6px}
+  .rc p{margin:0; font-size:13px; color:var(--ink-soft)}
+
+  .cols2{display:grid; grid-template-columns:1fr 1fr; gap:30px; align-items:start}
+  .taste h4{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin:0 0 8px}
+  .taste ul{margin:0 0 18px; padding-left:18px}
+  .taste li{margin:4px 0; font-size:14.5px; color:var(--ink-soft)}
+  .taste li b{color:var(--ink)}
+  .attrs .a{padding:10px 0; border-bottom:1px solid var(--line-soft); font-size:14px}
+  .attrs .a b{color:var(--ink)}
+  .attrs .a .src{font-family:var(--mono); font-size:10px; color:var(--muted); display:block; margin-top:2px}
+
+  .dirs{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+  .dir{border-radius:var(--r); overflow:hidden; border:1px solid var(--line-soft); box-shadow:var(--shadow-sm); position:relative}
+  .dir .band{height:74px}
+  .dir .db{padding:15px 16px 17px; background:var(--surface)}
+  .dir .dn{font-family:var(--mono); font-size:10px; color:var(--muted); letter-spacing:.1em; text-transform:uppercase}
+  .dir h3{font-family:var(--serif); font-weight:400; font-size:21px; margin:5px 0 6px}
+  .dir p{margin:0; font-size:13px; color:var(--ink-soft)}
+  .dir .pick{position:absolute; top:12px; right:12px; font-family:var(--mono); font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; background:var(--accent-deep); color:#fff; padding:5px 9px; border-radius:100px}
+  .dir.chosen{outline:2px solid var(--accent); outline-offset:-2px}
+
+  .aura{display:grid; grid-template-columns:300px 1fr; gap:30px; align-items:start}
+  .phone{background:var(--surface); border-radius:28px; padding:13px; box-shadow:var(--shadow); border:1px solid var(--line-soft)}
+  .rcard{border-radius:16px; overflow:hidden; background:var(--frost); backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,.8)}
+  .rcard .phw{position:relative; background:var(--iris); overflow:hidden}
+  .rcard .halo{position:absolute; inset:0; background:radial-gradient(circle at 50% 47%,rgba(255,255,255,.72),rgba(255,255,255,.15) 34%,transparent 52%)}
+  .rcard .wheel{position:relative; z-index:1; display:grid; place-items:center; padding:24px 0 28px}
+  .rcard .wheel svg{width:146px; height:146px}
+  .rcard .b{padding:15px 16px 17px}
+  .rcard .plc{font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:var(--accent-deep)}
+  .rcard h3{font-family:var(--serif); font-weight:400; font-size:21px; margin:7px 0 6px; line-height:1.14}
+  .rcard p{margin:0; font-size:13px; color:var(--ink-soft)}
+  .rcard .foot{display:flex; align-items:center; justify-content:space-between; margin-top:14px; gap:10px}
+  .badge{display:inline-flex; align-items:center; gap:6px; font-size:11px; padding:5px 11px; border-radius:100px; background:linear-gradient(90deg,#e4dcf8,#f6dcea); color:var(--accent-deep); font-weight:500}
+  .btn{border:none; font-family:var(--sans); font-size:13px; font-weight:600; padding:9px 15px; border-radius:100px; color:#fff; background:var(--accent-deep); box-shadow:var(--shadow-sm)}
+  .specs .r{margin-bottom:18px}
+  .specs .lbl{font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:8px}
+  .pal{display:flex; border-radius:12px; overflow:hidden; border:1px solid var(--line)}
+  .pal i{flex:1; height:44px}
+  .palr{display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:8px}
+  .palr span{font-family:var(--mono); font-size:10px; color:var(--muted)}
+  .tp .d{font-family:var(--serif); font-size:28px; line-height:1}
+  .tp .bd{font-size:15px; color:var(--ink-soft); margin-top:4px}
+  .tp .mn{font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-deep); margin-top:6px}
+
+  footer{padding:40px 0 60px; border-top:1px solid var(--line-soft); color:var(--ink-soft); font-size:14px}
+  footer a{color:var(--accent-deep); text-decoration:none; border-bottom:1px solid var(--line)}
+
+  @media (max-width:860px){
+    body{flex-direction:column}
+    nav.wf-nav{width:100%; min-width:0; height:auto; position:static; padding:12px 6px}
+    .cards3,.dirs{grid-template-columns:1fr} .cols2,.aura{grid-template-columns:1fr} .aura .phone{max-width:320px} .moods{grid-template-columns:1fr}
+    .wrap{padding:0 22px}
+  }
 </style>
 </head>
 <body>
 
-<!-- NAV TREE: every stage of the project so far -->
+<!-- NAV TREE: every stage of the project, by lesson -->
 <nav class="wf-nav">
-  <div class="nav-logo">Astro Recipe — Project</div>
+  <div class="nav-logo">Astro Recipe</div>
 
   <div class="nav-lesson">Урок 1 — Research</div>
   <a href="research/research.html">Research (усе разом)</a>
@@ -58,64 +141,156 @@
 
   <div class="nav-lesson">Урок 4 — Wireframes</div>
   <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/wireframes/_screens.md">_screens.md</a>
-  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/wireframes/_conventions.md">_conventions.md</a>
   <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/wireframes/_critique.md">_critique.md</a>
-
   <div class="group">Onboarding</div>
-  <a href="wireframes/welcome.html">Welcome</a>
-  <a href="wireframes/onboarding-date.html">Enter birth date</a>
-  <div class="state"><a href="wireframes/onboarding-date-empty.html">└─ empty</a></div>
-  <div class="state"><a href="wireframes/onboarding-date-error.html">└─ error</a></div>
-  <a href="wireframes/onboarding-time.html">Enter birth time</a>
-  <a href="wireframes/onboarding-place.html">Enter birthplace</a>
-  <div class="state"><a href="wireframes/onboarding-place-empty.html">└─ empty</a></div>
-  <div class="state"><a href="wireframes/onboarding-place-error.html">└─ error</a></div>
-  <div class="state"><a href="wireframes/onboarding-place-loading.html">└─ loading</a></div>
-  <a href="wireframes/onboarding-question.html">Life context question</a>
-  <a href="wireframes/onboarding-question-2.html">Additional question</a>
-
-  <div class="group">Results (free teaser)</div>
-  <a href="wireframes/results.html">Results</a>
-  <div class="state"><a href="wireframes/results-error.html">└─ error</a></div>
-  <div class="state"><a href="wireframes/results-loading.html">└─ loading</a></div>
-
-  <div class="group">Checkout</div>
-  <a href="wireframes/checkout.html">Checkout</a>
-  <div class="state"><a href="wireframes/checkout-error.html">└─ error</a></div>
-  <div class="state"><a href="wireframes/checkout-loading.html">└─ loading</a></div>
-
-  <div class="group">Glow Report</div>
-  <a href="wireframes/report.html">Report</a>
-
-  <div class="group">Share</div>
-  <a href="wireframes/share.html">Glow card</a>
+  <div class="screen-group">
+    <a href="wireframes/welcome.html">Welcome</a>
+    <a href="wireframes/onboarding-date.html">Enter birth date</a>
+    <a href="wireframes/onboarding-time.html">Enter birth time</a>
+    <a href="wireframes/onboarding-place.html">Enter birthplace</a>
+    <a href="wireframes/onboarding-question.html">Life context question</a>
+    <a href="wireframes/onboarding-question-2.html">Additional question</a>
+  </div>
+  <div class="group">Results · Checkout · Share</div>
+  <div class="screen-group">
+    <a href="wireframes/results.html">Results (painted)</a>
+    <a href="wireframes/checkout.html">Checkout</a>
+    <a href="wireframes/report.html">Glow Report (painted)</a>
+    <a href="wireframes/share.html">Glow card</a>
+  </div>
 
   <div class="nav-lesson">Урок 5 — Voice</div>
   <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/voice.md">Voice.md</a>
   <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/microcopy.md">Microcopy.md</a>
 
-  <div class="nav-lesson">Урок 6 — Концепт <span class="lesson-status">в процесі</span></div>
-  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/concept.md">Concept.md</a>
+  <div class="nav-lesson">Урок 6 — Концепт <span class="lesson-status">✓ готово</span></div>
+  <div class="group">Візуальний рісерч (тут ↓)</div>
+  <a class="jump" href="#moods">→ Moodboards</a>
+  <a class="jump" href="#research">→ What we studied</a>
+  <a class="jump" href="#taste">→ Taste &amp; attributes</a>
+  <a class="jump" href="#directions">→ Three directions</a>
+  <a class="jump" href="#language">→ Liquid Aura</a>
+  <div class="group">Interactive reports</div>
+  <a href="concept/visual-style-hub.html">Visual research hub</a>
+  <a href="concept/style-direction.html">Neptunian style board</a>
+  <a href="concept/elevated-references.html">Elevated references</a>
+  <a href="concept/directions.html">Three directions</a>
+  <a href="concept.html">Liquid Aura — language stand</a>
+  <div class="group">Documents</div>
+  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/concept.md">Concept.md (taste + attributes)</a>
+  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/concept/moodboard-analysis.md">Moodboard-analysis.md</a>
+  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/research/mobbin-visual-research.md">Mobbin-visual-research.md</a>
+  <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/concept/neptunian-ui-references.md">Neptunian-ui-references.md</a>
   <a class="file-md" href="https://github.com/ikznsk/design-engineering-with-ai/blob/main/concept/references.md">References.md</a>
-  <a href="concept/directions.html">Directions (3 напрями)</a>
 </nav>
 
-<!-- MAIN -->
-<div class="wf-wrap">
-  <main>
-    <h1>Astro Recipe</h1>
-    <div class="sub">Натальна карта як персональна інструкція до дій — для соло-підприємців і контент-крейторів.</div>
+<!-- MAIN: the full visual research -->
+<div class="wf-wrap"><main>
+  <div class="wrap">
 
-    <div class="note">
-      <strong>Це навігаційний хаб проєкту</strong>, не продуктовий екран. Ліва панель — дерево всього зробленого по уроках: дослідження → персони/JTBD/IA → вайрфрейми → голос → концепт (у процесі).
-    </div>
-    <div class="note">
-      Файли <code>.md</code> відкриваються на GitHub (рендер markdown), файли <code>.html</code> — тут-таки на GitHub Pages.
-    </div>
+    <header class="hero">
+      <div class="eyebrow">Project hub · Visual concept · Lesson 6</div>
+      <h1>A dream you can read.</h1>
+      <p class="sub">Натальна карта як персональна інструкція до дій — для соло-підприємців і контент-крейторів. Ліворуч — дерево всього проєкту по уроках. Нижче — повний візуальний рісерч Уроку 6.</p>
+      <div class="chips"><span class="chip">Neptunian / Pisces</span><span class="chip">Iridescent · luminous</span><span class="chip">Warm, not purple-cosmic</span><span class="chip">Elevated, not cheap-SaaS</span></div>
+    </header>
 
-    <div class="repo-link">Репозиторій: <a href="https://github.com/ikznsk/design-engineering-with-ai">github.com/ikznsk/design-engineering-with-ai</a></div>
-  </main>
-</div>
+    <section id="moods">
+      <div class="sh"><span class="n">01</span><h2>The moodboards</h2></div>
+      <p class="si">Iryna's own references. One Neptunian / Pisces vibe at two saturations: a vivid iridescent dream (boards 1–3) and a muted warm dream (board 4). Shared thread: light, water, aura, translucency.</p>
+      <div class="moods">
+        <figure><img src="assets/moodboards/mood_1.jpg" alt="Moodboard 1" loading="lazy"><figcaption>Board 1 — ethereal glow / MOON DREAM</figcaption></figure>
+        <figure><img src="assets/moodboards/mood_2.jpg" alt="Moodboard 2" loading="lazy"><figcaption>Board 2 — iridescent / holographic</figcaption></figure>
+        <figure><img src="assets/moodboards/mood_3.jpg" alt="Moodboard 3" loading="lazy"><figcaption>Board 3 — celestial · sparkle · water</figcaption></figure>
+        <figure><img src="assets/moodboards/mood_4.jpg" alt="Moodboard 4" loading="lazy"><figcaption>Board 4 — warm quiet luxury</figcaption></figure>
+      </div>
+    </section>
 
+    <section id="research">
+      <div class="sh"><span class="n">02</span><h2>What we studied</h2></div>
+      <p class="si">Reference is an input, not an output. Techniques pulled from real products — never cloning one — and a map of where the category goes wrong.</p>
+      <div class="cards3">
+        <div class="rc"><div class="k">Benchmark</div><h3>CHANI, torn down</h3><p>Profiled from a real screen recording — warmer and more playful than its reputation: a three-voice type system and hand-drawn squiggle dividers.</p></div>
+        <div class="rc"><div class="k">The field</div><h3>Competitors on Mobbin</h3><p>Two traps: Co-Star's cold grayscale, and the purple-cosmic starfield (Nebula, Moonly). Closest to us: warm document (Tolan), photographic warmth (Calm).</p></div>
+        <div class="rc"><div class="k">The taste bar</div><h3>Elevated references</h3><p>mymind, Cosmos, Vyrao — dreamy done <em>expensively</em>. Type leads, one contained glow, matte not glossy, negative space.</p></div>
+      </div>
+    </section>
+
+    <section id="taste">
+      <div class="sh"><span class="n">03</span><h2>Taste &amp; attributes</h2></div>
+      <div class="cols2">
+        <div class="taste">
+          <h4>Named references</h4>
+          <ul><li><b>mymind</b> — restraint is the design</li><li><b>ABY Journal</b> — legible text on a dreamy ground</li><li><b>CHANI</b> — the type &amp; voice benchmark</li></ul>
+          <h4>Anti-references (confirmed)</h4>
+          <ul><li><b>Aura, Opal, Air</b> — cheap SaaS glassmorphism</li><li>Dark <b>purple-cosmic</b> starfield</li><li>Cold grayscale SaaS · the “cozy” cream+terracotta reflex</li></ul>
+        </div>
+        <div class="attrs">
+          <h4 style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px">Six attribute pairs (each from data)</h4>
+          <div class="a"><b>Expressive display serif</b> ↔ neutral body<span class="src">← personas: reads like a real astrologer</span></div>
+          <div class="a"><b>Warm misted ground</b> ↔ cool iridescent accent<span class="src">← report + Glow register</span></div>
+          <div class="a"><b>Editorial density (report)</b> ↔ airy app spacing<span class="src">← the report is the paid deliverable</span></div>
+          <div class="a"><b>Iridescence in one object</b> ↔ no illustration<span class="src">← honest about mysticism</span></div>
+          <div class="a"><b>Dream at full</b> ↔ dream at low<span class="src">← wow-moment vs legible reading</span></div>
+          <div class="a"><b>Elevated restraint</b> ↔ cheap glassmorphism<span class="src">← Iryna's taste (mymind in, Aura out)</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="directions">
+      <div class="sh"><span class="n">04</span><h2>Three directions</h2></div>
+      <p class="si">All luminous, all inside the moodboards — but different temperatures. Iryna chose Direction 02. <a href="concept/directions.html" style="color:var(--accent-deep)">Open the interactive chooser →</a></p>
+      <div class="dirs">
+        <div class="dir">
+          <div class="band" style="background:radial-gradient(120% 90% at 20% 0%,#E9D9F6,transparent 60%),radial-gradient(110% 90% at 100% 10%,#FBD9E7,transparent 55%),#CDEDE8"></div>
+          <div class="db"><div class="dn">Direction 01</div><h3>Moon Dream</h3><p>Pastel iridescent cloud-sky + fashion serif. The dreamiest — kept for the wow-moment.</p></div>
+        </div>
+        <div class="dir chosen">
+          <span class="pick">Chosen</span>
+          <div class="band" style="background:radial-gradient(120% 90% at 80% 0%,#DCE6FF,transparent 55%),radial-gradient(120% 90% at 0% 100%,#F2DCEB,transparent 55%),linear-gradient(120deg,#CDBAF2,#F5C7DB,#BFE8E3)"></div>
+          <div class="db"><div class="dn">Direction 02</div><h3>Liquid Aura</h3><p>One oil-on-water iridescent field + an aura ring behind the chart, on calm space.</p></div>
+        </div>
+        <div class="dir">
+          <div class="band" style="background:radial-gradient(120% 90% at 80% 0%,#F6E2BE,transparent 55%),radial-gradient(110% 90% at 0% 100%,#F2D6C3,transparent 52%),#FBF1DF"></div>
+          <div class="db"><div class="dn">Direction 03</div><h3>Golden Hour</h3><p>Warm sacred light + ring-of-light halo. Kept for the report's keepsake warmth.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="language">
+      <div class="sh"><span class="n">05</span><h2>The chosen language — Liquid Aura</h2></div>
+      <p class="si">One iridescent aura holds the chart; everything else stays calm and readable. See it applied: <a href="wireframes/results.html" style="color:var(--accent-deep)">Results</a> · <a href="wireframes/report.html" style="color:var(--accent-deep)">Glow Report</a> · <a href="concept.html" style="color:var(--accent-deep)">language stand</a>.</p>
+      <div class="aura">
+        <div class="phone">
+          <article class="rcard">
+            <div class="phw">
+              <div class="halo"></div>
+              <div class="wheel"><svg viewBox="0 0 150 150" fill="none" stroke="#2b2440" stroke-opacity=".6" stroke-width=".8" aria-hidden="true"><circle cx="75" cy="75" r="62"/><circle cx="75" cy="75" r="46"/><circle cx="75" cy="75" r="20"/><g id="spokes"></g><path d="M18 92 L120 56" stroke-dasharray="2.5 3.5" stroke-opacity=".45"/></svg></div>
+            </div>
+            <div class="b">
+              <div class="plc">RISING · SCORPIO</div>
+              <h3>You read a room before you enter it.</h3>
+              <p>Lead with the slow reveal — mystery is your first language, not a flaw to fix.</p>
+              <div class="foot"><span class="badge">Free reading</span><button class="btn">Reveal my chart</button></div>
+            </div>
+          </article>
+        </div>
+        <div class="specs">
+          <div class="r"><div class="lbl">Palette</div><div class="pal"><i style="background:#EDEEF3"></i><i style="background:#FBFAFF"></i><i style="background:linear-gradient(120deg,#CDBAF2,#F5C7DB,#F8DBBE,#BFE8E3)"></i><i style="background:#6E5FE0"></i><i style="background:#241F2E"></i></div><div class="palr"><span>#EDEEF3 ground</span><span>iridescent field</span><span>#6E5FE0 periwinkle</span><span>#241F2E ink</span></div></div>
+          <div class="r tp"><div class="lbl">Type — three voices</div><div class="d">A chart you drift into</div><div class="bd">Figtree keeps long-form reading effortless and calm.</div><div class="mn">Rising · Scorpio — Martian Mono for data</div></div>
+          <div class="r"><div class="lbl">The rule</div><p style="margin:0;font-size:14px;color:var(--ink-soft)">Atmosphere in the background · content on a frosted panel · one solid action · warm-light not purple-cosmic. The dream turns up behind the chart and down under the words.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Full source on GitHub — <a href="https://github.com/ikznsk/design-engineering-with-ai" target="_blank" rel="noopener">github.com/ikznsk/design-engineering-with-ai</a>. Use the tree on the left to open any report. Next: roll the language across the whole product (Lesson 7), then extract design tokens (Lesson 8).
+    </footer>
+
+  </div>
+</main></div>
+<script>
+  (function(){var g=document.getElementById('spokes'); if(!g)return; for(var i=0;i<12;i++){var a=i/12*Math.PI*2-Math.PI/2; g.insertAdjacentHTML('beforeend','<line x1="'+(75+46*Math.cos(a))+'" y1="'+(75+46*Math.sin(a))+'" x2="'+(75+62*Math.cos(a))+'" y2="'+(75+62*Math.sin(a))+'"/>');}})();
+</script>
 </body>
 </html>
